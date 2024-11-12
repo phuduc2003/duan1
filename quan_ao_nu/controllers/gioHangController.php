@@ -18,5 +18,12 @@ class gioHangController
           echo "Có lỗi xảy ra: " . $e->getMessage();
         }
       }  
+      public function homeGioHang(){
+        try {
+          require_once "./views/gioHang.php";
+        } catch (Exception $e) {
+          echo "Có lỗi xảy ra: " . $e->getMessage();
+        }
+      }  
 
 }
