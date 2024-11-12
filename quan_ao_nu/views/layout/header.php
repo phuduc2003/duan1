@@ -29,7 +29,7 @@
                         <a href="<?= BASE_URL?>" class="nav-item nav-link">Home</a>
                         <a href="<?= BASE_URL . '?act=sanpham' ?>" class="nav-item nav-link">Products</a>
                         <a href="<?= BASE_URL . '?act=sanphamchitiet' ?>" class="nav-item nav-link">Product Detail</a>
-                   
+                        <a href="<?= BASE_URL . '?act=giohang' ?>" class="nav-item nav-link">Cart</a>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
