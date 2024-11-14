@@ -47,7 +47,7 @@
                     </a>
                     <ul style="background-color: #1A2035;" id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
+                            <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
@@ -162,15 +162,16 @@
             <tr>
              
                 <th>ID</th></th>
-                <th>Tên Sản Phẩm </th>
-                <th>Giá Tiền</th>
-                <th>Giá Khuyến mãi</th>
-                <th>Hình Ảnh</th>
-                <th>Số Lượng</th>
-                <th>Lướt xem </th>
-                <th>Ngày Nhập</th>  
-                <th>mô tả</th>
-                <th>Danh Mục</th>
+                <th>Mã Đơn Hàng </th>
+                <th> Tài Khoản</th>
+                <th>Tên Người Nhận</th>
+                <th>Email Người Nhận</th>
+                <th>SĐT Người Nhận</th>
+                <th>Địa Chỉ Người Đặt</th>
+                <th>Ngày Đặt </th>
+                <th>Tổng Tiền</th>  
+                <th>Ghi Chú</th>
+                <th>Phương Thức Thanh Toán</th>
                 <th>Trạng Thái</th>
                 <th>Thao Tác</th>
             </tr>
@@ -181,20 +182,23 @@
                 <tr>
                
                     <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ten_san_pham ?></td>
+                    <td> <?= $admins->ma_don_hang ?></td>
                    
-                    <td> <?= $admins->gia_san_pham ?> </td>
-                    <td> <?= $admins->gia_khuyen_mai ?></td> <td>
+                    <td> <?= $admins->tai_khoan_id ?> </td>
+                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
+                    <!-- <td>
                         <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>">
+                            <img style="max-height:100%; max-width:100%;" src="">
                         </div>
-                    </td>
-                    <td> <?= $admins->so_luong ?></td>
-                    <td> <?= $admins->luot_xem ?></td>
-                    <td> <?= $admins->ngay_nhap ?></td>
-                    <td> <?= $admins->mo_ta ?></td>
-                    <td> <?= $admins->danh_muc_id ?></td>
-                    <td> <?= $admins->trang_thai ?></td>
+                    </td> -->
+                    <td> <?= $admins->email_nguoi_nhan ?></td>
+                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
+                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
+                    <td> <?= $admins->ngay_dat ?></td>
+                    <td> <?= $admins->tong_tien ?></td>
+                    <td> <?= $admins->ghi_chu ?></td>
+                    <td> <?= $admins->phuong_thuc_thanh_toan_id ?></td>
+                    <td> <?= $admins->trang_thai_id ?></td>
                     <td style="width:170px;">
                     <button class="btn btn-success">
                                     <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
