@@ -4,6 +4,9 @@ include_once "models/all.php";
 include_once "models/AdminSanPham.php";
 include_once "controllers/SanPhamController.php";
 
+include_once "models/AdminDonHang.php";
+include_once "controllers/DonHangController.php";
+
 // Route
 $act = "";
 if (isset($_GET["act"])) {
@@ -17,13 +20,18 @@ if (isset($_GET["id"])) {
 }
 
 $admin = new SanPhamController();
+$adminDonHang = new DonHangController();
 switch($act) {
     case "":
         // Điều hướng sang trang mặc định (trang danh sách) nếu người dùng không truyền "act"
-        header("Location: ?act=admin-sanpham");
+        header("Location: ?act=admin-donhang");
         break;
     case "admin-sanpham":
     $admin->sanpham();
+    break;
+
+    case "admin-donhang";
+    $adminDonHang->donhang();
     break;
 
     default:
