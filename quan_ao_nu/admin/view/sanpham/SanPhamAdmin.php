@@ -47,10 +47,10 @@
                     </a>
                     <ul style="background-color: #1A2035;" id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
+                            <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-themSP" class="sidebar-link">Thêm Sản Phẩm</a>
                         </li>
                     </ul>
                 </li>
@@ -146,7 +146,7 @@
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
-                                <img src="upload/user.jpg" class="avatar img-fluid" alt="">
+                                <img src="uploads/avata.jpg" class="avatar img-fluid" alt="">
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end rounded">
