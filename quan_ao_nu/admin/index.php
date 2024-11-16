@@ -26,10 +26,25 @@ switch($act) {
         // Điều hướng sang trang mặc định (trang danh sách) nếu người dùng không truyền "act"
         header("Location: ?act=admin-donhang");
         break;
+//------------------------ trang quán lý sản phẩm--------------------------------//
+     //danh sách
     case "admin-sanpham":
     $admin->sanpham();
     break;
 
+    //thêm sửa xoá
+    case "admin-delete";
+   $admin->delete($id);
+   break;
+   case "admin-themSP";
+   $admin->themSP();
+   break;
+   case "admin-update";
+   $admin->showUpdate($id);
+   break;
+
+
+//-----------------------------end----------------------------------------------------//
     case "admin-donhang";
     $adminDonHang->donhang();
     break;
