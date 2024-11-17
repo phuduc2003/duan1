@@ -44,4 +44,49 @@ class AdminDonHang
 }
    
 }
+ public function deleteDonHang($id){
+    try{
+          $sql ="DELETE FROM `don_hangs` WHERE id=$id";
+          $data =$this->pdo->exec($sql);
+        if($data===1){
+            return "success";
+        }
+    }catch (Exception $error) {
+        echo "<h1>";
+        echo "Lỗi hàm insert trong model: " . $error->getMessage();
+        echo "</h1>";
+ }
+}
+public function find_DH($id){
+    try{
+     $sql="SELECT * FROM `don_hangs` WHERE id=$id";
+     $data=$this->pdo->query($sql)->fetch();
+     if($data !== false){
+        $don_hangs = new don_hangs();
+        return $don_hangs;
+     }else{
+        echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
+       }
+    } catch (Exception $error) {
+        echo "<h1>";
+        echo "Lỗi hàm insert trong model: " . $error->getMessage();
+        echo "</h1>";
+    }
+}
+public function updateDonHang($id, don_hang $don_hangs){
+    try{
+       $sql="UPDATE `don_hangs` SET `ma_don_hang`='$don_hangs->ma_don_hang',`tai_khoan_id`='$don_hangs->tai_khoan_id',`ten_nguoi_nhan`='$don_hangs->ten_nguoi_nhan',
+       `email_nguoi_nhan`='$don_hangs->email_nguoi_nhan',`sdt_nguoi_nhan`='$don_hangs->sdt_nguoi_nhan',`dia_chi_nguoi_nhan`='$don_hangs->dia_chi_nguoi_nhan',`ngay_dat`='$don_hangs->ngay_dat',
+       `tong_tien`='$don_hangs->tong_tien',`ghi_chu`='$don_hangs->ghi_chu',`phuong_thuc_thanh_toan_id`='$don_hangs->phuong_thuc_thanh_toan_id',`trang_thai_id`='$don_hangs->trang_thai_id' WHERE id=$id";
+       $data = $this->pdo->exec($sql);
+       if($data ===1 || $data===0){
+        return "success";
+       }
+    } catch (Exception $error) {
+        echo "<h1>";
+        echo "Lỗi hàm insert trong model: " . $error->getMessage();
+        echo "</h1>";
+    }
+   
+}
 }

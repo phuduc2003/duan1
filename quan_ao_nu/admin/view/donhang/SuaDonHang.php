@@ -50,7 +50,7 @@
                             <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-themSP" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
                         </li>
                     </ul>
                 </li>
@@ -102,7 +102,7 @@
                     </a>
                     <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donhang" class="sidebar-link">Danh Sách Đơn Hàng</a>
+                            <a href="?act=admin-donHang" class="sidebar-link">Danh Sách Đơn Hàng</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link">?</a>
@@ -146,7 +146,7 @@
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
-                                <img src="upload/user.jpg" class="avatar img-fluid" alt="">
+                                <img src="uploads/avata.jpg" class="avatar img-fluid" alt="">
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end rounded">
@@ -156,66 +156,100 @@
                     </ul>
                 </div>
             </nav>
+        
             <main class="content px-3 py-4">
-            <table  class="table">
-        <thead >
-            <tr>
-             
-                <th>ID</th></th>
-                <th>Mã Đơn Hàng </th>
-                <th> Tài Khoản</th>
-                <th>Tên Người Nhận</th>
-                <th>Email Người Nhận</th>
-                <th>SĐT Người Nhận</th>
-                <th>Địa Chỉ Người Đặt</th>
-                <th>Ngày Đặt </th>
-                <th>Tổng Tiền</th>  
-                <th>Ghi Chú</th>
-                <th>Phương Thức Thanh Toán</th>
-                <th>Trạng Thái</th>
-                <th>Thao Tác</th>
-            </tr>
-        </thead>
+            <form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
+                <!-- Khu vực thông báo lỗi -->
+<div style="color: red;">
+<?= $thongBaoLoi ?>
+</div>
+<div style="color: red;">
+<?= $thongBaoUploadFile ?>
+</div>
+
+<!-- Khu vực thông báo thành công -->
+<div style="color: green;">
+<?= $thongBaoThanhCong ?>
+</div>
+
+<div class="row">
+    <div class="">
+        <label for="inputEmail4" class="form-label">Mã Đơn Hàng</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập tên sản phẩm" name="ma_don_hang" value="<?= $don_hangs->ma_don_hang ?>" >
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">Tên Người Nhận</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập số lượng" name="ten_nguoi_nhan" value="<?= $don_hangs->ten_nguoi_nhan ?>">
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">Email Người Nhận</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="email_nguoi_nhan"value="<?= $don_hangs->email_nguoi_nhan ?>" >
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">SĐT Người Nhận</label>
+        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="sdt_nguoi_nhan"value="<?= $don_hangs->sdt_nguoi_nhan ?>" >
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">Địa Chỉ Người Đặt</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá sale" name="dia_chi_nguoi_nhan" value="<?= $don_hangs->dia_chi_nguoi_nhan ?>">
+    <div class="">
+        <label for="inputEmail4" class="form-label">Ngày Đặt</label>
+        <input type="date" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="ngay_dat" value="<?= $don_hangs->ngay_dat ?>">
+        <div class="">
+        <label for="inputPassword4" class="form-label">Ghi Chú</label>
+        <textarea name="ghi_chu" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
+    </div>
+    <div class="">
+        <label for="inputPassword4" class="form-label">Địa Chỉ người nhận</label>
+        <textarea name="dia_chi_nguoi_nhan" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
+    </div>
+    <div class="mt-3">
+        <span class="form-label">Phương Thức Thanh Toán:</span>
+        <select class="form-control" name="phuong_thuc_thanh_toan_id">
+            <option value="0">-- Lựa chọn --</option>
+            <option value="1">tiền mặt</option>
+            <option value="2">chuyển khoản</option>
+        </select>
+    </div>
+    <div class="mt-3">
+        <span class="form-label">Tài Khoản :</span>
+        <select class="form-control" name="tai_khoan_id">
+            <option value="0">-- Lựa chọn --</option>
+            <option value="1">admin</option>
+            <option value="2">Khách Hàng</option>
+            
+        </select>
+    </div>
+    <div class="mt-3">
+        <span class="form-label">Trạng Thái:</span>
+        <select class="form-control" name="trang_thai_id">
+            <option value="1">còn hàng</option>
            
-        <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
-                <tr>
-               
-                    <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ma_don_hang ?></td>
-                   
-                    <td> <?= $admins->tai_khoan_id ?> </td>
-                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
-                    <!-- <td>
-                        <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="">
-                        </div>
-                    </td> -->
-                    <td> <?= $admins->email_nguoi_nhan ?></td>
-                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
-                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
-                    <td> <?= $admins->ngay_dat ?></td>
-                    <td> <?= $admins->tong_tien ?></td>
-                    <td> <?= $admins->ghi_chu ?></td>
-                    <td> <?= $admins->phuong_thuc_thanh_toan_id ?></td>
-                    <td> <?= $admins->trang_thai_id ?></td>
-                    <td style="width:170px;">
-                    <button class="btn btn-success">
-                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Sửa
-                                    </a>
-                                </button>
-                                
-                                <button class="btn btn-danger">
-                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Xóa
-                                    </a>
-                                </button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            <option value="2">hết hàng</option>
+        </select>
+    </div>
+    <!-- <div class="mt-3">
+        <span class="form-label">Lựa chọn</span>
+        <div class="row ps-3 pt-2">
+            <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault1">
+                <label value="1" class="form-check-label" for="flexRadioDefault1">
+                  Còn hàng
+                </label>
+            </div>
+            <div class="form-check col-5">
+                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault2" checked>
+                <label value="2" class="form-check-label" for="flexRadioDefault2">
+                  Hết hàng
+                </label>
+            </div>
+        </div>
+    </div> -->
+    <div class="mt-3 d-flex justify-content-center">
+        <button type="submit" class="btn btn-success" name="submitForm">Tạo mới</button>
+    </div>  
+</div>
+</form>
             </main>
   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

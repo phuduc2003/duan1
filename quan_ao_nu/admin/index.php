@@ -45,10 +45,19 @@ switch($act) {
 
 
 //-----------------------------end----------------------------------------------------//
+     //------------------------ trang quán lý đơn hàng-------------------------------//
     case "admin-donhang";
     $adminDonHang->donhang();
     break;
 
+    //thêm sửa xoá
+    case "admin-deleteDonHang";
+    $adminDonHang->deleteHang($id);
+    break;
+    case "admin-updateDonHang";
+    $adminDonHang->updateDonHang($id);
+    break;
+     //------------------------------end------------------------------------------//
     default:
         // Hiển thị "trang 404 fage not found" nếu giá trị "act" không nằm trong danh sách phía trên.
         // Lưu ý: Gặp lỗi này phải kiểm tra ngay giá trị act trên đường dẫn url, xem xem có gõ sai chính tả không. Chứ gõ sai chính tả thì buồn lắm luôn...

@@ -109,6 +109,7 @@ class SanPhamController
               $thongBaoUploadFile ="upload file không thành công. mời bạn thử lại.";
             }
           }
+          
           if($thongBaoLoi===""&& $thongBaoUploadFile===""){
             $ketQua=$this->AdminSanPham->update($id,$san_phams);
             if($ketQua==="success"){
