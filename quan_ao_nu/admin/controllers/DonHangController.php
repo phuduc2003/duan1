@@ -9,10 +9,14 @@ class DonHangController{
       $this->AdminDonHang = new AdminDonHang();
       // Mở trình duyệt lên để kiểm tra kết quả
   }
+
+
+  
   public function donhang(){
     $danhSachSanPham = $this->AdminDonHang->All();
     include "view/donhang/DonHangAdmin.php";
   }
+
     public function deleteHang($id){
       if($id !==""){
       $KetQua=$this->AdminDonHang->deleteDonHang($id);
@@ -30,6 +34,7 @@ class DonHangController{
         $thongBaoUploadFile="";
         $thongBaoThanhCong="";
         $don_hangs=$this->AdminDonHang->find_DH($id);
+        
         if(isset($_POST["submitForm"])){
           $don_hangs->ma_don_hang=trim($_POST["ma_don_hang"]);
           $don_hangs->tai_khoan_id	=trim($_POST["tai_khoan_id"]);

@@ -175,33 +175,38 @@
 <div class="row">
     <div class="">
         <label for="inputEmail4" class="form-label">Mã Đơn Hàng</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập tên sản phẩm" name="ma_don_hang" value="<?= $don_hangs->ma_don_hang ?>" >
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập tên sản phẩm" name="ma_don_hang" value="<?= $don_hangs["ma_don_hang" ];?>" >
     </div>
     <div class="">
         <label for="inputEmail4" class="form-label">Tên Người Nhận</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập số lượng" name="ten_nguoi_nhan" value="<?= $don_hangs->ten_nguoi_nhan ?>">
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập số lượng" name="ten_nguoi_nhan" value="<?= $don_hangs["ten_nguoi_nhan"]; ?>">
     </div>
     <div class="">
         <label for="inputEmail4" class="form-label">Email Người Nhận</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="email_nguoi_nhan"value="<?= $don_hangs->email_nguoi_nhan ?>" >
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="email_nguoi_nhan"value="<?= $don_hangs["email_nguoi_nhan"] ;?>" >
     </div>
     <div class="">
         <label for="inputEmail4" class="form-label">SĐT Người Nhận</label>
-        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="sdt_nguoi_nhan"value="<?= $don_hangs->sdt_nguoi_nhan ?>" >
+        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="sdt_nguoi_nhan"value="<?= $don_hangs["sdt_nguoi_nhan"] ;?>" >
     </div>
     <div class="">
         <label for="inputEmail4" class="form-label">Địa Chỉ Người Đặt</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá sale" name="dia_chi_nguoi_nhan" value="<?= $don_hangs->dia_chi_nguoi_nhan ?>">
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá sale" name="dia_chi_nguoi_nhan" value="<?= $don_hangs["dia_chi_nguoi_nhan"] ;?>">
     <div class="">
         <label for="inputEmail4" class="form-label">Ngày Đặt</label>
-        <input type="date" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="ngay_dat" value="<?= $don_hangs->ngay_dat ?>">
+        <input type="date" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="ngay_dat" value="<?= $don_hangs["ngay_dat"]; ?>">
         <div class="">
         <label for="inputPassword4" class="form-label">Ghi Chú</label>
         <textarea name="ghi_chu" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
     </div>
-    <div class="">
-        <label for="inputPassword4" class="form-label">Địa Chỉ người nhận</label>
-        <textarea name="dia_chi_nguoi_nhan" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
+    <div class="mt-3">
+        <span class="form-contro" >Địa Chỉ Người Nhận</span>
+      <select name="dia_chi_nguoi_nhan" id="" class="form-control">
+            <option value="0">---lựa chọn---</option>
+            <option value="1">Hà nội</option>
+            <option value="2">Hải Phòng</option>
+            <option value="3">Ninh Bình</option>
+       <select>
     </div>
     <div class="mt-3">
         <span class="form-label">Phương Thức Thanh Toán:</span>

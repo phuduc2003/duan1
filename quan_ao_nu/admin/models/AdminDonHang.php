@@ -61,12 +61,12 @@ public function find_DH($id){
     try{
      $sql="SELECT * FROM `don_hangs` WHERE id=$id";
      $data=$this->pdo->query($sql)->fetch();
-     if($data !== false){
-        $don_hangs = new don_hangs();
-        return $don_hangs;
-     }else{
-        echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
-       }
+    //  if($data !== false){
+    //     $don_hangs = new don_hangs();
+        return $data;
+    //  }else{
+    //     echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
+    //    }
     } catch (Exception $error) {
         echo "<h1>";
         echo "Lỗi hàm insert trong model: " . $error->getMessage();

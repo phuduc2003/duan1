@@ -13,6 +13,37 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        .table img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .btn-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .search-bar {
+            max-width: 400px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .add-product-btn {
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-product-btn:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -131,18 +162,18 @@
         </aside>
         <div class="main">
             <nav class="navbar navbar-expand px-4 py-3">
-            <form action="#" class="d-none d-sm-inline-block">
+            <!-- <form action="#" class="d-none d-sm-inline-block">
                        <div class="input1">
                     <input type="text" name="" id="" placelado="tim">
                    </div>
                    <div class="icon">
                     <box-icon name='search-alt'></box-icon>
                          </div>
-                </form>
+                </form> -->
                 <div class="navbar-collapse collapse">
              
                     <ul class="navbar-nav ms-auto">
-                         <box-icon name='envelope'></box-icon>
+                        
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
@@ -156,27 +187,41 @@
                     </ul>
                 </div>
             </nav>
-            <main class="content px-3 py-4">
-            <table  class="table">
-        <thead >
-            <tr>
-             
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Product Management</h1>
+        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <form class="d-flex align-items-center">
+            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Product Table -->
+    <div class="table-wrapper">
+        <table class="table table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
                 <th>ID</th></th>
-                <th>Tên Sản Phẩm </th>
-                <th>Giá Tiền</th>
-                <th>Giá Khuyến mãi</th>
-                <th>Hình Ảnh</th>
-                <th>Số Lượng</th>
-                <th>Lướt xem </th>
-                <th>Ngày Nhập</th>  
-                <th>mô tả</th>
-                <th>Danh Mục</th>
-                <th>Trạng Thái</th>
-                <th>Thao Tác</th>
-            </tr>
-        </thead>
-           
-        <tbody>
+                <th>Product Name </th>
+                <th>Price </th>
+                <th> Promotion Price</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th>View </th>
+                <th> Date Enter</th>  
+                <!-- <th>mô tả</th> -->
+                <th>Category</th>
+                <th>Status</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
             <?php foreach ($danhSachSanPham as $admins) : ?>     
                 <tr>
                
@@ -186,33 +231,43 @@
                     <td> <?= $admins->gia_san_pham ?> </td>
                     <td> <?= $admins->gia_khuyen_mai ?></td> <td>
                         <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>">
+                       
+
+                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>"></a> 
                         </div>
                     </td>
                     <td> <?= $admins->so_luong ?></td>
                     <td> <?= $admins->luot_xem ?></td>
                     <td> <?= $admins->ngay_nhap ?></td>
-                    <td> <?= $admins->mo_ta ?></td>
+
+                    <!-- <td> <?= $admins->mo_ta ?></td> -->
+
                     <td> <?= $admins->danh_muc_id ?></td>
                     <td> <?= $admins->trang_thai ?></td>
                     <td style="width:170px;">
                     <button class="btn btn-success">
                                     <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Sửa
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
                                     </a>
                                 </button>
                                 
                                 <button class="btn btn-danger">
                                     <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Xóa
+                                        <i class="fa-solid fa-trash"></i> Delete
                                     </a>
-                                </button>
+                                </button> 
+                                
+                                
                     </td>
                 </tr>
             <?php endforeach; ?>
-        </tbody>
-    </table>
-            </main>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
