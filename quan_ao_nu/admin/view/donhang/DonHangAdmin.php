@@ -201,13 +201,13 @@
                     <td> <?= $admins->trang_thai_id ?></td>
                     <td style="width:170px;">
                     <button class="btn btn-success">
-                                    <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
                                         <i class="fa-solid fa-pen-to-square"></i> Sửa
                                     </a>
                                 </button>
                                 
                                 <button class="btn btn-danger">
-                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                         <i class="fa-solid fa-trash"></i> Xóa
                                     </a>
                                 </button>

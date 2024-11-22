@@ -13,37 +13,6 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
-    <style>
-        .table img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .btn-actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .search-bar {
-            max-width: 400px;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        .add-product-btn {
-            background-color: #28a745;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-
-        .add-product-btn:hover {
-            background-color: #218838;
-        }
-    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -81,7 +50,7 @@
                             <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-themSP" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
                         </li>
                     </ul>
                 </li>
@@ -133,7 +102,7 @@
                     </a>
                     <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donhang" class="sidebar-link">Danh Sách Đơn Hàng</a>
+                            <a href="?act=admin-donHang" class="sidebar-link">Danh Sách Đơn Hàng</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link">?</a>
@@ -162,18 +131,18 @@
         </aside>
         <div class="main">
             <nav class="navbar navbar-expand px-4 py-3">
-            <!-- <form action="#" class="d-none d-sm-inline-block">
+            <form action="#" class="d-none d-sm-inline-block">
                        <div class="input1">
                     <input type="text" name="" id="" placelado="tim">
                    </div>
                    <div class="icon">
                     <box-icon name='search-alt'></box-icon>
                          </div>
-                </form> -->
+                </form>
                 <div class="navbar-collapse collapse">
              
                     <ul class="navbar-nav ms-auto">
-                        
+                         <box-icon name='envelope'></box-icon>
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
@@ -187,87 +156,106 @@
                     </ul>
                 </div>
             </nav>
-<div class="container mt-5">
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="mb-3">
-        <form class="d-flex align-items-center">
-            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-    </div>
-
-    <!-- Product Table -->
-    <div class="table-wrapper">
-        <table class="table table-striped table-hover text-center">
-            <thead class="table-dark">
-                <tr>
-                <th>ID</th></th>
-                <th>Product Name </th>
-                <th>Price </th>
-                <th> Promotion Price</th>
-                <th>Image</th>
-                <th>Quantity</th>
-                <th>View </th>
-                <th> Date Enter</th>  
-                <!-- <th>mô tả</th> -->
-                <th>Category</th>
-                <th>Status</th>
-                <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
-                <tr>
-               
-                    <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ten_san_pham ?></td>
-                   
-                    <td> <?= $admins->gia_san_pham ?> </td>
-                    <td> <?= $admins->gia_khuyen_mai ?></td> <td>
-                        <div style="height: 60px; width:60px;">
-                       
-
-                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>"></a> 
-                        </div>
-                    </td>
-                    <td> <?= $admins->so_luong ?></td>
-                    <td> <?= $admins->luot_xem ?></td>
-                    <td> <?= $admins->ngay_nhap ?></td>
-
-                    <!-- <td> <?= $admins->mo_ta ?></td> -->
-
-                    <td> <?= $admins->danh_muc_id ?></td>
-                    <td> <?= $admins->trang_thai ?></td>
-                    <td style="width:170px;">
-                    <button class="btn btn-success">
-                                    <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Fix
-                                    </a>
-                                </button>
-                                
-                                <button class="btn btn-danger">
-                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Delete
-                                    </a>
-                                </button> 
-                                
-                                
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+        
+            <main class="content px-3 py-4">
+            <form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
+                <!-- Khu vực thông báo lỗi -->
+<div style="color: red;">
+<?= $thongBaoLoi ?>
+</div>
+<div style="color: red;">
+<?= $thongBaoUploadFile ?>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Khu vực thông báo thành công -->
+<div style="color: green;">
+<?= $thongBaoThanhCong ?>
+</div>
+
+<div class="row">
+    <div class="">
+        <label for="inputEmail4" class="form-label">Mã Đơn Hàng</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập tên sản phẩm" name="ma_don_hang" value="<?= $don_hangs["ma_don_hang" ];?>" >
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">Tên Người Nhận</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập số lượng" name="ten_nguoi_nhan" value="<?= $don_hangs["ten_nguoi_nhan"]; ?>">
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">Email Người Nhận</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="email_nguoi_nhan"value="<?= $don_hangs["email_nguoi_nhan"] ;?>" >
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">SĐT Người Nhận</label>
+        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="sdt_nguoi_nhan"value="<?= $don_hangs["sdt_nguoi_nhan"] ;?>" >
+    </div>
+    <div class="">
+        <label for="inputEmail4" class="form-label">Địa Chỉ Người Đặt</label>
+        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá sale" name="dia_chi_nguoi_nhan" value="<?= $don_hangs["dia_chi_nguoi_nhan"] ;?>">
+    <div class="">
+        <label for="inputEmail4" class="form-label">Ngày Đặt</label>
+        <input type="date" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="ngay_dat" value="<?= $don_hangs["ngay_dat"]; ?>">
+        <div class="">
+        <label for="inputPassword4" class="form-label">Ghi Chú</label>
+        <textarea name="ghi_chu" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
+    </div>
+    <div class="mt-3">
+        <span class="form-contro" >Địa Chỉ Người Nhận</span>
+      <select name="dia_chi_nguoi_nhan" id="" class="form-control">
+            <option value="0">---lựa chọn---</option>
+            <option value="1">Hà nội</option>
+            <option value="2">Hải Phòng</option>
+            <option value="3">Ninh Bình</option>
+       <select>
+    </div>
+    <div class="mt-3">
+        <span class="form-label">Phương Thức Thanh Toán:</span>
+        <select class="form-control" name="phuong_thuc_thanh_toan_id">
+            <option value="0">-- Lựa chọn --</option>
+            <option value="1">tiền mặt</option>
+            <option value="2">chuyển khoản</option>
+        </select>
+    </div>
+    <div class="mt-3">
+        <span class="form-label">Tài Khoản :</span>
+        <select class="form-control" name="tai_khoan_id">
+            <option value="0">-- Lựa chọn --</option>
+            <option value="1">admin</option>
+            <option value="2">Khách Hàng</option>
+            
+        </select>
+    </div>
+    <div class="mt-3">
+        <span class="form-label">Trạng Thái:</span>
+        <select class="form-control" name="trang_thai_id">
+            <option value="1">còn hàng</option>
+           
+            <option value="2">hết hàng</option>
+        </select>
+    </div>
+    <!-- <div class="mt-3">
+        <span class="form-label">Lựa chọn</span>
+        <div class="row ps-3 pt-2">
+            <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault1">
+                <label value="1" class="form-check-label" for="flexRadioDefault1">
+                  Còn hàng
+                </label>
+            </div>
+            <div class="form-check col-5">
+                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault2" checked>
+                <label value="2" class="form-check-label" for="flexRadioDefault2">
+                  Hết hàng
+                </label>
+            </div>
+        </div>
+    </div> -->
+    <div class="mt-3 d-flex justify-content-center">
+        <button type="submit" class="btn btn-success" name="submitForm">Tạo mới</button>
+    </div>  
+</div>
+</form>
+            </main>
   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

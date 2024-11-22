@@ -83,30 +83,30 @@ class AdminSanPham
            $sql="SELECT * FROM `san_phams` WHERE id=$id";
 
            $data=$this->pdo->query($sql)->fetch();
+            
+        //    if($data !== false){
+        //     $san_phams = new san_phams();
 
-           if($data !== false){
-            $san_phams = new san_phams();
-
-            return $san_phams;
-           }else{
-            echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
-           }
+            return $data;
+        //    }else{
+        //     echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
+        //    }
         }catch (Exception $error) {
             echo "<h1>";
             echo "Lỗi hàm find trong model: " . $error->getMessage();
             echo "</h1>";
         }
        }
-       public function update($id, san_phams $san_phams){
+       public function updateSP($id, san_phams $san_phams){
         try{
            $sql="UPDATE `san_phams` SET `ten_san_pham`='$san_phams->ten_san_pham',`gia_san_pham`='$san_phams->gia_san_pham',
+
            `gia_khuyen_mai`='$san_phams->gia_khuyen_mai',`hinh_anh`='$san_phams->hinh_anh',`so_luong`='$san_phams->so_luong',
+           
            `luot_xem`='$san_phams->luot_xem',`ngay_nhap`='$san_phams->ngay_nhap',`mo_ta`='$san_phams->mo_ta',
            `danh_muc_id`='$san_phams->danh_muc_id',`trang_thai`='$san_phams->trang_thai' WHERE id=$id";
            $data = $this->pdo->exec($sql);
-           if($data ===1 || $data===0){
-            return "success";
-           }
+           
         } catch (Exception $error) {
             echo "<h1>";
             echo "Lỗi hàm insert trong model: " . $error->getMessage();
@@ -114,4 +114,12 @@ class AdminSanPham
         }
        
     }
+    public function showSP($id){
+
+        $sql = "SELECT * FROM `san_phams` WHERE id = $id";
+        // 2. Thực hiện truy vấn
+        $stmt=$this->pdo->query($sql);
+
+        return $stmt->fetchAll();
+}
 }
