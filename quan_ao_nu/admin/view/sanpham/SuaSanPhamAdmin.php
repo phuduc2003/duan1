@@ -114,10 +114,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Quan Lý</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Quản Lý</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
                                 </li>
                             </ul>
                         </li>
@@ -131,10 +131,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
                                 </li>
                             </ul>
                         </li>
@@ -226,13 +226,13 @@
 
 <div class="mb-3">
                 <label for="productName" class="form-label">Product Name</label>
-                <input type="text" class="form-control" id="productName" placeholder="Enter product name" required name= "ten_san_pham" value="<?= $san_phams["ten_san_pham"]?>">
+                <input type="text" class="form-control" id="productName" placeholder="Enter product name" required name= "ten_san_pham" value="<?= $san_phams->ten_san_pham?>">
             </div>
 
         
             <div class="mb-3">
                 <label for="productCategory" class="form-label">Category</label>
-                <select class="form-select" id="productCategory" required name="danh_muc_id" value="<?= $san_phams["danh_muc_id"]?>">
+                <select class="form-select" id="productCategory" required name="danh_muc_id" value="<?= $san_phams->danh_muc_id?>">
                     <option selected disabled>Select category</option>
                     <option value="1">Dress</option>
                     <option value="2">Trouser</option>
@@ -244,22 +244,22 @@
 
             <div class="mb-3">
                 <label for="productPrice" class="form-label">Price ($)</label>
-                <input type="number" class="form-control" id="productPrice" placeholder="Enter price" min="0" required  name="gia_san_pham" value="<?= $san_phams["gia_san_pham"]?>">  
+                <input type="number" class="form-control" id="productPrice" placeholder="Enter price" min="0" required  name="gia_san_pham" value="<?= $san_phams->gia_san_pham?>">  
             </div>
             <div class="mb-3">
                 <label for="productPrice" class="form-label">Price old ($)</label>
-                <input type="number" class="form-control" id="productPrice" placeholder="Enter price" min="0" required  name="gia_khuyen_mai" value="<?= $san_phams["gia_khuyen_mai"]?>">  
+                <input type="number" class="form-control" id="productPrice" placeholder="Enter price" min="0" required  name="gia_khuyen_mai" value="<?= $san_phams->gia_khuyen_mai?>">  
             </div>
 
       
             <div class="mb-3">
                 <label for="productStock" class="form-label"> Quantity</label>
-                <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="so_luong"value="<?= $san_phams["so_luong"]?>">
+                <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="so_luong"value="<?= $san_phams->so_luong?>">
             </div>
 
             <div class="mb-3">
                 <label for="productDescription" class="form-label">Description</label>
-                <textarea class="form-control" id="productDescription" rows="4" placeholder="Enter product description" name="mo_ta" ><?= $san_phams["mo_ta"]?></textarea>
+                <textarea class="form-control" id="productDescription" rows="4" placeholder="Enter product description" name="mo_ta" ><?= $san_phams->mo_ta?></textarea>
             </div>
 
           
@@ -268,15 +268,15 @@
                 <input type="file" class="form-control" id="productImage" accept="image" required name="file_anh_upload" >
             </div>
             <div style="height: 100px; width:300px;" >
-                            <img style="max-height:100%; max-width:100%;" src="<?= $san_phams["hinh_anh"] ?>">
+                            <img style="max-height:100%; max-width:100%;" src="<?= $san_phams->hinh_anh ?>">
                         </div>
             <div class="mb-3">
                 <label for="productStock" class="form-label"> Ngày Sản Xuất</label>
-                <input type="date" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="ngay_nhap"value="<?= $san_phams["ngay_nhap"]?>">
+                <input type="date" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="ngay_nhap"value="<?= $san_phams->ngay_nhap?>">
             </div>
             <div class="mb-3">
                 <label for="productStock" class="form-label"> lượt xem</label>
-                <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="luot_xem"value="<?= $san_phams["luot_xem"]?>">
+                <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="luot_xem"value="<?= $san_phams->luot_xem?>">
             </div>
             <div class="mb-3">
                 <label for="productCategory" class="form-label">Trạng thái</label>

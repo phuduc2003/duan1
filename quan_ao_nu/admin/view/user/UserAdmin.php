@@ -1,6 +1,5 @@
 
-
-
+<!-- <?php print_r($danhSachSanPham) ?> -->
 <!DOCTYPE html>
 <html>
 
@@ -190,10 +189,10 @@
             </nav>
 <div class="container mt-5">
     <!-- Header -->
-    <!-- <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
-    </div> -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Admin Account</h1>
+        <a href="?act=admin-create" class="btn add-product-btn">+ Add New Account</a>
+    </div>
 
     <!-- Search Bar -->
     <div class="mb-3">
@@ -208,67 +207,173 @@
         <table class="table table-striped table-hover text-center">
             <thead class="table-dark">
                 <tr>
-                <th>ID</th></th>
-                <th>Order Code </th>
-                <th> Recipient Account</th>
-                <th> Name Recipient</th>
-                <th>Email Recipient</th>
+                <th>STT</th></th>
+                <th> Name </th>
+                <th>email </th>
+                <th>gender</th>
+                <th>Avatar</th>
                 <th>Phone Number</th>
-                <th>Placer Address</th>
-                <th> Date Put </th>
-                <th>Total Amount </th>  
-                <th>Notes</th>
-                <th>Pay</th>
+                <th>address</th>
+                <th>date of birth</th>
+                 <th>password</th> 
+                <th>position</th>
                 <th>Status</th>
-                <th>Operation</th>
+                <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
+            <?php foreach ($DanhSachUser as $admins) {
+                if($admins->chuc_vu_id == 1){
+                ?>     
                 <tr>
                
                     <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ma_don_hang ?></td>
+                    <td> <?= $admins->ho_ten ?></td>
                    
-                    <td> <?= $admins->tai_khoan_id ?> </td>
-                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
-                    <!-- <td>
+                    <td> <?= $admins->email ?> </td>
+                    <td> <?php if( $admins->gioi_tinh ==1) {echo"Nam";}else{echo"Nữ";}?></td> <td>
                         <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="">
+                       
+
+                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->anh_dai_dien ?>"></a> 
                         </div>
-                    </td> -->
-                    <td> <?= $admins->email_nguoi_nhan ?></td>
-                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
-                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
-                    <td> <?= $admins->ngay_dat ?></td>
-                    <td> <?= $admins->tong_tien ?></td>
-                    <td> <?= $admins->ghi_chu ?></td>
-                    <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
-                        echo"  cash ";
-                    }else{echo" Online ";} ?></td>
-                    <td> <?php if( $admins->trang_thai_id==1 ){
-                        echo"Hiện";
-                    }else{echo"Hiden";}
-                        ?></td>
+                    </td>
+                    <td> <?= $admins->so_dien_thoai ?></td>
+                    <td> <?= $admins->dia_chi ?></td>
+                    <td> <?= $admins->ngay_sinh ?></td>
+
+                    <td> <?= $admins->mat_khau ?></td>
+
+                    <td> <?php if( $admins->chuc_vu_id == 1 ){
+                    echo"Admin";
+                    }else{echo"client";}?></td>
+
+                    <td> <?php if($admins->trang_thai == 1){
+                        echo "appear";
+                    } else{
+                        echo"Hiden";
+                    }
+                    ?></td> 
+
+                    
+
+                   
+                     
+
                     <td style="width:170px;">
                     <button class="btn btn-success">
-                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                    <a href="?act=admin-updateUser&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
                                         <i class="fa-solid fa-pen-to-square"></i> Fix
                                     </a>
                                 </button>
                                 
-                                <button class="btn btn-danger">
-                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Delelte
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                        <i class="fa-solid fa-trash" ></i> Delete
                                     </a>
-                                </button>
+                                </button> 
+                                
+                                
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } }?>
             </tbody>
         </table>
     </div>
 </div>
+<div class="container mt-5">
+    <!-- Header -->
+    <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">client Account</h1>
+        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Account</a>
+    </div> -->
+
+    <!-- Search Bar -->
+    <!-- <div class="mb-3">
+        <form class="d-flex align-items-center">
+            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div> -->
+
+    <!-- Product Table -->
+    <div class="table-wrapper">
+        <table class="table table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                <th>STT</th></th>
+                <th> Name </th>
+                <th>email </th>
+                <th>gender</th>
+                <th>Avatar</th>
+                <th>Phone Number</th>
+                <th>address</th>
+                 <th>password</th> 
+                <th>position</th>
+                <th>Status</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($DanhSachUser as $admins) {
+                if($admins->chuc_vu_id == 2){
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td> <?= $admins->ho_ten ?></td>
+                   
+                    <td> <?= $admins->email ?> </td>
+                    <td> <?php if( $admins->gioi_tinh ==1) {echo"Nam";}else{echo"Nữ";}?></td> <td>
+                        <div style="height: 60px; width:60px;">
+                       
+
+                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->anh_dai_dien ?>"></a> 
+                        </div>
+                    </td>
+                    <td> <?= $admins->so_dien_thoai ?></td>
+                    <td> <?= $admins->dia_chi ?></td>
+
+                    <td> <?= $admins->mat_khau ?></td>
+
+                    <td> <?php if( $admins->chuc_vu_id == 1 ){
+                    echo"Admin";
+                    }else{echo"client";}?></td>
+
+                    <td> <?php if($admins->trang_thai == 1){
+                        echo "appear";
+                    } else{
+                        echo"Hiden";
+                    }
+                    ?></td> 
+
+                    
+
+                   
+                     
+
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updateUser&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                        <i class="fa-solid fa-trash" ></i> Delete
+                                    </a>
+                                </button> 
+                                
+                                
+                    </td>
+                </tr>
+            <?php } }?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

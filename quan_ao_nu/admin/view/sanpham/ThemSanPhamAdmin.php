@@ -13,6 +13,52 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .btn-submit {
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
+        .btn-reset {
+            background-color: #dc3545;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -68,10 +114,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Quan Lý</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Quản Lý</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
                                 </li>
                             </ul>
                         </li>
@@ -85,10 +131,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
                                 </li>
                             </ul>
                         </li>
@@ -131,18 +177,18 @@
         </aside>
         <div class="main">
             <nav class="navbar navbar-expand px-4 py-3">
-            <form action="#" class="d-none d-sm-inline-block">
+            <!-- <form action="#" class="d-none d-sm-inline-block">
                        <div class="input1">
                     <input type="text" name="" id="" placelado="tim">
                    </div>
                    <div class="icon">
                     <box-icon name='search-alt'></box-icon>
                          </div>
-                </form>
+                </form> -->
                 <div class="navbar-collapse collapse">
              
                     <ul class="navbar-nav ms-auto">
-                         <box-icon name='envelope'></box-icon>
+                         <!-- <box-icon name='envelope'></box-icon> -->
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
@@ -156,9 +202,14 @@
                     </ul>
                 </div>
             </nav>
-        
+            
             <main class="content px-3 py-4">
-            <form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
+            <div class="container">
+    <div class="form-container">
+        <div class="form-header">
+            <h1> Add New Product</h1>
+        </div>
+<form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
                 <!-- Khu vực thông báo lỗi -->
 <div style="color: red;">
 <?= $thongBaoLoi ?>
@@ -172,87 +223,82 @@
 <?= $thongBaoThanhCong ?>
 </div>
 
-<div class="row">
-    <div class="">
-        <label for="inputEmail4" class="form-label">Ảnh sản phẩm</label>
-        <input type="file" class="form-control rounded-0" id="inputEmail4" placeholder="" name="file_anh_upload">
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Tên sản phẩm</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập tên sản phẩm" name="ten_san_pham">
-    </div>
-    <div class="">
-        <label for="inputPassword4" class="form-label">Mô tả</label>
-        <textarea name="mo_ta" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Số lượng</label>
-        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập số lượng" name="so_luong">
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Giá</label>
-        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="gia_san_pham">
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Lượt Xem</label>
-        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="luot_xem">
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">SALE</label>
-        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá sale" name="gia_khuyen_mai">
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Ngày Sản Xuất</label>
-        <input type="date" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="ngay_nhap">
-    </div>
-    <div class="mt-3">
-        <span class="form-label">Danh mục sản phẩm:</span>
-        <select class="form-control" name="danh_muc_id">
-            <option value="0">-- Lựa chọn --</option>
-            <option value="1">Quần nữ</option>
-            <option value="2">Váy</option>
-            <option value="3">Áo</option>
-        </select>
-    </div>
-    <div class="mt-3">
-        <span class="form-label">Trạng Thái:</span>
-        <select class="form-control" name="trang_thai">
-            <option value="1">còn hàng</option>
-           
-            <option value="2">hết hàng</option>
-        </select>
-    </div>
-    <!-- <div class="mt-3">
-        <span class="form-label">Lựa chọn</span>
-        <div class="row ps-3 pt-2">
-            <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault1">
-                <label value="1" class="form-check-label" for="flexRadioDefault1">
-                  Còn hàng
-                </label>
+
+<div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter product name" required name="ten_san_pham">
             </div>
-            <div class="form-check col-5">
-                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault2" checked>
-                <label value="2" class="form-check-label" for="flexRadioDefault2">
-                  Hết hàng
-                </label>
+
+        
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Category</label>
+                <select class="form-select" id="productCategory" required name="danh_muc_id" >
+                    <option selected disabled>Select category</option>
+                    <option value="1">Dress</option>
+                    <option value="2">Trouser</option>
+                    <option value="3">Shirt</option>
+                    <option value="4">Books</option>
+                    <option value="5">Books</option>
+                </select>
             </div>
-        </div>
-    </div> -->
-    <div class="mt-3 d-flex justify-content-center">
-        <button type="submit" class="btn btn-success" name="submitForm">Tạo mới</button>
-    </div>  
-</div>
+
+            <div class="mb-3">
+                <label for="productPrice" class="form-label">Price ($)</label>
+                <input type="number" class="form-control" id="productPrice" placeholder="Enter price" min="0" required  name="gia_san_pham" >  
+            </div>
+            <div class="mb-3">
+                <label for="productPrice" class="form-label">Price old ($)</label>
+                <input type="number" class="form-control" id="productPrice" placeholder="Enter price" min="0" required  name="gia_khuyen_mai" >  
+            </div>
+
+      
+            <div class="mb-3">
+                <label for="productStock" class="form-label"> Quantity</label>
+                <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="so_luong">
+            </div>
+
+            <div class="mb-3">
+                <label for="productDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="productDescription" rows="4" placeholder="Enter product description" name="mo_ta" ></textarea>
+            </div>
+
+          
+            <div class="mb-3">
+                <label for="productImage" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="productImage" accept="image" required name="file_anh_upload" >
+            </div>
+            <div class="mb-3">
+                <label for="productStock" class="form-label"> Ngày Sản Xuất</label>
+                <input type="date" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="ngay_nhap">
+            </div>
+            <div class="mb-3">
+                <label for="productStock" class="form-label"> lượt xem</label>
+                <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="luot_xem">
+            </div>
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Trạng thái</label>
+                <select class="form-select" id="productCategory" required name="trang_thai">
+                    <option selected disabled>Select category</option>
+                    <option value="1">Presently</option>
+                    <option value="2">Hidden</option>
+                    
+                </select>
+            </div>
+
+         
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-submit" name="submitForm" >Add Product</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
 </form>
-            </main>
-  
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
-</body>
 
-</html>
 </body>
-
 </html>
+ 

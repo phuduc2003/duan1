@@ -1,5 +1,5 @@
 
-
+<!-- <?php print_r($danhSachSanPham) ?> -->
 <!DOCTYPE html>
 <html>
 
@@ -81,7 +81,7 @@
                             <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-themSP" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
                         </li>
                     </ul>
                 </li>
@@ -99,10 +99,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Quan Lý</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Quản Lý</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
                                 </li>
                             </ul>
                         </li>
@@ -116,10 +116,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
                                 </li>
                             </ul>
                         </li>
@@ -173,7 +173,7 @@
                 <div class="navbar-collapse collapse">
              
                     <ul class="navbar-nav ms-auto">
-                        
+                         <!-- <box-icon name='envelope'></box-icon> -->
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
@@ -207,7 +207,7 @@
         <table class="table table-striped table-hover text-center">
             <thead class="table-dark">
                 <tr>
-                <th>ID</th></th>
+                <th>STT</th></th>
                 <th>Product Name </th>
                 <th>Price </th>
                 <th> Promotion Price</th>
@@ -242,8 +242,31 @@
 
                     <!-- <td> <?= $admins->mo_ta ?></td> -->
 
-                    <td> <?= $admins->danh_muc_id ?></td>
-                    <td> <?= $admins->trang_thai ?></td>
+                    <td> <?php
+                if( $admins->danh_muc_id ==1){
+                    echo"Dress ";
+                } if($admins->danh_muc_id ==2){
+                    echo"Trouser ";
+                }
+                if($admins->danh_muc_id ==3){
+                    echo"Shirt ";
+                }
+                if($admins->danh_muc_id ==4){
+                    echo"Váy ";
+                }
+                if($admins->danh_muc_id ==5){
+                    echo"Váy ";
+                } 
+                        ?></td>
+                    
+                    <td> <?php if($admins->trang_thai == 1){
+                        echo "Presently";
+                    } else{
+                        echo"Hiden";
+                    }
+                    ?></td>
+                     
+
                     <td style="width:170px;">
                     <button class="btn btn-success">
                                     <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
@@ -251,9 +274,9 @@
                                     </a>
                                 </button>
                                 
-                                <button class="btn btn-danger">
+                                <button class="btn btn-danger" name="delete">
                                     <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Delete
+                                        <i class="fa-solid fa-trash" ></i> Delete
                                     </a>
                                 </button> 
                                 

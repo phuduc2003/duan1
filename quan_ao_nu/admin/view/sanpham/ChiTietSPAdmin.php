@@ -98,7 +98,7 @@
                             <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-themSP" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
                         </li>
                     </ul>
                 </li>
@@ -116,10 +116,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Quan Lý</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Quản Lý</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
                                 </li>
                             </ul>
                         </li>
@@ -133,10 +133,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
                                 </li>
                             </ul>
                         </li>
