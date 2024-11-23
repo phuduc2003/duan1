@@ -57,23 +57,37 @@ class AdminDonHang
         echo "</h1>";
  }
 }
-public function find_DH($id){
+public function find($id){
     try{
      $sql="SELECT * FROM `don_hangs` WHERE id=$id";
      $data=$this->pdo->query($sql)->fetch();
-    //  if($data !== false){
-    //     $don_hangs = new don_hangs();
-        return $data;
-    //  }else{
-    //     echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
-    //    }
+     if($data !== false){
+        $don_hangs = new don_hangs();
+        $don_hangs->id = $data['id'];
+        $don_hangs->ma_don_hang	 = $data['ma_don_hang'];
+        $don_hangs->tai_khoan_id= $data['tai_khoan_id'];
+        $don_hangs->ten_nguoi_nhan= $data['ten_nguoi_nhan'];
+        $don_hangs->email_nguoi_nhan= $data['email_nguoi_nhan'];
+        $don_hangs->sdt_nguoi_nhan= $data['sdt_nguoi_nhan'];
+        $don_hangs->dia_chi_nguoi_nhan= $data['dia_chi_nguoi_nhan'];
+        $don_hangs->ngay_dat= $data['ngay_dat'];
+        $don_hangs->tong_tien= $data['tong_tien'];
+        $don_hangs->ghi_chu= $data['ghi_chu'];
+        $don_hangs->phuong_thuc_thanh_toan_id= $data['phuong_thuc_thanh_toan_id'];
+        $don_hangs->trang_thai_id= $data['trang_thai_id'];
+        
+
+        return $don_hangs;
+     }else{
+        echo "Lỗi: id không tồn tại. Mời bạn kiểm tra lại.";
+       }
     } catch (Exception $error) {
         echo "<h1>";
         echo "Lỗi hàm insert trong model: " . $error->getMessage();
         echo "</h1>";
     }
 }
-public function updateDonHang($id, don_hang $don_hangs){
+public function updateDonHang($id,don_hangs $don_hangs){
     try{
        $sql="UPDATE `don_hangs` SET `ma_don_hang`='$don_hangs->ma_don_hang',`tai_khoan_id`='$don_hangs->tai_khoan_id',`ten_nguoi_nhan`='$don_hangs->ten_nguoi_nhan',
        `email_nguoi_nhan`='$don_hangs->email_nguoi_nhan',`sdt_nguoi_nhan`='$don_hangs->sdt_nguoi_nhan',`dia_chi_nguoi_nhan`='$don_hangs->dia_chi_nguoi_nhan',`ngay_dat`='$don_hangs->ngay_dat',

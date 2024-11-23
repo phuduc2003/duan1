@@ -13,6 +13,52 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .btn-submit {
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
+        .btn-reset {
+            background-color: #dc3545;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -68,10 +114,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Quan Lý</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Quản Lý</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
                                 </li>
                             </ul>
                         </li>
@@ -85,10 +131,10 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-user" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-createTV" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
                                 </li>
                             </ul>
                         </li>
@@ -102,7 +148,7 @@
                     </a>
                     <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donHang" class="sidebar-link">Danh Sách Đơn Hàng</a>
+                            <a href="?act=admin-donhang" class="sidebar-link">Danh Sách Đơn Hàng</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link">?</a>
@@ -131,18 +177,18 @@
         </aside>
         <div class="main">
             <nav class="navbar navbar-expand px-4 py-3">
-            <form action="#" class="d-none d-sm-inline-block">
+            <!-- <form action="#" class="d-none d-sm-inline-block">
                        <div class="input1">
                     <input type="text" name="" id="" placelado="tim">
                    </div>
                    <div class="icon">
                     <box-icon name='search-alt'></box-icon>
                          </div>
-                </form>
+                </form> -->
                 <div class="navbar-collapse collapse">
              
                     <ul class="navbar-nav ms-auto">
-                         <box-icon name='envelope'></box-icon>
+                         <!-- <box-icon name='envelope'></box-icon> -->
                         <li class="nav-item dropdown"> Admin
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                             
@@ -156,9 +202,14 @@
                     </ul>
                 </div>
             </nav>
-        
+            
             <main class="content px-3 py-4">
-            <form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
+            <div class="container">
+    <div class="form-container">
+        <div class="form-header">
+            <h1> Update Account</h1>
+        </div>
+<form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
                 <!-- Khu vực thông báo lỗi -->
 <div style="color: red;">
 <?= $thongBaoLoi ?>
@@ -172,98 +223,80 @@
 <?= $thongBaoThanhCong ?>
 </div>
 
-<div class="row">
-    <div class="">
-        <label for="inputEmail4" class="form-label">Mã Đơn Hàng</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập tên sản phẩm" name="ma_don_hang" value="<?= $don_hangs["ma_don_hang" ];?>" >
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Tên Người Nhận</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập số lượng" name="ten_nguoi_nhan" value="<?= $don_hangs["ten_nguoi_nhan"]; ?>">
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Email Người Nhận</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="email_nguoi_nhan"value="<?= $don_hangs["email_nguoi_nhan"] ;?>" >
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">SĐT Người Nhận</label>
-        <input type="number" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="sdt_nguoi_nhan"value="<?= $don_hangs["sdt_nguoi_nhan"] ;?>" >
-    </div>
-    <div class="">
-        <label for="inputEmail4" class="form-label">Địa Chỉ Người Đặt</label>
-        <input type="text" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá sale" name="dia_chi_nguoi_nhan" value="<?= $don_hangs["dia_chi_nguoi_nhan"] ;?>">
-    <div class="">
-        <label for="inputEmail4" class="form-label">Ngày Đặt</label>
-        <input type="date" class="form-control rounded-0" id="inputEmail4" placeholder="Nhập giá bán" name="ngay_dat" value="<?= $don_hangs["ngay_dat"]; ?>">
-        <div class="">
-        <label for="inputPassword4" class="form-label">Ghi Chú</label>
-        <textarea name="ghi_chu" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả"></textarea>
-    </div>
-    <div class="mt-3">
-        <span class="form-contro" >Địa Chỉ Người Nhận</span>
-      <select name="dia_chi_nguoi_nhan" id="" class="form-control">
-            <option value="0">---lựa chọn---</option>
-            <option value="1">Hà nội</option>
-            <option value="2">Hải Phòng</option>
-            <option value="3">Ninh Bình</option>
-       <select>
-    </div>
-    <div class="mt-3">
-        <span class="form-label">Phương Thức Thanh Toán:</span>
-        <select class="form-control" name="phuong_thuc_thanh_toan_id">
-            <option value="0">-- Lựa chọn --</option>
-            <option value="1">tiền mặt</option>
-            <option value="2">chuyển khoản</option>
-        </select>
-    </div>
-    <div class="mt-3">
-        <span class="form-label">Tài Khoản :</span>
-        <select class="form-control" name="tai_khoan_id">
-            <option value="0">-- Lựa chọn --</option>
-            <option value="1">admin</option>
-            <option value="2">Khách Hàng</option>
-            
-        </select>
-    </div>
-    <div class="mt-3">
-        <span class="form-label">Trạng Thái:</span>
-        <select class="form-control" name="trang_thai_id">
-            <option value="1">còn hàng</option>
+
+<div class="mb-3">
+                <label for="productName" class="form-label"> Order Code </label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ma_don_hang" value=" <?= $don_hangs->ma_don_hang?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Name Recipient </label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ten_nguoi_nhan" value=" <?= $don_hangs->ten_nguoi_nhan?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Email Recipient</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required  name="email_nguoi_nhan" value=" <?= $don_hangs->email_nguoi_nhan?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Phone Number</label>
+                <input type="number" class="form-control" id="productName" placeholder="Enter Phone Number" required name="sdt_nguoi_nhan" value=" <?= $don_hangs->sdt_nguoi_nhan?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Placer Address</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="dia_chi_nguoi_nhan" value=" <?= $don_hangs->dia_chi_nguoi_nhan?>">
+            </div>
+             <div class="mb-3">
+                <label for="productName" class="form-label"> Date put</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ngay_dat" value=" <?= $don_hangs->ngay_dat?>">
+            </div>
+            <div class="mb-3">
+                <label for="productDescription" class="form-label">Notes</label>
+                <textarea class="form-control" id="productDescription" rows="4" placeholder="Enter product description" name="ghi_chu" ><?= $don_hangs->ghi_chu?></textarea>
+            </div>
+
+        
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Pay </label>
+                <select class="form-select" id="productCategory" required name="phuong_thuc_thanh_toan_id" >
+                    <option selected disabled>Select Pay</option>
+                    <option value="1">Tiền mặt</option>
+                    <option value="2">Online</option>
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Chức vụ</label>
+                <select class="form-select" id="productCategory" required name="tai_khoan_id" >
+                    <option selected disabled>Select gender</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Client</option>
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Status</label>
+                <select class="form-select" id="productCategory" required name="trang_thai_id">
+                    <option selected disabled>Select Status</option>
+                    <option value="1">Presently</option>
+                    <option value="2">Hidden</option>
+                    
+                </select>
+            </div>
            
-            <option value="2">hết hàng</option>
-        </select>
-    </div>
-    <!-- <div class="mt-3">
-        <span class="form-label">Lựa chọn</span>
-        <div class="row ps-3 pt-2">
-            <div class="form-check col-2">
-                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault1">
-                <label value="1" class="form-check-label" for="flexRadioDefault1">
-                  Còn hàng
-                </label>
+
+         
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-submit" name="submitForm" >Upadte Account</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
             </div>
-            <div class="form-check col-5">
-                <input class="form-check-input" type="radio" name="trang_thai" id="flexRadioDefault2" checked>
-                <label value="2" class="form-check-label" for="flexRadioDefault2">
-                  Hết hàng
-                </label>
-            </div>
-        </div>
-    </div> -->
-    <div class="mt-3 d-flex justify-content-center">
-        <button type="submit" class="btn btn-success" name="submitForm">Tạo mới</button>
-    </div>  
-</div>
 </form>
-            </main>
-  
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
-</body>
 
-</html>
 </body>
-
 </html>
+ 

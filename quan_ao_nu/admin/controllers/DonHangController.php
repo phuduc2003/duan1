@@ -27,17 +27,21 @@ class DonHangController{
     }
       } 
     }
-    public function updateDonHang($id){
-      if($id !==""){
-        $don_hangs = new don_hangs();
-        $thongBaoLoi="";
-        $thongBaoUploadFile="";
-        $thongBaoThanhCong="";
-        $don_hangs=$this->AdminDonHang->find_DH($id);
+    public function updateDonHang($id)
+    {
+      
         
-        if(isset($_POST["submitForm"])){
+        if ($id !== "") {
+            $don_hangs = new don_hangs(); 
+            $thongBaoLoi = ""; 
+            $thongBaoThanhCong = ""; 
+            $thongBaoUploadFile = "";
+    
+            $don_hangs = $this->AdminDonHang->find($id);
+    
+          if (isset($_POST["submitForm"])) {
           $don_hangs->ma_don_hang=trim($_POST["ma_don_hang"]);
-          $don_hangs->tai_khoan_id	=trim($_POST["tai_khoan_id"]);
+          $don_hangs->tai_khoan_id=trim($_POST["tai_khoan_id"]);
           $don_hangs->ten_nguoi_nhan=trim($_POST["ten_nguoi_nhan"]);
           $don_hangs->email_nguoi_nhan=trim($_POST["email_nguoi_nhan"]);
           $don_hangs->sdt_nguoi_nhan=trim($_POST["sdt_nguoi_nhan"]);
@@ -47,22 +51,28 @@ class DonHangController{
           $don_hangs->phuong_thuc_thanh_toan_id=trim($_POST["phuong_thuc_thanh_toan_id"]);
           $don_hangs->trang_thai_id=trim($_POST["trang_thai_id"]);
 
-          if($don_hangs->ma_don_hang){
-            $thongBaoLoi ="mã đơn hàng phải nhập";
-          }
-          
-          if($thongBaoLoi===""){
-            $KetQua=$this->AdminDonHang->updloadDonHang($id,$don_hangs);
-            if($KetQua==="success"){
-              $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-              $AdminDonHang = new AdminDonHang();
-            }else {
-              $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
-
-          }
-          }
+          if($don_hangs->ma_don_hang===""){
+                    $thongBaoLoi ="mã đơn hàng phải nhập";
+                  }
+                if ($thongBaoLoi === "" && $thongBaoUploadFile === "") {
+                    $ketQua = $this->AdminDonHang->updateDonHang($id,$don_hangs);
+                    if ($ketQua === "success") {
+                        $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                       
+    
+                    } else {
+                        $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+    
+                    }
+                }
+            }    
+              
+            include "view/donhang/SuaDonHang.php";
+            
+        } else {
+            echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
         }
-      }
-      include "view/donhang/SuaDonHang.php";
-    }
+    } 
+
+
 }
