@@ -122,6 +122,76 @@ class UserController{
     }
 
 
+    public function showLogin()
+    { 
+     
+session_start();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+
+if (isset($_POST['email']) && isset($_POST['mat_khau'])) {
+
+$email= (strtolower(trim($_POST['email'])));
+$mat_khau = $_POST['mat_khau'];
+$user = $this->AdminUser->check_login($email , $mat_khau);
+
+
+if ($user) {
+// Phân quyền dựa trên trạng thái (chuc_vu_id) của người dùng
+switch ($user['chuc_vu_id']) {
+case 1: // Admin
+    $_SESSION['username'] = $user['email'];
+    $_SESSION['role_admin'] = $user['chuc_vu_id'];
+    echo "<script>";
+    echo "alert('Chào Admin');";
+    echo "window.location.href = '?act=admin-sanpham';";
+    echo "</script>";
+    break;
+
+case 2: // guest
+    $_SESSION['username'] = $user['email '];
+    $_SESSION['role_guest'] = $user['chuc_vu_id'];
+    $_SESSION['id'] = $user['id'];
+    echo "<script>";
+    echo 'alert("Chào Bạn ");';
+    echo 'window.location.href = "sanpham";';
+    echo "</script>";
+    break;
+
+   
+
+default:
+    $errors = "Trạng thái người dùng không hợp lệ";
+    break;
+}
+
+} else {
+$errors = "Tài khoản hoặc mật khẩu không chính xác";
+}
+
+
+}else {
+$errors = "Vui lòng nhập tên đăng nhập và mật khẩu";
+}
+
+}
+include "view/user/login.php";
+echo $errors;
+}
+
+
+
+
+    public function login(){
+      include "view/user/login.php";
+    }
+
+
+public function logout(){
+  include "view/user/logout.php";
+}
 
 
     

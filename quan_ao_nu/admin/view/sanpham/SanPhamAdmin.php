@@ -1,5 +1,4 @@
-
-<!-- <?php print_r($danhSachSanPham) ?> -->
+<?php session_start();?> 
 <!DOCTYPE html>
 <html>
 
@@ -154,7 +153,7 @@
                 </li>
             </ul>
             <div class="sidebar-footer">
-            <a href="?act=admin-logout" class="sidebar-link">
+            <a href="?act=logout" class="sidebar-link">
                     <i class="lni lni-exit"></i>
                     <span>Đăng Xuất</span>
                 </a>

@@ -31,7 +31,7 @@ $user = new UserController();
 switch($act) {
     case "":
         // Điều hướng sang trang mặc định (trang danh sách) nếu người dùng không truyền "act"
-        header("Location: ?act=admin-donhang");
+        header("Location: ?act=login");
         break;
 //------------------------ TRANG QUÁN LÝ SẢN PHẨM --------------------------------//
      //DANH SÁCH
@@ -78,6 +78,17 @@ switch($act) {
     case "admin-listuser";
     $user->ListUser();
     break;
+    //SỬ LÝ DỮ LIỆU ĐĂNG NHẬP
+  case "admin-login":
+        $user->showLogin();
+        break; 
+    //LOGIN LOGOUT
+        case "login";
+        $user->login();
+        break;
+        case "logout";
+        $user->logout();
+        break;
 
     //THÊM SỬA XOÁ
     case "admin-create";

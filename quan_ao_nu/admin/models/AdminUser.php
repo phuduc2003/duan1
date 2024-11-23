@@ -113,6 +113,13 @@ class AdminUser{
 
 }
 
+public function check_login($email ,$mat_khau){
+    $stmt = $this->pdo->prepare("SELECT * FROM tai_khoans WHERE email = '$email' AND mat_khau = '$mat_khau'");
+    
+     $stmt->execute();
+    $user = $stmt->fetch();
+    return $user;
+}
 
 
 }
