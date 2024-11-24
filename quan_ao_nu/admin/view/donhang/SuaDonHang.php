@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html>
 
@@ -15,34 +14,49 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <style>
-        .table img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 5px;
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-actions {
-            display: flex;
-            gap: 5px;
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .search-bar {
-            max-width: 400px;
+        .form-header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
+        .form-label {
+            font-weight: bold;
+            color: #555;
         }
 
-        .add-product-btn {
+        .btn-submit {
             background-color: #28a745;
             color: white;
             transition: background-color 0.3s ease;
         }
 
-        .add-product-btn:hover {
+        .btn-submit:hover {
             background-color: #218838;
+        }
+
+        .btn-reset {
+            background-color: #dc3545;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -188,98 +202,101 @@
                     </ul>
                 </div>
             </nav>
-<div class="container mt-5">
-    <!-- Header -->
-    <!-- <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
-    </div> -->
-
-    <!-- Search Bar -->
-    <div class="mb-3">
-        <form class="d-flex align-items-center">
-            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-    </div>
-
-    <!-- Product Table -->
-    <div class="table-wrapper">
-        <table class="table table-striped table-hover text-center">
-            <thead class="table-dark">
-                <tr>
-                <th>ID</th></th>
-                <th>Order Code </th>
-                <th> Recipient Account</th>
-                <th> Name Recipient</th>
-                <th>Email Recipient</th>
-                <th>Phone Number</th>
-                <th>Placer Address</th>
-                <th> Date Put </th>
-                <th>Total Amount </th>  
-                <th>Notes</th>
-                <th>Pay</th>
-                <th>Status</th>
-                <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
-                <tr>
-               
-                    <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ma_don_hang ?></td>
-                   
-                    <td> <?= $admins->tai_khoan_id ?> </td>
-                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
-                    <!-- <td>
-                        <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="">
-                        </div>
-                    </td> -->
-                    <td> <?= $admins->email_nguoi_nhan ?></td>
-                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
-                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
-                    <td> <?= $admins->ngay_dat ?></td>
-                    <td> <?= $admins->tong_tien ?></td>
-                    <td> <?= $admins->ghi_chu ?></td>
-                    <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
-                        echo"  cash ";
-                    }else{echo" Online ";} ?></td>
-                    <td> <?php if( $admins->trang_thai_id==1 ){
-                        echo"Hiện";
-                    }else{echo"Hiden";}
-                        ?></td>
-                    <td style="width:170px;">
-                    <button class="btn btn-success">
-                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Fix
-                                    </a>
-                                </button>
-                                
-                                <button class="btn btn-danger">
-                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Delelte
-                                    </a>
-                                </button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+            
+            <main class="content px-3 py-4">
+            <div class="container">
+    <div class="form-container">
+        <div class="form-header">
+            <h1> Update Account</h1>
+        </div>
+<form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
+                <!-- Khu vực thông báo lỗi -->
+<div style="color: red;">
+<?= $thongBaoLoi ?>
+</div>
+<div style="color: red;">
+<?= $thongBaoUploadFile ?>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
+<!-- Khu vực thông báo thành công -->
+<div style="color: green;">
+<?= $thongBaoThanhCong ?>
+</div>
+
+
+<div class="mb-3">
+                <label for="productName" class="form-label"> Order Code </label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ma_don_hang" value=" <?= $don_hangs->ma_don_hang?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Name Recipient </label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ten_nguoi_nhan" value=" <?= $don_hangs->ten_nguoi_nhan?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Email Recipient</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required  name="email_nguoi_nhan" value=" <?= $don_hangs->email_nguoi_nhan?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Phone Number</label>
+                <input type="number" class="form-control" id="productName" placeholder="Enter Phone Number" required name="sdt_nguoi_nhan" value=" <?= $don_hangs->sdt_nguoi_nhan?>">
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Placer Address</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="dia_chi_nguoi_nhan" value=" <?= $don_hangs->dia_chi_nguoi_nhan?>">
+            </div>
+             <div class="mb-3">
+                <label for="productName" class="form-label"> Date put</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ngay_dat" value=" <?= $don_hangs->ngay_dat?>">
+            </div>
+            <div class="mb-3">
+                <label for="productDescription" class="form-label">Notes</label>
+                <textarea class="form-control" id="productDescription" rows="4" placeholder="Enter product description" name="ghi_chu" ><?= $don_hangs->ghi_chu?></textarea>
+            </div>
+
+        
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Pay </label>
+                <select class="form-select" id="productCategory" required name="phuong_thuc_thanh_toan_id" >
+                    <option selected disabled>Select Pay</option>
+                    <option value="1">Tiền mặt</option>
+                    <option value="2">Online</option>
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Chức vụ</label>
+                <select class="form-select" id="productCategory" required name="tai_khoan_id" >
+                    <option selected disabled>Select gender</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Client</option>
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Status</label>
+                <select class="form-select" id="productCategory" required name="trang_thai_id">
+                    <option selected disabled>Select Status</option>
+                    <option value="1">Presently</option>
+                    <option value="2">Hidden</option>
+                    
+                </select>
+            </div>
+           
+
+         
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-submit" name="submitForm" >Upadte Account</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+</form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
-</body>
 
-</html>
 </body>
-
 </html>
+ 

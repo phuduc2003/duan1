@@ -83,9 +83,21 @@ class AdminSanPham
            $sql="SELECT * FROM `san_phams` WHERE id=$id";
 
            $data=$this->pdo->query($sql)->fetch();
-
+            
            if($data !== false){
             $san_phams = new san_phams();
+                 $san_phams->id= $data['id'];
+                $san_phams->ten_san_pham= $data['ten_san_pham'];
+                $san_phams->gia_san_pham= $data['gia_san_pham'];
+                $san_phams->gia_khuyen_mai= $data['gia_khuyen_mai'];
+                $san_phams->hinh_anh= $data['hinh_anh'];
+                $san_phams->so_luong= $data['so_luong'];
+                $san_phams->luot_xem= $data['luot_xem'];
+                $san_phams->ngay_nhap= $data['ngay_nhap'];
+                $san_phams->mo_ta= $data['mo_ta'];
+                $san_phams->danh_muc_id= $data['danh_muc_id'];
+                $san_phams->trang_thai= $data['trang_thai'];
+                
 
             return $san_phams;
            }else{
@@ -97,16 +109,20 @@ class AdminSanPham
             echo "</h1>";
         }
        }
-       public function update($id, san_phams $san_phams){
+       public function updateSP($id, san_phams $san_phams){
         try{
            $sql="UPDATE `san_phams` SET `ten_san_pham`='$san_phams->ten_san_pham',`gia_san_pham`='$san_phams->gia_san_pham',
+
            `gia_khuyen_mai`='$san_phams->gia_khuyen_mai',`hinh_anh`='$san_phams->hinh_anh',`so_luong`='$san_phams->so_luong',
+           
            `luot_xem`='$san_phams->luot_xem',`ngay_nhap`='$san_phams->ngay_nhap',`mo_ta`='$san_phams->mo_ta',
            `danh_muc_id`='$san_phams->danh_muc_id',`trang_thai`='$san_phams->trang_thai' WHERE id=$id";
            $data = $this->pdo->exec($sql);
-           if($data ===1 || $data===0){
+            
+           if ($data === 1 || $data === 0) {
             return "success";
-           }
+        }
+           
         } catch (Exception $error) {
             echo "<h1>";
             echo "Lỗi hàm insert trong model: " . $error->getMessage();
@@ -114,4 +130,12 @@ class AdminSanPham
         }
        
     }
+    public function showSP($id){
+
+        $sql = "SELECT * FROM `san_phams` WHERE id = $id";
+        // 2. Thực hiện truy vấn
+        $stmt=$this->pdo->query($sql);
+
+        return $stmt->fetchAll();
+}
 }

@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html>
 
@@ -14,35 +12,53 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
-        .table img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 5px;
+        .product-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
         }
 
-        .btn-actions {
-            display: flex;
-            gap: 5px;
+        .price {
+            font-size: 1.5rem;
+            color: #28a745;
+            font-weight: bold;
         }
 
-        .search-bar {
-            max-width: 400px;
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            margin-left: 10px;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
+        .product-description {
+            line-height: 1.8;
+            color: #555;
         }
 
-        .add-product-btn {
-            background-color: #28a745;
+        .quantity-input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .btn-buy-now {
+            background-color: #007bff;
+            border: none;
             color: white;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
-        .add-product-btn:hover {
-            background-color: #218838;
+        .btn-buy-now:hover {
+            background-color: #0056b3;
+        }
+
+        .related-products img {
+            transition: transform 0.3s;
+        }
+
+        .related-products img:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -188,92 +204,43 @@
                     </ul>
                 </div>
             </nav>
-<div class="container mt-5">
-    <!-- Header -->
-    <!-- <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
-    </div> -->
 
-    <!-- Search Bar -->
-    <div class="mb-3">
-        <form class="d-flex align-items-center">
-            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-    </div>
+            <?php foreach ($danhSach_SP as $value) : ?>  
+            <div class="container mt-5"> 
+                <h1>Product Details</h1> <br>
+        <!-- Product Details -->
+        <div class="row">
+            <div class="col-md-6">
+                <img src="<?= $value["hinh_anh"] ?>" alt="Product Image" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+                <h1 class="product-title"><?= $value["ten_san_pham"]  ?></h1>
+                <p class="price">$<?= $value["gia_san_pham"] ?> <span class="old-price">$<?= $value["gia_khuyen_mai"]  ?></span></p>
+                <p class="product-description">
+                <?= $value["mo_ta"]?>
+                </p>
 
-    <!-- Product Table -->
-    <div class="table-wrapper">
-        <table class="table table-striped table-hover text-center">
-            <thead class="table-dark">
-                <tr>
-                <th>ID</th></th>
-                <th>Order Code </th>
-                <th> Recipient Account</th>
-                <th> Name Recipient</th>
-                <th>Email Recipient</th>
-                <th>Phone Number</th>
-                <th>Placer Address</th>
-                <th> Date Put </th>
-                <th>Total Amount </th>  
-                <th>Notes</th>
-                <th>Pay</th>
-                <th>Status</th>
-                <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
-                <tr>
-               
-                    <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ma_don_hang ?></td>
-                   
-                    <td> <?= $admins->tai_khoan_id ?> </td>
-                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
-                    <!-- <td>
-                        <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="">
-                        </div>
-                    </td> -->
-                    <td> <?= $admins->email_nguoi_nhan ?></td>
-                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
-                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
-                    <td> <?= $admins->ngay_dat ?></td>
-                    <td> <?= $admins->tong_tien ?></td>
-                    <td> <?= $admins->ghi_chu ?></td>
-                    <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
-                        echo"  cash ";
-                    }else{echo" Online ";} ?></td>
-                    <td> <?php if( $admins->trang_thai_id==1 ){
-                        echo"Hiện";
-                    }else{echo"Hiden";}
-                        ?></td>
-                    <td style="width:170px;">
-                    <button class="btn btn-success">
-                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Fix
-                                    </a>
-                                </button>
-                                
-                                <button class="btn btn-danger">
-                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Delelte
-                                    </a>
-                                </button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
+                <!-- Quantity and Buttons -->
+                <div class="d-flex align-items-center mb-3">
+                    <label for="quantity" class="me-2">Quantity:</label>
+                    <input type="number" id="quantity" class="form-control quantity-input me-3" value="1" min="1">
+                    <button class="btn btn-success me-2">Add to Cart</button>
+                    <button class="btn btn-buy-now">Buy Now</button>
+                </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Additional Information -->
+                <p><strong>Category:</strong> <?= $value["danh_muc_id"]?></p>
+                <p><strong>Availability:</strong> <?= $value["trang_thai"]?></p>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
