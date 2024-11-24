@@ -22,6 +22,8 @@ match ($act) {
    '/' => (new HomeController())-> home(),
    'sanpham' => (new HomeController())->homeSanPham(),
    'chitietsanpham' => (new HomeController())->detailSanPham(),
+   'them-gio-hang' => (new HomeController())->addGioHang(),
+   'gio-hang' => (new HomeController())->gioHang(),
         //auth
         'login' =>(new HomeController())->formLogin(),
         'check-login' =>(new HomeController())->postLogin(),

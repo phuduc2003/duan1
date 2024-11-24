@@ -95,4 +95,54 @@ class HomeController
         header("Location: " . BASE_URL);  // Hoặc trang đăng nhập
         exit();
     }
+    public function addGioHang(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_SESSION['user_client'])){
+          $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+          $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+          if(!$gioHang){
+            $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
+            $gioHang = ['id'=>$gioHangId];
+            $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+          }else{
+            $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+          }
+          $san_pham_id = $_POST['san_pham_id'];
+          $so_luong = $_POST['so_luong'];
+          $checkSanPham = false;
+        foreach($chiTietGioHang as $detail){
+          if($detail['san_pham_id'] == $san_pham_id){
+            $newSoLuong = $detail['so_luong'] + $so_luong;
+            $this->modelGioHang->updateSoLuong($gioHang['id'],$san_pham_id,$newSoLuong);
+            $checkSanPham=true;
+            break;
+          }
+        }
+        if(!$checkSanPham){
+          $this->modelGioHang->addDetailGioHang($gioHang['id'],$san_pham_id,$so_luong);
+        }
+        header("Location: " . BASE_URL . '?act=gio-hang');
+        }else{
+          header("Location: " . BASE_URL . '?act=login');
+    }
+      }
+    }
+    public function gioHang(){
+      if(isset($_SESSION['user_client'])){
+        $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+        //Lấy dữ liệu giỏ hàng người dùng
+        $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+        if(!$gioHang){
+          $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
+          $gioHang = ['id'=>$gioHangId];
+          $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+        }else{
+          $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+        }
+        
+        require_once './views/gioHang.php';
+    }else{
+      header("Location: " . BASE_URL . '?act=login');
+    }
+    }
 }
