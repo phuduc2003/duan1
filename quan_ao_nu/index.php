@@ -6,10 +6,12 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
-require_once './controllers/gioHangController.php';
 // Require toàn bộ file Models
 require_once './models/SanPham.php';
-
+require_once './models/SanPham.php';
+require_once './models/TaiKhoan.php';
+require_once './models/GioHang.php';
+require_once './models/DonHang.php';
 // Route
 $act = $_GET['act'] ?? '/';
 
@@ -18,7 +20,7 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ
    '/' => (new HomeController())-> home(),
-   'sanpham' => (new gioHangController())->homeSanPham(),
+   'sanpham' => (new HomeController())->homeSanPham(),
    'chitietsanpham' => (new HomeController())->detailSanPham(),
-    'giohang' => (new gioHangController())->homeGioHang(),
+    
 };

@@ -67,4 +67,16 @@ class SanPham
               echo "Lỗi".$e->getMessage();
            }
           }
+          public function searchProducts($keyword) {
+            try {
+                $sql = "SELECT * FROM san_phams WHERE ten_san_pham LIKE :keyword OR mo_ta LIKE :keyword";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về danh sách sản phẩm
+            } catch (Exception $e) {
+                echo "Lỗi: " . $e->getMessage();
+                return false; // Trả về false nếu có lỗi
+            }
+        }
 }

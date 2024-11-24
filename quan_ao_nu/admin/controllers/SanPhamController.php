@@ -127,8 +127,8 @@ class SanPhamController
             if ($thongBaoLoi === "" && $thongBaoUploadFile === "") {
                 $ketQua = $this->AdminSanPham->updateSP($id,$san_phams);
                 if ($ketQua === "success") {
-                    $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-                    $san_phams = new san_phams();
+                    $thongBaoThanhCong = " Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                           
 
                 } else {
                     $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
