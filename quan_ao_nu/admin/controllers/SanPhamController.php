@@ -1,13 +1,13 @@
 <?php
 class SanPhamController
 {
-
-
+   
+   
   public $AdminSanPham;
 
 
 
-  // Khai báo phương thức
+  // Khai báo phương thức 
   public function __construct()
   {
       // 1. Khởi tạo giá trị cho thuộc tính hang_hoaQuery
@@ -15,7 +15,7 @@ class SanPhamController
       // $this->AdminTrangThai = new AdminTrangThai();
       // Mở trình duyệt lên để kiểm tra kết quả
   }
-
+  
   public function sanpham(){
     $danhSachSanPham = $this->AdminSanPham->all();
 
@@ -72,28 +72,28 @@ class SanPhamController
             $ketQua=$this->AdminSanPham->insert($san_phams);
             if($ketQua==="success"){
               $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-
+            
             }else {
               $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
 
           }
-
+          
 
         }
 
       }
     include "view/sanpham/ThemSanPhamAdmin.php";
    }
-
+    
 
  public function showUpdate($id)
 {
-
-
+  
+    
     if ($id !== "") {
-        $san_phams = new san_phams();
-        $thongBaoLoi = "";
-        $thongBaoThanhCong = "";
+        $san_phams = new san_phams(); 
+        $thongBaoLoi = ""; 
+        $thongBaoThanhCong = ""; 
         $thongBaoUploadFile = "";
 
         $san_phams = $this->AdminSanPham->find($id);
@@ -110,7 +110,7 @@ class SanPhamController
                   $san_phams->trang_thai=trim($_POST["trang_thai"]);
                   if($san_phams->ten_san_pham===""||$san_phams->gia_san_pham===""){
                   $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
-
+                    
                             }
 
             if ($_FILES["file_anh_upload"]["name"] !== "") {
@@ -128,21 +128,21 @@ class SanPhamController
                 $ketQua = $this->AdminSanPham->updateSP($id,$san_phams);
                 if ($ketQua === "success") {
                     $thongBaoThanhCong = " Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-
+                           
 
                 } else {
                     $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
 
                 }
             }
-        }
-
+        }    
+          
         include "view/sanpham/SuaSanPhamAdmin.php";
-
+        
     } else {
         echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
     }
-}
+} 
 
-
+   
 }
