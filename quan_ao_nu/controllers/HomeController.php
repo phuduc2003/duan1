@@ -57,4 +57,42 @@ class HomeController
         }
 
     }
+    public function formLogin(){
+      require_once './views/auth/formLogin.php';
+      deleteSessionError();
+      exit();
+    }
+    public function postLogin(){
+      if($_SERVER['REQUEST_METHOD']=='POST'){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $user = $this->modelTaiKhoan->checkLogin($email,$password);
+        if ($user==$email){
+          $_SESSION['user_client'] = $user;
+          header("Location: " . BASE_URL );
+          exit();
+        }else{
+          $_SESSION['error'] = $user;
+          $_SESSION['flash'] = true;
+          header("Location: " . BASE_URL . '?act=login');
+        }
+
+      }
+    }
+    public function logout()
+    {
+        // Xóa thông tin người dùng trong session nếu có
+        if (isset($_SESSION['user_client'])) {
+            unset($_SESSION['user_client']);
+        }
+    
+        // Xóa thông tin lỗi trong session nếu có
+        DeleteSessionError();
+    
+        // Hủy session
+    
+        // Chuyển hướng người dùng về trang chính hoặc trang đăng nhập sau khi đăng xuất
+        header("Location: " . BASE_URL);  // Hoặc trang đăng nhập
+        exit();
+    }
 }
