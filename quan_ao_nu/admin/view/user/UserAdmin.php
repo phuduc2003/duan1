@@ -1,5 +1,4 @@
 
-<!-- <?php print_r($danhSachSanPham) ?> -->
 <!DOCTYPE html>
 <html>
 
