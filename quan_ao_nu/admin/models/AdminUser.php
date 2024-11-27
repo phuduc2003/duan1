@@ -51,7 +51,7 @@ class AdminUser{
  public function InsertUser(tai_khoans $tai_khoans){
     try{
     $sql = "INSERT INTO `tai_khoans` (`id`, `ho_ten`, `anh_dai_dien`, `ngay_sinh`, `email`, `so_dien_thoai`, `gioi_tinh`, `dia_chi`, `mat_khau`, `chuc_vu_id`, `trang_thai`)
-     VALUES (NULL, '$tai_khoans->ho_ten', '$tai_khoans->anh_dai_dien', '$tai_khoans->ngay_sinh', '$tai_khoans->email', '$tai_khoans->so_dien_thoai', '$tai_khoans->gioi_tinh', '$tai_khoans->dia_chi', '$tai_khoans->mat_khau', '$tai_khoans->chuc_vu_id', '$tai_khoans->trang_thai')";
+     VALUES (NULL, '$tai_khoans->ho_ten', '$tai_khoans->anh_dai_dien', '$tai_khoans->ngay_sinh', '$tai_khoans->email', '$tai_khoans->so_dien_thoai', '$tai_khoans->gioi_tinh', '$tai_khoans->dia_chi', '$tai_khoans->mat_khau', '$tai_khoans->chuc_vu_id', 1)";
     $data=$this->pdo->exec($sql);
     if ($data === 1 ) {
         return "success";
@@ -114,13 +114,46 @@ class AdminUser{
 }
 
 public function check_login($email ,$mat_khau){
-    $stmt = $this->pdo->prepare("SELECT * FROM tai_khoans WHERE email = '$email' AND mat_khau = '$mat_khau'");
+    $stmt = $this->pdo->prepare("SELECT * FROM tai_khoans WHERE email = '$email' AND mat_khau = '$mat_khau'  ");
     
      $stmt->execute();
     $user = $stmt->fetch();
     return $user;
 }
 
+public function open($id){
+    try{
+     $sql = "UPDATE tai_khoans SET trang_thai = 1 WHERE id = $id";
+
+    $data =$this->pdo->exec($sql);
+    
+    if($data ===1){
+      return "success";
+    }
+   }catch (Exception $error) {
+    echo "<h1>";
+    echo "Lỗi hàm insert trong model: " . $error->getMessage();
+    echo "</h1>";
+}
+
+}
+
+public function lock($id){
+    try{
+     $sql = "UPDATE tai_khoans SET trang_thai = 2 WHERE id = $id";
+
+    $data =$this->pdo->exec($sql);
+    
+    if($data ===1){
+      return "success";
+    }
+   }catch (Exception $error) {
+    echo "<h1>";
+    echo "Lỗi hàm insert trong model: " . $error->getMessage();
+    echo "</h1>";
+}
+
+}
 
 }
 

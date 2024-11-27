@@ -1,13 +1,19 @@
 <?php
 class DonHangController{
+ 
     public $AdminDonHang;
+   public $adminChiTietDH;
+  public $AdminSanPham;
 
     // Khai báo phương thức 
   public function __construct()
   {
       // 1. Khởi tạo giá trị cho thuộc tính hang_hoaQuery
       $this->AdminDonHang = new AdminDonHang();
-      // Mở trình duyệt lên để kiểm tra kết quả
+        $this->adminChiTietDH = new adminChiTietDH();
+      $this->AdminSanPham = new AdminSanPham();
+
+        // Mở trình duyệt lên để kiểm tra kết quả
   }
 
 
@@ -21,7 +27,7 @@ class DonHangController{
       if($id !==""){
       $KetQua=$this->AdminDonHang->deleteDonHang($id);
      if($KetQua="success"){
-      header("location: ?act =admin-donhang");
+      header("location:?act=admin-donhang");
      }else{
       echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
     }
@@ -73,6 +79,22 @@ class DonHangController{
             echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
         }
     } 
+ public function ChitietDH(){
+  $id=$_GET['id'];
 
+   $ChiTietDonHang = $this->adminChiTietDH->Show($id);
+
+  $danhSachSanPham = $this->AdminDonHang->All($id);
+
+  $name = $this->AdminSanPham->all();
+
+
+ 
+  include "view/donhang/ChiTietDHAdmin.php";
+ }
+ public function AnDonHang(){
+  $danhSachSanPham = $this->AdminDonHang->All();
+  include "view/donhang/AnDonHangAdmin.php";
+ }
 
 }

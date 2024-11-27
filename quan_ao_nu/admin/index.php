@@ -10,6 +10,9 @@ include_once "controllers/DonHangController.php";
 include_once "models/AdminUser.php";
 include_once "controllers/UserController.php";
 
+include_once "models/AdminChiTietDH.php";
+
+
 
 
 
@@ -43,6 +46,16 @@ switch($act) {
     $admin->ChiTietSP($id);
     break;
 
+    // TRANG SẢN PHẨM BỊ ẨN
+    case "admin-anSanPham";
+    $admin->AnSanPham();
+    break;
+
+    // NUT HIỆN SẢN PHẨM
+    case "admin-HienSanPham";
+    $admin->hienSanPham($id);
+    break;
+
 
     //THÊM SỬA XOÁ
     case "admin-delete";
@@ -62,26 +75,51 @@ switch($act) {
     $adminDonHang->donhang();
     break;
 
+    // TRANG ĐƠN HÀNG BỊ ẨN
+    case "admin-andonhang":
+    $adminDonHang->AnDonHang();
+    break;
+
+    //CHI TIẾT ĐƠN HÀNG
+    case "admin-chitietdonhang":
+    $adminDonHang->ChiTietDH($id);
+    break;    
+
     //thêm sửa xoá
     case "admin-deleteDonHang";
     $adminDonHang->deleteHang($id);
     break;
-
-
-
-    
     case "admin-updateDonHang";
     $adminDonHang->updateDonHang($id);
     break;
+
      //------------------------------END------------------------------------------//
    //-----------------------------------TRANG QUẢN LÝ USER ------------------------------//
+   // TRANG HIỆN USER
     case "admin-listuser";
     $user->ListUser();
     break;
+
+    // TRANG USER BỊ ẨN
+    case "admin-AnUser";
+    $user->AnUser();
+    break;
+
+    //NUT HIỆN USER
+    case "admin-hienuser":
+    $user->Hienuser($id);
+    break;
+
+    //NUT ẨN USER
+    case "admin-lockuser":
+    $user->LockUser($id);
+    break;    
+
     //SỬ LÝ DỮ LIỆU ĐĂNG NHẬP
   case "admin-login":
         $user->showLogin();
         break; 
+
     //LOGIN LOGOUT
         case "login";
         $user->login();
@@ -90,12 +128,16 @@ switch($act) {
         $user->logout();
         break;
 
-    //THÊM SỬA XOÁ
+    // NUT THÊM SỬA XOÁ
     case "admin-create";
     $user->CreateUser();
     break;
     case "admin-updateUser";
     $user->UpdateUser($id);
+    break;
+
+    case "admin-deleteUser";
+    $user->deleteUserId($id);
     break;
    //------------------------------END------------------------------------------//
     default:

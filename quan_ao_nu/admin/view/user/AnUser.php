@@ -1,5 +1,7 @@
 
+<?php session_start();
 
+?> 
 <!DOCTYPE html>
 <html>
 
@@ -14,49 +16,34 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <style>
-        .form-container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        .table img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
         }
 
-        .form-header {
-            text-align: center;
-            margin-bottom: 20px;
+        .btn-actions {
+            display: flex;
+            gap: 5px;
         }
 
-        .form-header h1 {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
+        .search-bar {
+            max-width: 400px;
         }
 
-        .form-label {
-            font-weight: bold;
-            color: #555;
+        .table-wrapper {
+            overflow-x: auto;
         }
 
-        .btn-submit {
+        .add-product-btn {
             background-color: #28a745;
             color: white;
             transition: background-color 0.3s ease;
         }
 
-        .btn-submit:hover {
+        .add-product-btn:hover {
             background-color: #218838;
-        }
-
-        .btn-reset {
-            background-color: #dc3545;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-reset:hover {
-            background-color: #c82333;
         }
     </style>
 </head>
@@ -208,97 +195,204 @@
                     </ul>
                 </div>
             </nav>
-            
-            <main class="content px-3 py-4">
-            <div class="container">
-    <div class="form-container">
-        <div class="form-header">
-            <h1> Add New Account</h1>
-        </div>
-<form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
-                <!-- Khu vực thông báo lỗi -->
-<div style="color: red;">
-<?= $thongBaoLoi ?>
-</div>
-<div style="color: red;">
-<?= $thongBaoUploadFile ?>
-</div>
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Admin Account</h1>
+        <a href="?act=admin-create" class="btn add-product-btn">+ Add New Account</a>
+    </div>
 
-<!-- Khu vực thông báo thành công -->
-<div style="color: green;">
-<?= $thongBaoThanhCong ?>
-</div>
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <form class="d-flex align-items-center">
+            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
 
+    <!-- Product Table -->
+    <div class="table-wrapper">
+        <table class="table table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                <th>STT</th></th>
+                <th> Name </th>
+                <th>email </th>
+                <th>gender</th>
+                <th>Avatar</th>
+                <th>Phone Number</th>
+                <th>address</th>
+                <th>date of birth</th>
+                 <th>password</th> 
+                <th>position</th>
+                <th>Status</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($DanhSachUser as $admins) {
+                if($admins->chuc_vu_id == 1 && $admins->trang_thai == 2 ){
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td> <?= $admins->ho_ten ?></td>
+                   
+                    <td> <?= $admins->email ?> </td>
+                    <td> <?php if( $admins->gioi_tinh ==2) {echo"Nam";}else{echo"Nữ";}?></td> <td>
+                        <div style="height: 60px; width:60px;">
+                       
 
-<div class="mb-3">
-                <label for="productName" class="form-label"> Name</label>
-                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ho_ten">
-            </div>
+                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->anh_dai_dien ?>"></a> 
+                        </div>
+                    </td>
+                    <td> <?= $admins->so_dien_thoai ?></td>
+                    <td> <?= $admins->dia_chi ?></td>
+                    <td> <?= $admins->ngay_sinh ?></td>
 
-        
-            <div class="mb-3">
-                <label for="productCategory" class="form-label">Gender</label>
-                <select class="form-select" id="productCategory" required name="gioi_tinh" >
-                    <option selected disabled>Select gender</option>
-                    <option value="1">Man</option>
-                    <option value="2">Woman</option>
+                    <td> <?= $admins->mat_khau ?></td>
 
-                </select>
-            </div>
+                    <td> <?php if( $admins->chuc_vu_id == 1 ){
+                    echo"Admin";
+                    }else{echo"client";}?></td>
 
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Phone Number</label>
-                <input type="number" class="form-control" id="productPrice" placeholder="Enter Phone Number" min="0" required  name="so_dien_thoai" >  
-            </div>
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Email</label>
-                <input type="text" class="form-control" id="productPrice" placeholder="Enter Email" min="0" required  name="email" >  
-            </div>
+                    <td> <?php if($admins->trang_thai == 1){
+                        echo "open";
+                    } else{
+                        echo"lock";
+                    }
+                    ?></td> 
 
-      
-            <div class="mb-3">
-                <label for="productStock" class="form-label"> Date of birth</label>
-                <input type="date" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="ngay_sinh">
-            </div>
-        
-            <div class="mb-3">
-                <label for="productImage" class="form-label"> Image</label>
-                <input type="file" class="form-control" id="productImage" accept="image" required name="file_anh_upload" >
-            </div>
-            <div class="mb-3">
-                <label for="productStock" class="form-label"> Password</label>
-                <input type="password" class="form-control" id="productStock" placeholder="Enter password" min="0" required name="mat_khau">
-            </div>
-            <div class="mb-3">
-                <label for="productStock" class="form-label"> Address</label>
-                <input type="text" class="form-control" id="productStock" placeholder="Enter Address" min="0" required name="dia_chi">
-            </div>
-           
-           
-            <div class="mb-3">
-                <label for="productCategory" class="form-label">position</label>
-                <select class="form-select" id="productCategory" required name="chuc_vu_id">
-                    <option selected disabled>Select position</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Client</option>
                     
-                </select>
-            </div>
 
-         
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-submit" name="submitForm" >Add Account</button>
-                <button type="reset" class="btn btn-reset">Reset</button>
-            </div>
-</form>
-    </main>
+                   
+                     
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updateUser&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-hienuser&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" >
+                                        <i class="fa-solid fa-trash" ></i> Open
+                                    </a>
+                                </button> 
+                                
+                                
+                    </td>
+                </tr>
+            <?php } }?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">client Account</h1>
+        <!-- <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Account</a> -->
+    </div>
+
+    <!-- Search Bar -->
+    <!-- <div class="mb-3">
+        <form class="d-flex align-items-center">
+            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div> -->
+
+    <!-- Product Table -->
+    <div class="table-wrapper">
+        <table class="table table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                <th>STT</th></th>
+                <th> Name </th>
+                <th>email </th>
+                <th>gender</th>
+                <th>Avatar</th>
+                <th>Phone Number</th>
+                <th>address</th>
+                 <th>password</th> 
+                <th>position</th>
+                <th>Status</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($DanhSachUser as $admins) {
+                if($admins->chuc_vu_id == 2 && $admins->trang_thai == 2){
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td> <?= $admins->ho_ten ?></td>
+                   
+                    <td> <?= $admins->email ?> </td>
+                    <td> <?php if( $admins->gioi_tinh ==1) {echo"Nam";}else{echo"Nữ";}?></td> <td>
+                        <div style="height: 60px; width:60px;">
+                       
+
+                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->anh_dai_dien ?>"></a> 
+                        </div>
+                    </td>
+                    <td> <?= $admins->so_dien_thoai ?></td>
+                    <td> <?= $admins->dia_chi ?></td>
+
+                    <td> <?= $admins->mat_khau ?></td>
+
+                    <td> <?php if( $admins->chuc_vu_id == 1 ){
+                    echo"Admin";
+                    }else{echo"client";}?></td>
+
+                    <td> <?php if($admins->trang_thai == 1){
+                        echo "open";
+                    } else{
+                        echo"lock";
+                    }
+                    ?></td> 
+
+                    
+
+                   
+                     
+
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updateUser&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-hienuser&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                        <i class="fa-solid fa-trash" ></i> Open
+                                    </a>
+                                </button> 
+                                
+                                
+                    </td>
+                </tr>
+            <?php } }?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
-
 </body>
+
 </html>
- 
+</body>
+
+</html>

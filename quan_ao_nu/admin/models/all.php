@@ -44,4 +44,6 @@ class tai_khoans{
 //     public $danh_muc_id;
 //     public $trang_thai;
 }
+class chi_tiet_don_hangs{}
+
 ?>

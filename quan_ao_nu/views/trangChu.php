@@ -200,7 +200,7 @@
                         </div>
                         <div class="product-image">
                             <a href="<?= BASE_URL.'?act=chitietsanpham&id_san_pham=' . $sanPham['id']?>">
-                                <img src="<?= BASE_URL .$sanPham['hinh_anh'] ?>" alt="Product Image">
+                                <img src="<?= "./admin/" .$sanPham['hinh_anh'] ?>" alt="Product Image">
                             </a>
                         </div>
                         <div class="product-price">
