@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 
@@ -13,50 +12,28 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
-        .form-container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        body {
+            background-color: #f8f9fa;
         }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 20px;
+        .order-details-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
         }
-
-        .form-header h1 {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
+        .table th, .table td {
+            vertical-align: middle;
         }
-
-        .form-label {
-            font-weight: bold;
-            color: #555;
+        .btn-back {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
-
-        .btn-submit {
-            background-color: #28a745;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: #218838;
-        }
-
-        .btn-reset {
-            background-color: #dc3545;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-reset:hover {
-            background-color: #c82333;
+        .btn-back:hover {
+            background-color: #0056b3;
+            color: #fff;
         }
     </style>
 </head>
@@ -208,97 +185,86 @@
                     </ul>
                 </div>
             </nav>
-            
-            <main class="content px-3 py-4">
-            <div class="container">
-    <div class="form-container">
-        <div class="form-header">
-            <h1> Add New Account</h1>
+
+            <body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Order Details</h1>
+
+        <!-- Thông tin khách hàng -->
+        <div class="card mb-4 order-details-card">
+            <div class="card-header bg-primary text-white">
+            Customer Information
+            </div>
+            <?php foreach($danhSachSanPham as $admin){ ?>
+            <div class="card-body">
+                <p><strong>Customer name:</strong> <?= $admin->ten_nguoi_nhan ?></p>
+                <p><strong>Email:</strong> <?= $admin->email_nguoi_nhan?></p>
+                <p><strong>phone number:</strong> <?= $admin->sdt_nguoi_nhan?></p>
+                <p><strong>Order date:</strong> <?= $admin->ngay_dat?></p>
+                <p><strong>Status:</strong> <span class="badge bg-success">Delivered</span></p>
+            </div>
+            <?php }?>
         </div>
-<form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
-                <!-- Khu vực thông báo lỗi -->
-<div style="color: red;">
-<?= $thongBaoLoi ?>
-</div>
-<div style="color: red;">
-<?= $thongBaoUploadFile ?>
-</div>
 
-<!-- Khu vực thông báo thành công -->
-<div style="color: green;">
-<?= $thongBaoThanhCong ?>
-</div>
+        <!-- Thông tin đơn hàng -->
+        <div class="card mb-4 order-details-card">
+            <div class="card-header bg-secondary text-white">
+            Order Information
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price($)</th>
+                        <th>Money ($)</th>
+                    </tr>
+                    </thead>    
+                    <tbody>
+                        <?php foreach($ChiTietDonHang as $admin){  ?>
+                    <tr>
+                        <td><?= $admin->id ?></td>
 
-
-<div class="mb-3">
-                <label for="productName" class="form-label"> Name</label>
-                <input type="text" class="form-control" id="productName" placeholder="Enter  name" required name="ho_ten">
-            </div>
-
-        
-            <div class="mb-3">
-                <label for="productCategory" class="form-label">Gender</label>
-                <select class="form-select" id="productCategory" required name="gioi_tinh" >
-                    <option selected disabled>Select gender</option>
-                    <option value="1">Man</option>
-                    <option value="2">Woman</option>
-
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Phone Number</label>
-                <input type="number" class="form-control" id="productPrice" placeholder="Enter Phone Number" min="0" required  name="so_dien_thoai" >  
-            </div>
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Email</label>
-                <input type="text" class="form-control" id="productPrice" placeholder="Enter Email" min="0" required  name="email" >  
-            </div>
-
-      
-            <div class="mb-3">
-                <label for="productStock" class="form-label"> Date of birth</label>
-                <input type="date" class="form-control" id="productStock" placeholder="Enter stock quantity" min="0" required name="ngay_sinh">
-            </div>
-        
-            <div class="mb-3">
-                <label for="productImage" class="form-label"> Image</label>
-                <input type="file" class="form-control" id="productImage" accept="image" required name="file_anh_upload" >
-            </div>
-            <div class="mb-3">
-                <label for="productStock" class="form-label"> Password</label>
-                <input type="password" class="form-control" id="productStock" placeholder="Enter password" min="0" required name="mat_khau">
-            </div>
-            <div class="mb-3">
-                <label for="productStock" class="form-label"> Address</label>
-                <input type="text" class="form-control" id="productStock" placeholder="Enter Address" min="0" required name="dia_chi">
-            </div>
-           
-           
-            <div class="mb-3">
-                <label for="productCategory" class="form-label">position</label>
-                <select class="form-select" id="productCategory" required name="chuc_vu_id">
-                    <option selected disabled>Select position</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Client</option>
+                        <td><?= $admin->san_pham_id ?></td>
+                        
+                        <td><?= $admin->so_luong ?></td>
+                        <td><?= $admin->don_gia ?></td>
+                        <td>
+                            <?=$admin->thanh_tien=$admin->so_luong *$admin->don_gia ?>
+                        </td>
+                       
+                    </tr>
                     
-                </select>
+                   
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="4" class="text-end">Total:</th>
+                        <th><?=$admin->thanh_tien ?></th>
+                    </tr>
+                    </tfoot> <?php }?>
+                </table>
             </div>
+        </div>
 
-         
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-submit" name="submitForm" >Add Account</button>
-                <button type="reset" class="btn btn-reset">Reset</button>
-            </div>
-</form>
-    </main>
-
+        <!-- Nút quay lại -->
+        <div class="text-center">
+            <a href="?act=admin-donhang" class="btn-back">Back to order list</a>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
-
 </body>
+
 </html>
- 
+</body>
+
+</html>

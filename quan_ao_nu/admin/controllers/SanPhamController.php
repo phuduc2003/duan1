@@ -52,7 +52,6 @@ class SanPhamController
         $san_phams->ngay_nhap=trim($_POST["ngay_nhap"]);
         $san_phams->mo_ta=trim($_POST["mo_ta"]);
         $san_phams->danh_muc_id=trim($_POST["danh_muc_id"]);
-        $san_phams->trang_thai=trim($_POST["trang_thai"]);
         if($san_phams->ten_san_pham===""||$san_phams->gia_san_pham===""){
           $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
 
@@ -127,8 +126,8 @@ class SanPhamController
             if ($thongBaoLoi === "" && $thongBaoUploadFile === "") {
                 $ketQua = $this->AdminSanPham->updateSP($id,$san_phams);
                 if ($ketQua === "success") {
-                    $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-                    $san_phams = new san_phams();
+                    $thongBaoThanhCong = " Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                           
 
                 } else {
                     $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
@@ -144,5 +143,20 @@ class SanPhamController
     }
 } 
 
-   
+   public function AnSanPham(){
+    $danhSachSanPham = $this->AdminSanPham->all();
+    include "view/sanpham/AnSanPham.php";
+   }
+
+
+   public function hienSanPham($id){
+    if($id !==""){
+      $ketQua =$this->AdminSanPham->hien($id);
+      if($ketQua==="success"){
+      header("Location: ?act=admin-anSanPham");
+      }else{
+        echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+      }
+    }
+   }
 }

@@ -46,7 +46,7 @@ class AdminDonHang
 }
  public function deleteDonHang($id){
     try{
-          $sql ="DELETE FROM `don_hangs` WHERE id=$id";
+        $sql = "UPDATE don_hangs SET trang_thai_id = 1 WHERE id = $id";
           $data =$this->pdo->exec($sql);
         if($data===1){
             return "success";
@@ -102,5 +102,8 @@ public function updateDonHang($id,don_hangs $don_hangs){
         echo "</h1>";
     }
    
+}
+public function AnDonHang(){
+    include "view/donhang/ChiTietDHAdmin.php";
 }
 }

@@ -16,6 +16,7 @@ class UserController{
         $DanhSachUser = $this->AdminUser->All();
         include "view/user/UserAdmin.php";
     }
+
     public function CreateUser(){
         $tai_khoans =new tai_khoans();
         $thongBaoLoi="";
@@ -32,7 +33,7 @@ class UserController{
           $tai_khoans->dia_chi=trim($_POST["dia_chi"]);
           $tai_khoans->mat_khau=trim($_POST["mat_khau"]);
           $tai_khoans->chuc_vu_id=trim($_POST["chuc_vu_id"]);
-          $tai_khoans->trang_thai=trim($_POST["trang_thai"]);
+         
          
           if($tai_khoans->ho_ten===""){
             $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
@@ -46,16 +47,16 @@ class UserController{
               if($ketQuaUploadFile){
                 $tai_khoans->anh_dai_dien=$thamSo2;
               }else{
-                $thongBaoUploadFile ="upload file không thành công. mời bạn thử lại.";
+                $thongBaoUploadFile ="File New failed. Please try again.";
               }
             }
             if($thongBaoLoi===""&& $thongBaoUploadFile===""){
               $ketQua=$this->AdminUser->InsertUser($tai_khoans);
               if($ketQua==="success"){
-                $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                $thongBaoThanhCong = "New creation successful. Please continue creating or return to the list.";
                 $tai_khoans = new tai_khoans();
               }else {
-                $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+                $thongBaoLoi = "New creation failed. Please check errors and try again.";
   
             }
             
@@ -98,16 +99,16 @@ class UserController{
               if($ketQuaUploadFile){
                 $tai_khoans->anh_dai_dien=$thamSo2;
               }else{
-                $thongBaoUploadFile ="upload file không thành công. mời bạn thử lại.";
+                $thongBaoUploadFile ="File upload failed. Please try again.";
               }
             }
             if($thongBaoLoi===""&& $thongBaoUploadFile===""){
               $ketQua=$this->AdminUser->UpdateUser($id,$tai_khoans);
               if($ketQua==="success"){
-                $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                $thongBaoThanhCong = "Update successful. Please continue creating or return to the list.";
                
               }else {
-                $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+                $thongBaoLoi = "New creation failed. Please check errors and try again.";
   
             }
             
@@ -117,7 +118,7 @@ class UserController{
         }
         include "view/user/UpdateUser.php";
       } else {
-        echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+        echo "<h1> Error: The id parameter is empty. Please check the id parameter on the url path.. </h1>";
     }
     }
 
@@ -127,7 +128,6 @@ class UserController{
      
 session_start();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
 
@@ -136,8 +136,9 @@ if (isset($_POST['email']) && isset($_POST['mat_khau'])) {
 $email= (strtolower(trim($_POST['email'])));
 $mat_khau = $_POST['mat_khau'];
 $user = $this->AdminUser->check_login($email , $mat_khau);
+// $tai_khoans = $this->AdminUser->All();
 
-
+if($user['trang_thai'] == 1){
 if ($user) {
 // Phân quyền dựa trên trạng thái (chuc_vu_id) của người dùng
 switch ($user['chuc_vu_id']) {
@@ -163,17 +164,22 @@ case 2: // guest
    
 
 default:
-    $errors = "Trạng thái người dùng không hợp lệ";
+    $errors = "Invalid user state";
     break;
 }
+  }else{
+    $errors = "Your account is locked";
+  }
 
 } else {
-$errors = "Tài khoản hoặc mật khẩu không chính xác";
+$errors = "Incorrect account or password";
 }
+
+
 
 
 }else {
-$errors = "Vui lòng nhập tên đăng nhập và mật khẩu";
+$errors = "Please enter your username and password";
 }
 
 }
@@ -194,7 +200,34 @@ public function logout(){
 }
 
 
-    
-    
+
+public function Hienuser($id){
+  if($id !==""){
+    $ketQua =$this->AdminUser->open($id);
+    if($ketQua==="success"){
+    header("Location: ?act=admin-AnUser");
+    }else{
+      echo "<h1> Error: The id parameter is empty. Please check the id parameter on the url path. </h1>";
+    }
+  }
+ }
+   
+ 
+public function AnUser(){
+  $DanhSachUser = $this->AdminUser->All();
+  include "view/user/AnUser.php";
+}
+
+public function LockUser($id){
+  if($id !==""){
+    $ketQua =$this->AdminUser->lock($id);
+    if($ketQua==="success"){
+    header("Location: ?act=admin-listuser");
+    }else{
+      echo "<h1> Error: The id parameter is empty. Please check the id parameter on the url path. </h1>";
+    }
+  }
+ }
+ 
 }
 ?>

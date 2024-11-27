@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dự án 1</title>
       <script src="https://kit.fontawesome.com/be9ed8669f.js" crossorigin="anonymous"></script>  
       <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </head>  
