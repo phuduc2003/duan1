@@ -50,7 +50,7 @@ class AdminSanPham
        }
        public function delete($id){
         try{
-        $sql="DELETE FROM `san_phams` WHERE id=$id";
+            $sql = "UPDATE san_phams SET trang_thai = 2 WHERE id = $id";
     
         $data =$this->pdo->exec($sql);
         
@@ -67,7 +67,7 @@ class AdminSanPham
         try{
         $sql="INSERT INTO `san_phams`(`id`, `ten_san_pham`, `gia_san_pham`, `gia_khuyen_mai`, `hinh_anh`, `so_luong`, `luot_xem`, `ngay_nhap`, `mo_ta`, `danh_muc_id`, `trang_thai`)
          VALUES (NULL,'$san_phams->ten_san_pham','$san_phams->gia_san_pham','$san_phams->gia_khuyen_mai','$san_phams->hinh_anh','$san_phams->so_luong',
-         '$san_phams->luot_xem','$san_phams->ngay_nhap','$san_phams->mo_ta','$san_phams->danh_muc_id','$san_phams->trang_thai')";
+         '$san_phams->luot_xem','$san_phams->ngay_nhap','$san_phams->mo_ta','$san_phams->danh_muc_id',1)";
          $data =$this->pdo->exec($sql);
          if ($data === 1) {
             return "success";
@@ -137,5 +137,23 @@ class AdminSanPham
         $stmt=$this->pdo->query($sql);
 
         return $stmt->fetchAll();
+}
+
+
+public function hien($id){
+    try{
+        $sql = "UPDATE san_phams SET trang_thai = 1 WHERE id = $id";
+
+    $data =$this->pdo->exec($sql);
+    
+    if($data ===1){
+      return "success";
+    }
+   }catch (Exception $error) {
+    echo "<h1>";
+    echo "Lỗi hàm insert trong model: " . $error->getMessage();
+    echo "</h1>";
+}
+
 }
 }
