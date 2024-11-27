@@ -44,4 +44,11 @@ class tai_khoans{
 //     public $danh_muc_id;
 //     public $trang_thai;
 }
+
+class danh_mucs{
+    // public $id;
+    // public $ten_danh_muc;
+    // public $mo_ta;
+    // public $trang_thai;
+}
 ?>

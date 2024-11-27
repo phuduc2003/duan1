@@ -1,0 +1,240 @@
+#container{
+    width: 100%;
+    height: 1400px;
+    margin:auto;
+    background: #f7f7f7ff;
+  }
+  
+  
+  /* header */
+  header{
+  width: 100%;
+  height:25px;
+  margin-bottom:10px;
+  display: flex;
+  }
+  
+  hr{
+    width: 1340px;
+    margin-left: 50px;
+  }
+  
+  header p {
+    margin-left: 50px;
+    margin-right: 900px;
+    line-height: 50px;
+  
+  }
+  header a{
+    line-height: 50px;
+    text-decoration: none;
+    margin-left: 5px;
+  }
+  header ul li a{
+    color: black;
+  }
+  header ul li a:hover{
+    color: #80C41C;
+  }
+    
+   
+  
+    
+  
+  /* banner */
+  .image {
+    width: 100%;
+    height: 400px;
+    margin : 20px 0 20px  0;
+    position: relative;
+  }
+  .image .img1 img{
+    width: 100%;
+    height: 400px;
+    position: relative;
+  }
+   
+   .image .img2  img{
+    margin-top: -400px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  /*  */  
+  
+  
+  
+  /* nav */
+  .logo{
+    display: flex;
+   margin-left: 160px;
+  }
+  
+  nav ul{
+    list-style: none;
+  }
+  
+  nav ul .logo li a{
+    text-decoration: none;
+    margin-left: 20px;
+     color: black;
+     font-weight: bold;
+     padding: 10px;
+    }
+  
+   nav ul .logo li a:hover{
+    background-color: #80C41C;
+    padding: 10px;
+    color: #fff;
+    border-radius: 20px;
+   }
+    nav li{
+        margin-top: 10px;
+    }
+    /*  */
+  
+  
+  
+     /* search */
+     form{
+      margin-left: 60px;
+      margin-top: 10px;
+      position: relative;
+      display: inline-block;
+     }
+    
+     form input{
+      width: 300px;
+      height: 35px;
+      border: 1px solid black;
+      border-radius: 10px;
+     }  
+     .submit{
+          top:1px;
+      position: absolute;
+        left: 270px;
+        background-color:#fff;
+         padding: 0.1rem;
+         border-radius: 100px;
+         border:1px solid #fff;
+      }
+    /*  */
+  
+   /* icon */
+  
+   /*  */
+  
+  /* icon */
+   form i{
+    color:#80C41C;
+    font-size:20px;
+    margin-left:150px;
+  }
+  form i:hover{
+    font-size:22px;
+  }
+  /*  */
+  
+  
+  /* article */
+   main{
+      width: 1300px;
+      height: 920px;
+      margin-left: 150px;
+  } 
+  article{ 
+    width: 235px;
+    height: 350px;
+    float: left;
+    background-color: #fff;
+    text-align: center;
+    padding-top: 10px;
+    margin: 5px;
+    }
+    article:hover{
+      box-shadow: 0 0 15px gray;
+      border-radius: 10px;
+    }
+  .anh1 img {
+     width: 150px;
+     height: 170px;
+     text-align: center;
+     border-radius: 20px;
+  } 
+  .anh1 img:hover{
+    width: 160px;
+     height: 180px;
+  }
+  
+  .p1{
+    margin-top: 10px;
+    height:40px;
+  }
+  
+  .p1 h5{
+  font-size:17px;
+  }
+  
+  .p1 h5:hover{
+  color:#80C41C;
+  }
+  
+  
+  .p2{
+    height: 30px;
+    display: flex;
+    margin:10px;
+  } 
+  
+  .p2 del{
+  font-size:15px;
+  }
+  
+  .p2 h5{
+  margin-left: 90px;
+  font-size:15px;
+  text-decoration:underline;
+  font-weight: bold;
+  color:red;
+  
+  }.veiw{
+  color:#80C41C;
+  text-decoration: none;
+  border: 1px solid #80C41C;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: small;
+  
+  }
+  .veiw:hover{
+  background-color: #80C41C;
+  color: white;
+  }
+  .daban {
+    margin-top: 16px;
+    
+  }
+  /*  */
+  
+  
+  
+ 
+     footer{
+      width: 100%;
+     height: 400px;
+      margin-top: 5px;
+      background: url('https://haycafe.vn/wp-content/uploads/2022/03/Background-Bia-sach.jpg');
+      background-size:100% 400px;
+    }
+    footer .footer1{   
+      padding-top: 30px; 
+   margin-left: 30px;
+    display: flex;
+    margin-top: 10px;
+     }
+  
+     footer .footer1 h5{
+      font-size: 17px;
+      margin-left: 10px;
+      color: #fff;
+     }

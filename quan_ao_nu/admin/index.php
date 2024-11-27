@@ -10,7 +10,8 @@ include_once "controllers/DonHangController.php";
 include_once "models/AdminUser.php";
 include_once "controllers/UserController.php";
 
-
+include_once "controllers/DanhMucController.php";
+include_once "models/AdminDanhMuc.php";
 
 
 // Route
@@ -24,7 +25,7 @@ $id = "";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 }
-
+$adminDM = new DanhMucController();
 $admin = new SanPhamController();
 $adminDonHang = new DonHangController();
 $user = new UserController();
@@ -67,7 +68,30 @@ switch($act) {
     $adminDonHang->deleteHang($id);
     break;
 
+//-----------------------------END----------------------------------------------------//
+//------------------------------TRANG QUẢN LÝ DANH MUC--------------------------------//
+case "admin-listDM";
+    $adminDM->ListDM();
+    break;
+    case "admin-create";
+    $adminDM->themDM();
+    break;
+    case "admin-update";
+    $adminDM->xuaDM($id);
+    break;
+    case "admin-delete";
+    $adminDM->xoaDM($id);
+    break;
 
+    case "admin-dress":
+        $adminDM->Dress();
+        break;
+        case "admin-shirt":
+        $adminDM->Shirt();
+         break;
+        case "admin-trouser":
+        $adminDM->Trouser();
+        break;
 
     
     case "admin-updateDonHang";
@@ -103,4 +127,8 @@ switch($act) {
         // Lưu ý: Gặp lỗi này phải kiểm tra ngay giá trị act trên đường dẫn url, xem xem có gõ sai chính tả không. Chứ gõ sai chính tả thì buồn lắm luôn...
        
         break;
+
+
+        
+    
 }

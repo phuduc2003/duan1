@@ -45,7 +45,7 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -57,9 +57,9 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-listDM" class="sidebar-link">
+                    <a href="?act=admin-home" class="sidebar-link">
                         <i class="lni lni-user"></i>
-                        <span>Danh Mục</span>
+                        <span>category </span>
                     </a>
                 </li>
                 
@@ -73,14 +73,14 @@
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-protection"></i>
-                        <span>Quản Lý Danh Mục</span>
+                        <span>Product Management</span>
                     </a>
                     <ul style="background-color: #1A2035;" id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
+                            <a href="?act=admin-sanpham" class="sidebar-link">Product List</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-create" class="sidebar-link">Add Product</a>
                         </li>
                     </ul>
                 </li>
@@ -88,9 +88,9 @@
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-layout"></i>
-                        <span>Quản Lý Thành Viên</span>
+                        <span>Account Management</span>
                     </a>
-                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <!-- <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
@@ -105,20 +105,20 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#multi-two1" aria-expanded="false" aria-controls="multi-two1">
-                                Khách Hàng
+                                CLIENT, ADMIN
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">List Uuser</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Add User</a>
                                 </li>
                             </ul>
                         </li>
@@ -128,11 +128,11 @@
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-protection"></i>
-                        <span>Quản Lý Đơn Hàng</span>
+                        <span>Order Management</span>
                     </a>
                     <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donhang" class="sidebar-link">Danh Sách Đơn Hàng</a>
+                            <a href="?act=admin-donhang" class="sidebar-link">Order List</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link">?</a>
@@ -142,7 +142,7 @@
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-popup"></i>
-                        <span>Quản Lý Bình Luận</span>
+                        <span>Comment Management</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -155,7 +155,7 @@
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
                     <i class="lni lni-exit"></i>
-                    <span>Đăng Xuất</span>
+                    <span>Logout</span>
                 </a>
             </div>
         </aside>
@@ -190,7 +190,7 @@
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
+        <a href="?act=admin-create" class="btn add-product-btn">+ Add New Product</a>
     </div>
 
     <!-- Search Bar -->
@@ -206,64 +206,25 @@
         <table class="table table-striped table-hover text-center">
             <thead class="table-dark">
                 <tr>
-                <th>STT</th></th>
-                <th>Product Name </th>
-                <th>Price </th>
-                <th> Promotion Price</th>
-                <th>Image</th>
-                <th>Quantity</th>
-                <th>View </th>
-                <th> Date Enter</th>  
-                <!-- <th>mô tả</th> -->
-                <th>Category</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>ID</th></th>
+                <th>Category name </th>
+                <th>Describe </th>
+                <th>Operation </th>
+              
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
+            <?php foreach ($danhSachDanhMuc as $admins) {
+                if ($admins->id ==1){
+                
+                ?>     
                 <tr>
                
                     <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ten_san_pham ?></td>
+                    <td><a href="?act=admin-dress"><?= $admins->ten_danh_muc ?></a> </td>
                    
-                    <td> <?= $admins->gia_san_pham ?> </td>
-                    <td> <?= $admins->gia_khuyen_mai ?></td> <td>
-                        <div style="height: 60px; width:60px;">
-                       
-
-                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>"></a> 
-                        </div>
-                    </td>
-                    <td> <?= $admins->so_luong ?></td>
-                    <td> <?= $admins->luot_xem ?></td>
-                    <td> <?= $admins->ngay_nhap ?></td>
-
-                    <!-- <td> <?= $admins->mo_ta ?></td> -->
-
-                    <td> <?php
-                if( $admins->danh_muc_id ==1){
-                    echo"Dress ";
-                } if($admins->danh_muc_id ==2){
-                    echo"Trouser ";
-                }
-                if($admins->danh_muc_id ==3){
-                    echo"Shirt ";
-                }
-                if($admins->danh_muc_id ==4){
-                    echo"Váy ";
-                }
-                if($admins->danh_muc_id ==5){
-                    echo"Váy ";
-                } 
-                        ?></td>
-                    
-                    <td> <?php if($admins->trang_thai == 1){
-                        echo "Presently";
-                    } else{
-                        echo"Hiden";
-                    }
-                    ?></td>
+                    <td> <?= $admins->mo_ta ?> </td>
+                   
                      
 
                     <td style="width:170px;">
@@ -282,7 +243,71 @@
                                 
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php }} ?>
+            </tbody>
+            <tbody>
+            <?php foreach ($danhSachDanhMuc as $admins) {
+                if ($admins->id ==2){
+                
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td><a href="?act=admin-shirt"><?= $admins->ten_danh_muc ?></a> </td>
+                   
+                    <td> <?= $admins->mo_ta ?> </td>
+                   
+                     
+
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                        <i class="fa-solid fa-trash" ></i> Delete
+                                    </a>
+                                </button> 
+                                
+                                
+                    </td>
+                </tr>
+            <?php }} ?>
+            </tbody>
+            <tbody>
+            <?php foreach ($danhSachDanhMuc as $admins) {
+                if ($admins->id ==3){
+                
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td><a href="?act=admin-trousers"></a><?= $admins->ten_danh_muc ?> </td>
+                   
+                    <td> <?= $admins->mo_ta ?> </td>
+                   
+                     
+
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                        <i class="fa-solid fa-trash" ></i> Delete
+                                    </a>
+                                </button> 
+                                
+                                
+                    </td>
+                </tr>
+            <?php }} ?>
             </tbody>
         </table>
     </div>

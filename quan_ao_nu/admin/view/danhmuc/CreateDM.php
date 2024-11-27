@@ -1,4 +1,5 @@
-<?php session_start();?> 
+
+
 <!DOCTYPE html>
 <html>
 
@@ -13,39 +14,54 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <style>
-        .table img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 5px;
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-actions {
-            display: flex;
-            gap: 5px;
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .search-bar {
-            max-width: 400px;
+        .form-header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
+        .form-label {
+            font-weight: bold;
+            color: #555;
         }
 
-        .add-product-btn {
+        .btn-submit {
             background-color: #28a745;
             color: white;
             transition: background-color 0.3s ease;
         }
 
-        .add-product-btn:hover {
+        .btn-submit:hover {
             background-color: #218838;
+        }
+
+        .btn-reset {
+            background-color: #dc3545;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -57,9 +73,9 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-listDM" class="sidebar-link">
+                    <a href="?act=admin-home" class="sidebar-link">
                         <i class="lni lni-user"></i>
-                        <span>Danh Mục</span>
+                        <span>category </span>
                     </a>
                 </li>
                 
@@ -73,14 +89,14 @@
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-protection"></i>
-                        <span>Quản Lý Danh Mục</span>
+                        <span>Product Management</span>
                     </a>
                     <ul style="background-color: #1A2035;" id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-sanpham" class="sidebar-link">Danh Sách Sản Phẩm</a>
+                            <a href="?act=admin-sanpham" class="sidebar-link">Product List</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-create" class="sidebar-link">Thêm Sản Phẩm</a>
+                            <a href="?act=admin-create" class="sidebar-link">Add Product</a>
                         </li>
                     </ul>
                 </li>
@@ -88,9 +104,9 @@
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-layout"></i>
-                        <span>Quản Lý Thành Viên</span>
+                        <span>Account Management</span>
                     </a>
-                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <!-- <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
@@ -105,20 +121,20 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#multi-two1" aria-expanded="false" aria-controls="multi-two1">
-                                Khách Hàng
+                                CLIENT, ADMIN
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Thành Viên</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link">List Uuser</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-create" class="sidebar-link">Thêm Thành Viên</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Add User</a>
                                 </li>
                             </ul>
                         </li>
@@ -128,11 +144,11 @@
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-protection"></i>
-                        <span>Quản Lý Đơn Hàng</span>
+                        <span>Order Management</span>
                     </a>
                     <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donhang" class="sidebar-link">Danh Sách Đơn Hàng</a>
+                            <a href="?act=admin-donhang" class="sidebar-link">Order List</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="" class="sidebar-link">?</a>
@@ -142,7 +158,7 @@
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-popup"></i>
-                        <span>Quản Lý Bình Luận</span>
+                        <span>Comment Management</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -155,7 +171,7 @@
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
                     <i class="lni lni-exit"></i>
-                    <span>Đăng Xuất</span>
+                    <span>Logout</span>
                 </a>
             </div>
         </aside>
@@ -186,118 +202,54 @@
                     </ul>
                 </div>
             </nav>
-<div class="container mt-5">
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="mb-3">
-        <form class="d-flex align-items-center">
-            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-    </div>
-
-    <!-- Product Table -->
-    <div class="table-wrapper">
-        <table class="table table-striped table-hover text-center">
-            <thead class="table-dark">
-                <tr>
-                <th>STT</th></th>
-                <th>Product Name </th>
-                <th>Price </th>
-                <th> Promotion Price</th>
-                <th>Image</th>
-                <th>Quantity</th>
-                <th>View </th>
-                <th> Date Enter</th>  
-                <!-- <th>mô tả</th> -->
-                <th>Category</th>
-                <th>Status</th>
-                <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($danhSachSanPham as $admins) : ?>     
-                <tr>
-               
-                    <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ten_san_pham ?></td>
-                   
-                    <td> <?= $admins->gia_san_pham ?> </td>
-                    <td> <?= $admins->gia_khuyen_mai ?></td> <td>
-                        <div style="height: 60px; width:60px;">
-                       
-
-                        <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>"></a> 
-                        </div>
-                    </td>
-                    <td> <?= $admins->so_luong ?></td>
-                    <td> <?= $admins->luot_xem ?></td>
-                    <td> <?= $admins->ngay_nhap ?></td>
-
-                    <!-- <td> <?= $admins->mo_ta ?></td> -->
-
-                    <td> <?php
-                if( $admins->danh_muc_id ==1){
-                    echo"Dress ";
-                } if($admins->danh_muc_id ==2){
-                    echo"Trouser ";
-                }
-                if($admins->danh_muc_id ==3){
-                    echo"Shirt ";
-                }
-                if($admins->danh_muc_id ==4){
-                    echo"Váy ";
-                }
-                if($admins->danh_muc_id ==5){
-                    echo"Váy ";
-                } 
-                        ?></td>
-                    
-                    <td> <?php if($admins->trang_thai == 1){
-                        echo "Presently";
-                    } else{
-                        echo"Hiden";
-                    }
-                    ?></td>
-                     
-
-                    <td style="width:170px;">
-                    <button class="btn btn-success">
-                                    <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Fix
-                                    </a>
-                                </button>
-                                
-                                <button class="btn btn-danger" name="delete">
-                                    <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash" ></i> Delete
-                                    </a>
-                                </button> 
-                                
-                                
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+            
+            <main class="content px-3 py-4">
+            <div class="container">
+    <div class="form-container">
+        <div class="form-header">
+            <h1> Add New Product</h1>
+        </div>
+<form action="" method="POST" class="pb-5 mt-4 ms-4 me-4" enctype="multipart/form-data" >
+                <!-- Khu vực thông báo lỗi -->
+<div style="color: red;">
+<?= $thongBaoLoi ?>
+</div>
+<div style="color: red;">
+<?= $thongBaoUploadFile ?>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
+<!-- Khu vực thông báo thành công -->
+<div style="color: green;">
+<?= $thongBaoThanhCong ?>
+</div>
+
+
+
+            <div class="mb-3">
+                <label for="productName" class="form-label">Category name</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter Category name" required name="ten_danh_muc" >
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Describe</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter Describe" required name="mo_ta" >
+            </div>
+
+        
+            
+         
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-submit" name="submitForm" >Add Product</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+</form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
-</body>
 
-</html>
 </body>
-
 </html>
+ 
