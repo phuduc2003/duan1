@@ -12,6 +12,7 @@ include_once "controllers/UserController.php";
 
 include_once "controllers/DanhMucController.php";
 include_once "models/AdminDanhMuc.php";
+include_once "models/AdminChiTietDH.php";
 
 
 // Route
@@ -70,28 +71,28 @@ switch($act) {
 
 //-----------------------------END----------------------------------------------------//
 //------------------------------TRANG QUẢN LÝ DANH MUC--------------------------------//
-case "admin-listDM";
+case "admin-listDM":
     $adminDM->ListDM();
     break;
-    case "admin-create";
+case "admin-create":
     $adminDM->themDM();
     break;
-    case "admin-update";
+case "admin-update":
     $adminDM->xuaDM($id);
     break;
-    case "admin-delete";
+case "admin-delete":
     $adminDM->xoaDM($id);
     break;
 
-    case "admin-dress":
-        $adminDM->Dress();
-        break;
-        case "admin-shirt":
-        $adminDM->Shirt();
-         break;
-        case "admin-trouser":
-        $adminDM->Trouser();
-        break;
+case "admin-dress":
+    $adminDM->Dress();
+    break;
+case "admin-shirt":
+    $adminDM->Shirt();
+    break;
+case "admin-trouser":
+    $adminDM->Trouser();
+    break;
 
     
     case "admin-updateDonHang";
