@@ -71,26 +71,26 @@ switch($act) {
 
 //-----------------------------END----------------------------------------------------//
 //------------------------------TRANG QUẢN LÝ DANH MUC--------------------------------//
-case "admin-listDM";
+case "admin-listDM":
     $adminDM->ListDM();
     break;
-case "admin-create";
+case "admin-create":
     $adminDM->themDM();
     break;
-case "admin-update";
+case "admin-update":
     $adminDM->xuaDM($id);
     break;
-case "admin-delete";
+case "admin-delete":
     $adminDM->xoaDM($id);
     break;
 
-case "admin-dress";
+case "admin-dress":
     $adminDM->Dress();
     break;
-case "admin-shirt";
+case "admin-shirt":
     $adminDM->Shirt();
     break;
-case "admin-trouser";
+case "admin-trouser":
     $adminDM->Trouser();
     break;
 
