@@ -38,8 +38,8 @@
     <div class="breadcrumb-wrap">
         <div class="container-fluid">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="<?= BASE_URL?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=sanpham' ?>">Products</a></li>
                 <li class="breadcrumb-item active">Checkout</li>
             </ul>
         </div>
@@ -185,7 +185,7 @@
                                 <h1>Payment Methods</h1>
                                 <div class="payment-method">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="payment-1" value="1" name="phuong_thuc_thanh_toan_id">
+                                        <input type="radio" class="custom-control-input" id="payment-1" value="2" name="phuong_thuc_thanh_toan_id">
                                         <label class="custom-control-label" for="payment-1">Online payment</label>
                                     </div>
                                     <div class="payment-content" id="payment-1-show">
@@ -196,7 +196,7 @@
                                 </div>
                                 <div class="payment-method">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="payment-2" value="2" name="phuong_thuc_thanh_toan_id">
+                                        <input type="radio" class="custom-control-input" id="payment-2" value="1" name="phuong_thuc_thanh_toan_id">
                                         <label class="custom-control-label" for="payment-2">Cash on Delivery</label>
                                     </div>
                                     <div class="payment-content" id="payment-2-show">
