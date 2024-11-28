@@ -38,8 +38,8 @@
     <div class="breadcrumb-wrap">
         <div class="container-fluid">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Products</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=sanpham' ?>">Products</a></li>
                 <li class="breadcrumb-item active">Product List</li>
             </ul>
         </div>
@@ -57,7 +57,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="product-search">
-                                            <form action="<?= BASE_URL.'?act=sanpham'  ?>" method="post">
+                                            <form action="<?= BASE_URL . '?act=sanpham' ?>" method="post">
                                                 <input type="text" name="keyword" placeholder="Search"
                                                     value="<?= isset($_POST['keyword']) ? $_POST['keyword'] : ''; ?>">
                                                 <button type="submit"><i class="fa fa-search"></i></button>
@@ -69,11 +69,27 @@
                                             <div class="dropdown">
                                                 <div class="dropdown-toggle" data-toggle="dropdown">Product short by
                                                 </div>
+                                                <?php
+                                                // Lấy danh mục duy nhất từ danh sách sản phẩm
+                                                $categories = [];
+                                                foreach ($listSanPham as $sanPham) {
+                                                    $categories[$sanPham['danh_muc_id']] = $sanPham['ten_danh_muc'];
+                                                }
+                                                ?>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item">Newest</a>
-                                                    <a href="#" class="dropdown-item">Popular</a>
-                                                    <a href="#" class="dropdown-item">Most sale</a>
+                                                    <form action="<?= BASE_URL . '?act=sanpham' ?>" method="post">
+                                                        <!-- Lặp qua danh sách danh mục duy nhất -->
+                                                        <?php foreach ($categories as $categoryId => $categoryName): ?>
+                                                            <button type="submit" name="category_id"
+                                                                value="<?= $categoryId ?>" class="dropdown-item">
+                                                                <?= $categoryName ?>
+                                                            </button>
+                                                            <input type="hidden" name="" id="danh_muc_id" value="<?=$sanPham['danh_muc_id']?>">
+                                                        <?php endforeach; ?>
+                                                   
+                                                    </form>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>

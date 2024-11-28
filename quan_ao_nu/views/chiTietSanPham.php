@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    
     <!-- Top bar Start -->
     <?php require './views/layout/header.php'; ?>
     <!-- Bottom Bar End -->
@@ -34,8 +35,8 @@
     <div class="breadcrumb-wrap">
         <div class="container-fluid">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="<?= BASE_URL?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=sanpham' ?>">Products</a></li>
                 <li class="breadcrumb-item active">Product Detail</li>
             </ul>
         </div>
@@ -52,7 +53,7 @@
                             <div class="col-md-5">
                                 <div class="product-slider-single normal-slider">
                                     <?php foreach ($listAnhSanPham as $key => $anhSanPham): ?>
-                                        <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="Product Image">
+                                        <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>"  alt="Product Image" style="width: 300px; height: 300px;">
                                     <?php endforeach ?>
                                 </div>
                                 <div class="product-slider-single-nav normal-slider">
@@ -79,10 +80,10 @@
                                         <?php } ?>
                                     </div>
                                     
-                                    <div class="price">
+                                    <!-- <div class="price">
                                     <h4>Số lượng</h4>
                                     <p><?= $sanPham['so_luong']?> trong kho</p>  
-                                    </div>
+                                    </div> -->
                                 
                                     <div class="p-size">
                                         <h4>Size:</h4>
@@ -99,18 +100,18 @@
                                     <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
                                     <div class="quantity">
                                     <h4>Quantity:</h4>
+                                    <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
                                         <div class="qty">
-                                            <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
                                             <button class="btn-minus" type="button"><i class="fa fa-minus"></i></button>
                                             <input type="text" value="1" name="so_luong">
                                             <button class="btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                         </div>
-                                    <div class="action_link">
+                                        <div class="action_link">
                                         <button class="btn" ><i class="fa fa-shopping-cart"></i>Add to Cart</button>
-                                        <!-- <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a> -->
                                     </div>
                                     </form>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -148,14 +149,21 @@
                                     <?php endforeach; ?>
                                     <div class="reviews-submit">
                                         <h4>Give your Review:</h4>
+                                        <form action="<?= BASE_URL . '?act=them-binh-luan' ?>" method="post">
+                                           <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                            <input type="hidden" name="tai_khoan_id" value="<?= $mail['id'] ?>">
+                                                             
                                         <div class="row form">
                                             <div class="col-sm-12">
-                                                <textarea placeholder="Review"></textarea>
+                                                <textarea placeholder="Review" name="noi_dung"></textarea>
                                             </div>
                                             <div class="col-sm-12">
-                                                <button>Submit</button>
+                                                <button type="submit">Submit</button>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="ngay_dang" value="<?= date('Y-m-d'); ?>">  
+                                        <input type="hidden" name="trang_thai" value="1">        
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +172,7 @@
 
                     <div class="product">
                         <div class="section-header">
-                            <h1>Sản phẩm liên quan</h1>
+                            <h1>Related products</h1>
                         </div>
 
                         <div class="row align-items-center product-slider product-slider-3">

@@ -34,7 +34,12 @@
     <!-- Nav Bar Start -->
     <?php require './views/layout/header.php'; ?>
     <!-- Bottom Bar End -->
-
+    <?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success" role="alert" style="text-align: center; margin-bottom: 20px;">
+        <?= $_SESSION['success']; ?>
+    </div>
+    <?php unset($_SESSION['success']); // Xóa thông báo sau khi hiển thị ?>
+<?php endif; ?>
     <!-- Main Slider Start -->
     <div class="header">
         <div class="container-fluid">
@@ -76,21 +81,21 @@
                             <img src="img/slider-1.jpg" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Some text goes here that describes the image</p>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                <a class="btn" href="<?= BASE_URL . '?act=sanpham' ?>"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                             </div>
                         </div>
                         <div class="header-slider-item">
                             <img src="img/slider-2.jpg" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Some text goes here that describes the image</p>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                <a class="btn" href="<?= BASE_URL . '?act=sanpham' ?>"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                             </div>
                         </div>
                         <div class="header-slider-item">
                             <img src="img/slider-3.jpg" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Some text goes here that describes the image</p>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                <a class="btn" href="<?= BASE_URL . '?act=sanpham' ?>"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -140,7 +145,7 @@
                         <i class="fab fa-cc-mastercard"></i>
                         <h2>Secure Payment</h2>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur elit
+                            
                         </p>
                     </div>
                 </div>
@@ -149,7 +154,7 @@
                         <i class="fa fa-truck"></i>
                         <h2>Worldwide Delivery</h2>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur elit
+                            
                         </p>
                     </div>
                 </div>
@@ -158,7 +163,7 @@
                         <i class="fa fa-sync-alt"></i>
                         <h2>90 Days Return</h2>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur elit
+                            
                         </p>
                     </div>
                 </div>
@@ -167,7 +172,7 @@
                         <i class="fa fa-comments"></i>
                         <h2>24/7 Support</h2>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur elit
+                            
                         </p>
                     </div>
                 </div>
@@ -200,7 +205,7 @@
                         </div>
                         <div class="product-image">
                             <a href="<?= BASE_URL.'?act=chitietsanpham&id_san_pham=' . $sanPham['id']?>">
-                                <img src="<?= "./admin/" .$sanPham['hinh_anh'] ?>" alt="Product Image">
+                            <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="Product Image" style="width: 400px; height: 300px;">
                             </a>
                         </div>
                         <div class="product-price">
@@ -217,34 +222,7 @@
                     </div>
                 </div>
                 <?php endforeach ?>
-                <!-- <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-2.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3><span>$</span>99</h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                        </div>
-                    </div>
-                </div> -->
+     
             </div>
         </div>
     </div>
@@ -255,7 +233,7 @@
     <!-- Newsletter End -->
 
     <!-- Recent Product Start -->
-    <div class="recent-product product">
+    <!-- <div class="recent-product product">
         <div class="container-fluid">
             <div class="section-header">
                 <h1>Recent Product</h1>
@@ -403,11 +381,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Recent Product End -->
 
     <!-- Review Start -->
-    <div class="review">
+    <!-- <div class="review">
         <div class="container-fluid">
             <div class="row align-items-center review-slider normal-slider">
                 <div class="col-md-6">
@@ -478,7 +456,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Review End -->
 
     <!-- Footer Start -->

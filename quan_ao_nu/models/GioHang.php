@@ -46,7 +46,8 @@ class GioHang
             $stmt->execute([':gio_hang_id'=>$gio_hang_id,':san_pham_id'=>$san_pham_id,':so_luong'=>$so_luong]);
             return true;
          } catch (Exception $e) {
-            echo "Lỗi".$e->getMessage();
+            echo "Lỗi SQL (updateSoLuong): " . $e->getMessage();
+            return false;
          }
     }
     public function addDetailGioHang($gio_hang_id,$san_pham_id,$so_luong){
@@ -79,7 +80,20 @@ class GioHang
        echo "Lỗi".$e->getMessage();
     }
 }
+public function removeProductFromCart($gio_hang_id, $san_pham_id) {
+   try {
+       $sql = 'DELETE FROM chi_tiet_gio_hangs WHERE gio_hang_id = :gio_hang_id AND san_pham_id = :san_pham_id';
+       $stmt = $this->conn->prepare($sql);
+       $stmt->execute([
+           ':gio_hang_id' => $gio_hang_id,
+           ':san_pham_id' => $san_pham_id,
+       ]);
+       return true;
+   } catch (Exception $e) {
+       echo "Lỗi: " . $e->getMessage();
+   }
+}
 
-    
+
 
 }
