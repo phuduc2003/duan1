@@ -47,7 +47,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                             <div class="dropdown-menu">
                                 <a href="<?= BASE_URL . '?act=login' ?>" class="dropdown-item">Login</a>
-                                <a href="register.php" class="dropdown-item">Register</a>
+                                <a href="<?= BASE_URL . '?act=register' ?>" class="dropdown-item">Register</a>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -70,20 +70,17 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div>
+              
             </div>
             <div class="col-md-3">
                 <div class="user">
-                    <a href="wishlist.html" class="btn wishlist">
+                    <!-- <a href="wishlist.html" class="btn wishlist">
                         <i class="fa fa-heart"></i>
                         <span>(0)</span>
-                    </a>
+                    </a> -->
                     <a href="<?= BASE_URL . '?act=gio-hang' ?>" class="btn cart">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
+                        <!-- <span>(0)</span> -->
                     </a>
                 </div>
             </div>
