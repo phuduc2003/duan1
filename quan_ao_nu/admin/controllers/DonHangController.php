@@ -97,4 +97,12 @@ class DonHangController{
   include "view/donhang/AnDonHangAdmin.php";
  }
 
+
+public function ThongKe(){
+  $ChiTietDonHang = $this->adminChiTietDH->Show($id);
+ include "view/thongke/ThongKeAdmin.php";
+}
+
+
+
 }

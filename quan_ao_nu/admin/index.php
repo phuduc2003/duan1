@@ -12,6 +12,8 @@ include_once "controllers/UserController.php";
 
 include_once "models/AdminChiTietDH.php";
 
+include_once "controllers/DanhMucController.php";
+include_once "models/AdminDanhMuc.php";
 
 
 
@@ -31,6 +33,7 @@ if (isset($_GET["id"])) {
 $admin = new SanPhamController();
 $adminDonHang = new DonHangController();
 $user = new UserController();
+$adminDM = new DanhMucController();
 switch($act) {
     case "":
         // Điều hướng sang trang mặc định (trang danh sách) nếu người dùng không truyền "act"
@@ -70,6 +73,24 @@ switch($act) {
 
 
 //-----------------------------END----------------------------------------------------//
+//------------------------ TRANG QUÁN DANH MỤC---------------------------------------//
+case "admin-listDM";
+    $adminDM->ListDM();
+    break;
+    case "admin-create";
+    $adminDM->themDM();
+    break;
+    case "admin-updatedm";
+    $adminDM->xuaDM($id);
+    break;
+    case "admin-deletedm";
+    $adminDM->xoaDM($id);
+    break;
+   
+
+
+//-----------------------------END----------------------------------------------------//
+
      //------------------------ TRANG QUÁN LÝ ĐƠN HÀNG-------------------------------//
     case "admin-donhang";
     $adminDonHang->donhang();
@@ -94,6 +115,13 @@ switch($act) {
     break;
 
      //------------------------------END------------------------------------------//
+     //----------------------------------TRANG THỐNG KÊ-----------------------------//
+     case "admin-thongke":
+     $adminDonHang->ThongKe();
+     break;   
+
+     //------------------------------------END--------------------------------------//
+
    //-----------------------------------TRANG QUẢN LÝ USER ------------------------------//
    // TRANG HIỆN USER
     case "admin-listuser";

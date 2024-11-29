@@ -182,7 +182,7 @@
             </div>
         </aside>
         <div class="main">
-            <nav class="navbar navbar-expand px-4 py-3">
+            <nav class="navbar navbar-expand px-4 py-3">    
             <!-- <form action="#" class="d-none d-sm-inline-block">
                        <div class="input1">
                     <input type="text" name="" id="" placelado="tim">
@@ -227,6 +227,7 @@
 <!-- Khu vực thông báo thành công -->
 <div style="color: green;">
 <?= $thongBaoThanhCong ?>
+
 </div>
 
 
@@ -238,13 +239,12 @@
         
             <div class="mb-3">
                 <label for="productCategory" class="form-label">Category</label>
-                <select class="form-select" id="productCategory" required name="danh_muc_id" value="<?= $san_phams->danh_muc_id?>">
-                    <option selected disabled>Select category</option>
-                    <option value="1">Dress</option>
-                    <option value="2">Trouser</option>
-                    <option value="3">Shirt</option>
-                    <option value="4">Books</option>
-                    <option value="5">Books</option>
+                <select class="form-select" id="productCategory" required name="danh_muc_id" >
+                    <option selected disabled><?=$danh_mucs->ten_danh_muc?></option> 
+                    
+                     <?php foreach($danhSachDanhMuc as $value){ ?>
+                    <option value="<?= $value->id?>"><?=$value->ten_danh_muc?></option>
+                    <?php } ?>
                 </select>
             </div>
 
@@ -287,7 +287,7 @@
             <div class="mb-3">
                 <label for="productCategory" class="form-label">Status</label>
                 <select class="form-select" id="productCategory" required name="trang_thai">
-                    <option selected disabled>Select Status</option>
+                    <option selected disabled>Selected Status</option>
                     <option value="1">Show</option>
                     <option value="2">Hidden</option>
                     

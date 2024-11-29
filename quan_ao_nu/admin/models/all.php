@@ -45,5 +45,6 @@ class tai_khoans{
 //     public $trang_thai;
 }
 class chi_tiet_don_hangs{}
+class danh_mucs{}
 
 ?>

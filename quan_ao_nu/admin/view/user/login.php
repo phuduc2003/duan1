@@ -113,7 +113,7 @@ margin-top:50px;
           <a href="#">Quên Mật Khẩu?</a> 
           </div> 
           <div class="them">
-          <a href="?act=nguoiDung-register">Tạo Tài Khoản</a> 
+          <a href="?act=nguoiDung-register">Page Clien</a> 
                     </div> 
 
         <div class="sunmit">

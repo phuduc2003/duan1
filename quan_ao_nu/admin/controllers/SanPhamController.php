@@ -4,6 +4,7 @@ class SanPhamController
    
    
   public $AdminSanPham;
+  public $AdminDanhMuc;
 
 
 
@@ -12,6 +13,7 @@ class SanPhamController
   {
       // 1. Khởi tạo giá trị cho thuộc tính hang_hoaQuery
       $this->AdminSanPham = new AdminSanPham();
+      $this->AdminDanhMuc = new AdminDanhMuc();
       // $this->AdminTrangThai = new AdminTrangThai();
       // Mở trình duyệt lên để kiểm tra kết quả
   }
@@ -39,10 +41,12 @@ class SanPhamController
     }
    }
    public function themSP(){
+     
       $san_phams =new san_phams();
       $thongBaoLoi="";
       $thongBaoThanhCong="";
       $thongBaoUploadFile="";
+       $danhSachDanhMuc = $this->AdminDanhMuc->all_dm();
       if(isset($_POST["submitForm"])){
         $san_phams->ten_san_pham=trim($_POST["ten_san_pham"]);
         $san_phams->gia_san_pham=trim($_POST["gia_san_pham"]);
@@ -81,6 +85,8 @@ class SanPhamController
         }
 
       }
+      
+
     include "view/sanpham/ThemSanPhamAdmin.php";
    }
     
@@ -94,8 +100,9 @@ class SanPhamController
         $thongBaoLoi = ""; 
         $thongBaoThanhCong = ""; 
         $thongBaoUploadFile = "";
-
+        $danhSachDanhMuc = $this->AdminDanhMuc->all_dm();
         $san_phams = $this->AdminSanPham->find($id);
+        $danh_mucs = $this->AdminDanhMuc->find_DM($id);
 
         if (isset($_POST["submitForm"])) {
           $san_phams->ten_san_pham=trim($_POST["ten_san_pham"]);
@@ -127,7 +134,7 @@ class SanPhamController
                 $ketQua = $this->AdminSanPham->updateSP($id,$san_phams);
                 if ($ketQua === "success") {
                     $thongBaoThanhCong = " Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-                           
+                    echo '<a>hay</a>';
 
                 } else {
                     $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
@@ -159,4 +166,8 @@ class SanPhamController
       }
     }
    }
+  
+  
+
+
 }
