@@ -41,8 +41,10 @@ switch($act) {
     break;
     //CHI TIẾT
     case "admin-chitietsp":
-    $admin->ChiTietSP($id);
-    break;
+        
+        //bật cái dưới này lên//
+    // $admin->ChiTietSP($id);
+    // break;
 
 
     //THÊM SỬA XOÁ
@@ -70,33 +72,35 @@ switch($act) {
 
 //-----------------------------END----------------------------------------------------//
 //------------------------------TRANG QUẢN LÝ DANH MUC--------------------------------//
-case "admin-listDM":
-    $adminDM->ListDM();
-    break;
-case "admin-create":
-    $adminDM->themDM();
-    break;
-case "admin-update":
-    $adminDM->xuaDM($id);
-    break;
-case "admin-delete":
-    $adminDM->xoaDM($id);
-    break;
+// case "admin-listDM":
+//     $adminDM->ListDM();
+//     break;
+// case "admin-create":
+//     $adminDM->themDM();
+//     break;
+// case "admin-update":
+//     $adminDM->xuaDM($id);
+//     break;
+// case "admin-delete":
+//     $adminDM->xoaDM($id);
+//     break;
 
-case "admin-dress":
-    $adminDM->Dress();
-    break;
-case "admin-shirt":
-    $adminDM->Shirt();
-    break;
-case "admin-trouser":
-    $adminDM->Trouser();
-    break;
+// case "admin-dress":
+//     $adminDM->Dress();
+//     break;
+// case "admin-shirt":
+//     $adminDM->Shirt();
+//     break;
+// case "admin-trouser":
+//     $adminDM->Trouser();
+//     break;
 
     
-    case "admin-updateDonHang";
-    $adminDonHang->updateDonHang($id);
-    break;
+//     case "admin-updateDonHang";
+//     $adminDonHang->updateDonHang($id);
+//     break;
+
+// bật quản lý danh mục lên
      //------------------------------END------------------------------------------//
    //-----------------------------------TRANG QUẢN LÝ USER ------------------------------//
     case "admin-listuser";
