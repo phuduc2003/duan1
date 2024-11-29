@@ -12,7 +12,6 @@ include_once "controllers/UserController.php";
 
 include_once "controllers/DanhMucController.php";
 include_once "models/AdminDanhMuc.php";
-include_once "models/AdminChiTietDH.php";
 
 
 // Route
