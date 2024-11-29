@@ -64,6 +64,7 @@
                                         <th>Đơn giá </th>
                                         <th>Số lượng</th>
                                         <th>Thành tiền</th>
+                                       
                                     </tr>
                                     <?php foreach ($chiTietDonHang as $item): ?>
                                         <tr>
@@ -76,6 +77,16 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                            <table class="table table-bordered">
+                              
+                                    <tr>
+                                        <th colspan="5">Phí ship : $1</th>
+                                    </tr>
+
+                               
+                            
+                            </table>
+                           
                         </div>
                     </div>
                 </div>

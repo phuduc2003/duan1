@@ -341,7 +341,7 @@ class HomeController
             $item['san_pham_id'], //Id sản phẩm
             $donGia,//đơn giá
             $item['so_luong'], //so luong
-            $donGia * $item['so_luong'] + 1 //thành tiền
+            $donGia * $item['so_luong']  //thành tiền
           );
         }
         //Sau khi thêm xong thì phải tiến hành xóa sản phẩm trong giỏ hàng
