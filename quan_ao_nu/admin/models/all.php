@@ -46,5 +46,6 @@ class tai_khoans{
 }
 class chi_tiet_don_hangs{}
 class danh_mucs{}
+class binh_luans{}
 
 ?>
