@@ -1,4 +1,12 @@
-    <?php session_start();?> 
+    <?php 
+    session_start();
+if(!isset($_SESSION['username'])){
+echo "<script>";
+echo    "alert('bạn cần đăng nhập Trước');";
+echo   "window.location.href='?act=login';";
+echo   "</script>"; 
+}
+?>
     <!DOCTYPE html>
     <html>
 
@@ -57,7 +65,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
+                    <a href="?act=admin-listDM" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>category </span>
                     </a>
@@ -157,6 +165,7 @@
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
@@ -228,8 +237,8 @@
                 </thead>
                 <tbody>
                 <?php foreach ($danhSachSanPham as $admins) {
-                    if($admins->trang_thai == 1 && $admins->danh_muc_id == 1 ){
-                    ?>     
+                    if($admins->trang_thai == 1){
+                   ?>  
                     <tr>
                 
                         <td> <?= $admins->id ?> </td>
@@ -249,22 +258,7 @@
 
                         <!-- <td> <?= $admins->mo_ta ?></td> -->
 
-                        <td> <?php
-                    if( $admins->danh_muc_id ==1){
-                        echo"Dress ";
-                    } if($admins->danh_muc_id ==2){
-                        echo"Trouser ";
-                    }
-                    if($admins->danh_muc_id ==3){
-                        echo"Shirt ";
-                    }
-                    if($admins->danh_muc_id ==4){
-                        echo"Váy ";
-                    }
-                    if($admins->danh_muc_id ==5){
-                        echo"Váy ";
-                    } 
-                            ?></td>
+                        <td> <?=$admins->danh_muc_id?></td>
                         
                         <td> <?php if($admins->trang_thai == 1){
                             echo "Show";
@@ -290,139 +284,7 @@
                                     
                         </td>
                     </tr>
-                <?php } } ?>
-                </tbody>
-                <tbody>
-                <?php foreach ($danhSachSanPham as $admins) {
-                    if($admins->trang_thai == 1 && $admins->danh_muc_id == 2){
-                    ?>     
-                    <tr>
-                
-                        <td> <?= $admins->id ?> </td>
-                        <td> <?= $admins->ten_san_pham ?></td>
-                    
-                        <td> <?= $admins->gia_san_pham ?> </td>
-                        <td> <?= $admins->gia_khuyen_mai ?></td> <td>
-                            <div style="height: 60px; width:60px;">
-                        
-
-                            <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>"></a> 
-                            </div>
-                        </td>
-                        <td> <?= $admins->so_luong ?></td>
-                        <td> <?= $admins->luot_xem ?></td>
-                        <td> <?= $admins->ngay_nhap ?></td>
-
-                        <!-- <td> <?= $admins->mo_ta ?></td> -->
-
-                        <td> <?php
-                    if( $admins->danh_muc_id ==1){
-                        echo"Dress ";
-                    } if($admins->danh_muc_id ==2){
-                        echo"Trouser ";
-                    }
-                    if($admins->danh_muc_id ==3){
-                        echo"Shirt ";
-                    }
-                    if($admins->danh_muc_id ==4){
-                        echo"Váy ";
-                    }
-                    if($admins->danh_muc_id ==5){
-                        echo"Váy ";
-                    } 
-                            ?></td>
-                        
-                        <td> <?php if($admins->trang_thai == 1){
-                            echo "Show";
-                        } else{
-                            echo"Hiden";
-                        }
-                        ?></td>
-                        
-
-                        <td style="width:170px;">
-                        <button class="btn btn-success">
-                                        <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                            <i class="fa-solid fa-pen-to-square"></i> Fix
-                                        </a>
-                                    </button>
-                                    
-                                    <button class="btn btn-danger" name="delete">
-                                        <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa-solid fa-trash" ></i> Delete
-                                        </a>
-                                    </button> 
-                                    
-                                    
-                        </td>
-                    </tr>
-                <?php } } ?>
-                </tbody>
-                <tbody>
-                <?php foreach ($danhSachSanPham as $admins) {
-                    if($admins->trang_thai == 1 && $admins->danh_muc_id == 3){
-                    ?>     
-                    <tr>
-                
-                        <td> <?= $admins->id ?> </td>
-                        <td> <?= $admins->ten_san_pham ?></td>
-                    
-                        <td> <?= $admins->gia_san_pham ?> </td>
-                        <td> <?= $admins->gia_khuyen_mai ?></td> <td>
-                            <div style="height: 60px; width:60px;">
-                        
-
-                            <a href="?act=admin-chitietsp&id=<?=$admins->id ?>"> <img style="max-height:100%; max-width:100%;" src="<?= $admins->hinh_anh ?>"></a> 
-                            </div>
-                        </td>
-                        <td> <?= $admins->so_luong ?></td>
-                        <td> <?= $admins->luot_xem ?></td>
-                        <td> <?= $admins->ngay_nhap ?></td>
-
-                        <!-- <td> <?= $admins->mo_ta ?></td> -->
-
-                        <td> <?php
-                    if( $admins->danh_muc_id ==1){
-                        echo"Dress ";
-                    } if($admins->danh_muc_id ==2){
-                        echo"Trouser ";
-                    }
-                    if($admins->danh_muc_id ==3){
-                        echo"Shirt ";
-                    }
-                    if($admins->danh_muc_id ==4){
-                        echo"Váy ";
-                    }
-                    if($admins->danh_muc_id ==5){
-                        echo"Váy ";
-                    } 
-                            ?></td>
-                        
-                        <td> <?php if($admins->trang_thai == 3){
-                            echo "Show";
-                        } else{
-                            echo"Hiden";
-                        }
-                        ?></td>
-                        
-
-                        <td style="width:170px;">
-                        <button class="btn btn-success">
-                                        <a href="?act=admin-update&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                            <i class="fa-solid fa-pen-to-square"></i> Fix
-                                        </a>
-                                    </button>
-                                    
-                                    <button class="btn btn-danger" name="delete">
-                                        <a href="?act=admin-delete&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa-solid fa-trash" ></i> Delete
-                                        </a>
-                                    </button> 
-                                    
-                                    
-                        </td>
-                    </tr>
-                <?php } } ?>
+                <?php }  } ?>
                 </tbody>
             </table>
         </div>

@@ -223,7 +223,9 @@
                     </tr>
                     </thead>    
                     <tbody>
-                        <?php foreach($ChiTietDonHang as $admin){  ?>
+                        <?php 
+                        $tong =0;
+                        foreach($ChiTietDonHang as $admin){  ?>
                     <tr>
                         <td><?= $admin->id ?></td>
 
@@ -237,14 +239,22 @@
                        
                     </tr>
                     
-                   
+                    <th><?php $tong += $admin->thanh_tien ?></th> 
+                    <?php }?>
                     </tbody>
                     <tfoot>
                     <tr>
                         <th colspan="4" class="text-end">Total:</th>
-                        <th><?=$admin->thanh_tien ?></th>
+                        <th><?php echo $tong  ?>$</th>
                     </tr>
-                    </tfoot> <?php }?>
+                  
+                    </tfoot>
+                    
+                      
+                       
+
+                       
+                   
                 </table>
             </div>
         </div>

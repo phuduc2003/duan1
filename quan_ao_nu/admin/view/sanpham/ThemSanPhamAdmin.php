@@ -235,22 +235,21 @@
                 <input type="text" class="form-control" id="productName" placeholder="Enter product name" required name="ten_san_pham">
             </div>
 
-        
+         
             <div class="mb-3">
                 <label for="productCategory" class="form-label">Category</label>
                 <select class="form-select" id="productCategory" required name="danh_muc_id" >
-                    <option selected disabled>Select category</option>
-                    <option value="1">Dress</option>
-                    <option value="2">Trouser</option>
-                    <option value="3">Shirt</option>
-                    <option value="4">Books</option>
-                    <option value="5">Books</option>
+                    <option selected disabled>Select category</option> 
+                     <?php foreach($danhSachDanhMuc as $value){ ?>
+                    <option value="<?= $value->id?>"><?=$value->ten_danh_muc?></option>
+                    <?php } ?>
                 </select>
             </div>
 
           
-            <!-- foreach(){
-             echo "<option value=".$id">$name</option>" } -->
+        
+                    
+             
 
             <div class="mb-3">
                 <label for="productPrice" class="form-label">Price ($)</label>
