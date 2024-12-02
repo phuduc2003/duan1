@@ -7,6 +7,17 @@ class SanPham
     {
         $this->conn = connectDB();
     }
+    public function getAllDanhMuc()
+    {
+        try {
+            $sql = 'SELECT * from danh_mucs';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo "Lỗi" . $e->getMessage();
+        }
+    }
     public function getAllSanPham()
     {
 

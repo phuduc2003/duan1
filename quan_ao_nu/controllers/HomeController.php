@@ -29,24 +29,29 @@ class HomeController
   public function homeSanPham()
 {
     try {
-        // Kiểm tra nếu có từ khóa tìm kiếm
-        $keyword = isset($_POST['keyword']) ? trim($_POST['keyword']) : '';
-
-        // Kiểm tra nếu có category_id được gửi lên
-        $categoryId = isset($_POST['category_id']) ? (int)$_POST['category_id'] : null;
-
-        // Nếu có từ khóa hoặc category_id, gọi hàm tìm kiếm
+        $keyword = trim($_POST['keyword'] ?? '');
+        $categoryId = (int)($_POST['category_id'] ?? null);
+   
+        // Lấy tất cả danh mục (để hiển thị danh sách đầy đủ)
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+     
+        // Lọc sản phẩm dựa trên keyword và categoryId
         if (!empty($keyword) || $categoryId !== null) {
-            $listSanPham = $this->modelSanPham->searchProducts($keyword, $categoryId);
+            $listSanPham = $this->modelSanPham->searchProducts(keyword: $keyword, categoryId: $categoryId);
+          
         } else {
-            // Nếu không có từ khóa và danh mục, lấy tất cả sản phẩm
             $listSanPham = $this->modelSanPham->getAllSanPham();
+        
         }
 
-        // Trả về view với danh sách sản phẩm tìm được
+        if (empty($listSanPham)) {
+            $message = "Không tìm thấy sản phẩm nào.";
+        }
+
         require_once "./views/sanPham.php";
     } catch (Exception $e) {
-        echo "Có lỗi xảy ra: " . $e->getMessage();
+        error_log("Error loading products: " . $e->getMessage());
+        echo "Có lỗi xảy ra, vui lòng thử lại sau.";
     }
 }
 
@@ -97,22 +102,22 @@ class HomeController
       $trang_thai = $_POST['trang_thai'];
       $error = [];
       if (empty($ho_ten)) {
-        $error['ho_ten'] = 'Họ tên không được để trống';
+        $error['ho_ten'] = 'Name cannot be empty.';
       }
       if (empty($so_dien_thoai)) {
-        $error['so_dien_thoai'] = 'Số điện thoại không được để trống';
+        $error['so_dien_thoai'] = 'Phone cannot be empty.';
       }
       if (empty($ngay_sinh)) {
-        $error['ngay_sinh'] = 'Ngày sinh không được để trống';
+        $error['ngay_sinh'] = 'Birth cannot be empty.';
       }
       if (empty($email)) {
-        $error['email'] = 'Email không được để trống';
+        $error['email'] = 'Email Name cannot be empty.';
       }
       if (empty($mat_khau)) {
-        $error['mat_khau'] = 'Mật khẩu không được để trống';
+        $error['mat_khau'] = 'Password cannot be empty.';
       }
       if (empty($dia_chi)) {
-        $error['dia_chi'] = 'Địa chỉ không được để trống';
+        $error['dia_chi'] = 'Address cannot be empty.';
       }
       if (!empty($error)) {
         $_SESSION['error'] = $error; // Lưu lỗi vào session

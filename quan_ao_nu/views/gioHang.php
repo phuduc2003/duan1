@@ -42,8 +42,14 @@
     </div>
     <!-- Breadcrumb End -->
     <!-- Cart Start -->
+
     <div class="cart-page">
         <div class="container-fluid">
+        <?php if (isset($_SESSION['warning'])): ?>
+                            <div class="alert alert-warning">
+                                <?= $_SESSION['warning'] ?>
+                            </div>
+                        <?php endif; ?>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="cart-page-inner">
