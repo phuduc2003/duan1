@@ -5,6 +5,7 @@ class SanPhamController
    
   public $AdminSanPham;
   public $AdminDanhMuc;
+  public $AdminThongKe;
 
 
 
@@ -14,10 +15,18 @@ class SanPhamController
       // 1. Khởi tạo giá trị cho thuộc tính hang_hoaQuery
       $this->AdminSanPham = new AdminSanPham();
       $this->AdminDanhMuc = new AdminDanhMuc();
+      $this->AdminThongKe = new AdminThongKe();
       // $this->AdminTrangThai = new AdminTrangThai();
       // Mở trình duyệt lên để kiểm tra kết quả
   }
   
+  public function thongke(){
+    $danhSachTKe= $this->AdminThongKe->all_tk();
+    $thongKe = $this->AdminThongKe->thongKeDonHang();
+      include   "view/thongke/ThongKeAdmin.php";
+  }
+ 
+
   public function sanpham(){
     $danhSachSanPham = $this->AdminSanPham->all();
 

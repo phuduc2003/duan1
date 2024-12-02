@@ -73,7 +73,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
+                    <a href="?act=admin-listDM" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>category </span>
                     </a>
@@ -99,7 +99,7 @@
                             <a href="?act=admin-create" class="sidebar-link">Add Product</a>
                         </li> 
                         <li class="sidebar-item">
-                            <a href="?act=admin-HienSanPham" class="sidebar-link">Show Product </a>
+                            <a href="?act=admin-anSanPham" class="sidebar-link">Show Product </a>
                         </li>
                     </ul>
                 </li>
@@ -161,18 +161,37 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-popup"></i>
-                        <span>Comment Management</span>
+                        <span>Comment </span>
+                    </a>
+                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">

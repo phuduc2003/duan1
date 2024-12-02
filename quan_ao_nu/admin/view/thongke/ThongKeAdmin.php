@@ -11,6 +11,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
         <link rel="stylesheet" href="style/style.css">
         <style>
             .table img {
@@ -57,7 +59,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
+                    <a href="?act=admin-listDM" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>category </span>
                     </a>
@@ -145,18 +147,37 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-popup"></i>
-                        <span>Comment Management</span>
+                        <span>Comment </span>
+                    </a>
+                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
@@ -192,6 +213,22 @@
                     </ul>
                 </div>
             </nav>
+
+            <div class="container mt-5">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">Product Category Statistics</h1>
+            <!-- <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a> -->
+        </div>
+
+        <!-- Search Bar -->
+        <!-- <div class="mb-3">
+            <form class="d-flex align-items-center">
+                <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div> -->
+
             <div class="table-wrapper">
             <table class="table table-striped table-hover text-center">
                 <thead class="table-dark">
@@ -205,25 +242,102 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($danhSachSanPham as $admins) {
-                    if($admins->trang_thai == 1 && $admins->danh_muc_id == 1 ){
+                <?php foreach ($danhSachTKe as $admins) {
+                   
                     ?>     
                     <tr>
                 
-                        <td> <?= $admins->id ?> </td>
-                        <td> <?= $admins->ten_san_pham ?></td>
-                    
-                        <td> <?= $admins->gia_san_pham ?> </td>
-                        <td> <?= $admins->gia_khuyen_mai ?></td> 
-                        <td> <?= $admins->so_luong ?></td>
-                        <td> <?= $admins->luot_xem ?></td>
-                        <td> <?= $admins->ngay_nhap ?></td>
+                        <td> <?= $admins->danh_muc_id ?> </td>
+                        <td> <?= $admins->ten_danh_muc ?></td> 
+                        <td> <?= $admins->so_luong_san_pham ?></td>
+                        <td> <?= $admins->gia_cao_nhat ?> </td>
+                        <td> <?= $admins->gia_thap_nhat ?> </td>
+                        <td> <?= $admins->gia_trung_binh ?> </td>
+                        
+                       
 
-                        <!-- <td> <?= $admins->mo_ta ?></td> -->
+
+                        
 
                         <td></td>
-                <?php } } ?>
+                <?php }  ?>
                 </tbody>
+                </table>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Order statistics</h1>
+        
+        <!-- Thống kê tổng quan -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total orders</h5>
+                        <p class="card-text fs-3"><?= $thongKe['tong_don_hang'] ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total revenue</h5>
+                        <p class="card-text fs-3"><?= number_format($thongKe['tong_doanh_thu'], 0, ',', '.') ?> $</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Number of products sold</h5>
+                        <p class="card-text fs-3"><?= $thongKe['tong_san_pham'] ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Số đơn hàng theo trạng thái -->
+        <h2 class="mb-3">Number of orders by status</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                <th>Status</th>
+                <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($thongKe['trang_thai'] as $trangThai): ?>
+                    <tr>
+                        <td>Status <?= $trangThai['trang_thai_id'] ?></td>
+                        <td><?= $trangThai['so_luong'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <!-- Doanh thu theo tháng -->
+        <h2 class="mb-3">Revenue by month</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                <th>Month</th>
+                <th>Revenue ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($thongKe['doanh_thu_thang'] as $doanhThu): ?>
+                    <tr>
+                        <td>Month <?= $doanhThu['thang'] ?></td>
+                        <td><?= number_format($doanhThu['doanh_thu'], 0, ',', '.') ?> $</td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+                
+                
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>

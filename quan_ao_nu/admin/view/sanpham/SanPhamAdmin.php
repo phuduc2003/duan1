@@ -153,12 +153,30 @@ echo   "</script>";
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-popup"></i>
-                        <span>Comment Management</span>
+                        <span>Comment </span>
+                    </a>
+                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
@@ -258,7 +276,7 @@ echo   "</script>";
 
                         <!-- <td> <?= $admins->mo_ta ?></td> -->
 
-                        <td> <?=$admins->danh_muc_id?></td>
+                        <td> <?=$admins->ten_danh_muc?></td>
                         
                         <td> <?php if($admins->trang_thai == 1){
                             echo "Show";

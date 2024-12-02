@@ -59,7 +59,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
+                    <a href="?act=admin-listDM" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>category </span>
                     </a>
@@ -85,7 +85,7 @@
                             <a href="?act=admin-create" class="sidebar-link">Add Product</a>
                         </li> 
                         <li class="sidebar-item">
-                            <a href="?act=admin-HienSanPham" class="sidebar-link">Show Product </a>
+                            <a href="?act=admin-anSanPham" class="sidebar-link">Show Product </a>
                         </li>
                     </ul>
                 </li>
@@ -147,18 +147,37 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-popup"></i>
-                        <span>Comment Management</span>
+                        <span>Comment </span>
+                    </a>
+                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
@@ -212,6 +231,8 @@
     <!-- Product Table -->
     <div class="table-wrapper">
         <table class="table table-striped table-hover text-center">
+
+      
             <thead class="table-dark">
                 <tr>
                 <th>ID</th></th>
@@ -231,14 +252,14 @@
             </thead>
             <tbody>
             <?php foreach ($danhSachSanPham as $admins) {
-                  if($admins->trang_thai_id === 2){
+                  if($admins->trang_thai_id === 1){
                 ?>     
                 <tr>
                
                     <td> <?= $admins->id ?> </td>
                     <td> <?= $admins->ma_don_hang ?></td>
                    
-                    <td><a href="?act=admin-chitietdonhang"> <?= $admins->tai_khoan_id ?> </a></td>
+                    <td><?= $admins->ho_ten ?> </a></td>
                     <td> <?= $admins->ten_nguoi_nhan ?></td> 
                     <!-- <td>
                         <div style="height: 60px; width:60px;">
@@ -254,9 +275,14 @@
                     <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
                         echo"  cash ";
                     }else{echo" Online ";} ?></td>
+                    
                     <td> <?php if( $admins->trang_thai_id==1 ){
-                        echo"approval";
-                    }else{echo"Pending approval";}
+                        echo"approved";
+                    } if($admins->trang_thai_id==2 ){
+                        echo"Pending Approvalt";
+                    } if($admins->trang_thai_id==3 ){
+                        echo"In Delivery";
+                    }
                         ?></td>
                     <td style="width:170px;">
                     <button class="btn btn-success">
@@ -266,8 +292,110 @@
                                 </button>
                                 
                                 <button class="btn btn-danger">
-                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                        <i class="fa-solid fa-trash"></i> Drowse
+                                    <a href="?act=admin-GiaoDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" >
+                                        <i class="fa-solid fa-trash"></i> browse
+                                    </a>
+                                </button>
+                                
+                    </td>
+                </tr>
+            <?php } } ?>
+            </tbody>
+            <tbody>
+            <?php foreach ($danhSachSanPham as $admins) {
+                  if($admins->trang_thai_id === 2){
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td> <?= $admins->ma_don_hang ?></td>
+                   
+                    <td><?= $admins->ho_ten ?> </a></td>
+                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
+                    <!-- <td>
+                        <div style="height: 60px; width:60px;">
+                            <img style="max-height:100%; max-width:100%;" src="">
+                        </div>
+                    </td> -->
+                    <td> <?= $admins->email_nguoi_nhan ?></td>
+                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
+                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
+                    <td> <?= $admins->ngay_dat ?></td>
+                    <td> <?= $admins->tong_tien ?></td>
+                    <td> <?= $admins->ghi_chu ?></td>
+                    <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
+                        echo"  cash ";
+                    }else{echo" Online ";} ?></td>
+                    
+                    <td> <?php if( $admins->trang_thai_id==1 ){
+                        echo"Pending Approval";
+                    } if($admins->trang_thai_id==2 ){
+                        echo"Pending Approvalt";
+                    } if($admins->trang_thai_id==3 ){
+                        echo"In Delivery";
+                    }
+                        ?></td>
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger">
+                                    <a href="?act=admin-deleteDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" >
+                                        <i class="fa-solid fa-trash"></i> browse
+                                    </a>
+                                </button>
+                                
+                    </td>
+                </tr>
+            <?php } } ?>
+            </tbody>
+            <tbody>
+            <?php foreach ($danhSachSanPham as $admins) {
+                  if($admins->trang_thai_id === 3){
+                ?>     
+                <tr>
+               
+                    <td> <?= $admins->id ?> </td>
+                    <td> <?= $admins->ma_don_hang ?></td>
+                   
+                    <td><?= $admins->ho_ten ?> </a></td>
+                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
+                    <!-- <td>
+                        <div style="height: 60px; width:60px;">
+                            <img style="max-height:100%; max-width:100%;" src="">
+                        </div>
+                    </td> -->
+                    <td> <?= $admins->email_nguoi_nhan ?></td>
+                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
+                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
+                    <td> <?= $admins->ngay_dat ?></td>
+                    <td> <?= $admins->tong_tien ?></td>
+                    <td> <?= $admins->ghi_chu ?></td>
+                    <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
+                        echo"  cash ";
+                    }else{echo" Online ";} ?></td>
+                    
+                    <td> <?php if( $admins->trang_thai_id==1 ){
+                        echo"Pending Approval";
+                    } if($admins->trang_thai_id==2 ){
+                        echo"Pending Approvalt";
+                    } if($admins->trang_thai_id==3 ){
+                        echo"In Delivery";
+                    }
+                        ?></td>
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fix
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger">
+                                    <a href="?act=admin-HoanTDonHang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" >
+                                        <i class="fa-solid fa-trash"></i> browse
                                     </a>
                                 </button>
                                 

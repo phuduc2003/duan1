@@ -16,18 +16,48 @@ class DonHangController{
         // Mở trình duyệt lên để kiểm tra kết quả
   }
 
-
   
+  
+
   public function donhang(){
     $danhSachSanPham = $this->AdminDonHang->All();
     include "view/donhang/DonHangAdmin.php";
   }
-
+//
     public function deleteHang($id){
       if($id !==""){
       $KetQua=$this->AdminDonHang->deleteDonHang($id);
      if($KetQua="success"){
-      header("location:?act=admin-donhang");
+   
+
+      header("location:?act=admin-andonhang");
+     }else{
+      echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+    }
+      } 
+    }
+//
+    public function GiaoHang($id){
+      if($id !==""){
+      $KetQua=$this->AdminDonHang->GiaoDonHang($id);
+        
+     if($KetQua="success"){
+
+     
+      header("location:?act=admin-andonhang");
+     }else{
+      echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+    }
+      } 
+    }
+    //
+    public function HoanTHang($id){
+      if($id !==""){
+      $KetQua=$this->AdminDonHang->HoanTDonHang($id);
+     if($KetQua="success"){
+     
+
+      header("location:?act=admin-andonhang");
      }else{
       echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
     }
@@ -79,20 +109,22 @@ class DonHangController{
             echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
         }
     } 
- public function ChitietDH(){
+ public function ChitietDH($id){
   $id=$_GET['id'];
+  //  $ChiTietDonHang = $this->adminChiTietDH->Show($id);
+  // $danhSachSanPham = $this->AdminDonHang->All($id);
+  // $name = $this->AdminSanPham->all();
+  
+  $danhSach_DH = $this->adminChiTietDH->showDH($id);
 
-   $ChiTietDonHang = $this->adminChiTietDH->Show($id);
-
-  $danhSachSanPham = $this->AdminDonHang->All($id);
-
-  $name = $this->AdminSanPham->all();
 
 
  
   include "view/donhang/ChiTietDHAdmin.php";
  }
  public function AnDonHang(){
+  $thongBaoThanhCong = ""; 
+
   $danhSachSanPham = $this->AdminDonHang->All();
   include "view/donhang/AnDonHangAdmin.php";
  }

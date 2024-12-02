@@ -59,7 +59,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
+                    <a href="?act=admin-listDM" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>category </span>
                     </a>
@@ -85,7 +85,7 @@
                             <a href="?act=admin-create" class="sidebar-link">Add Product</a>
                         </li> 
                         <li class="sidebar-item">
-                            <a href="?act=admin-HienSanPham" class="sidebar-link">Show Product </a>
+                            <a href="?act=admin-anSanPham" class="sidebar-link">Show Product </a>
                         </li>
                     </ul>
                 </li>
@@ -147,18 +147,37 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-popup"></i>
-                        <span>Comment Management</span>
+                        <span>Comment </span>
+                    </a>
+                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
@@ -231,14 +250,14 @@
             </thead>
             <tbody>
             <?php foreach ($danhSachSanPham as $admins) {
-                if($admins->trang_thai_id === 1 ){
+                if($admins->trang_thai_id === 4 ){
                 ?>     
                 <tr>
                
                     <td> <?= $admins->id ?> </td>
                     <td> <?= $admins->ma_don_hang ?></td>
                    
-                    <td><?= $admins->tai_khoan_id ?></td>
+                    <td><?= $admins->ho_ten ?></td>
                     <td> <?= $admins->ten_nguoi_nhan ?></td> 
                     <!-- <td>
                         <div style="height: 60px; width:60px;">
@@ -254,16 +273,17 @@
                     <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
                         echo"  cash ";
                     }else{echo" Online ";} ?></td>
-                    <td> <?php if( $admins->trang_thai_id==1 ){
-                        echo"Show";
-                    }else{echo"Hiden";}
+                    <td> <?php if( $admins->trang_thai_id==4 ){
+                        echo"Completed Received";
+                    } 
+
                         ?></td>
                     <td style="width:170px;">
-                    <button class="btn btn-success m-1">
+                    <!-- <button class="btn btn-success m-1">
                                     <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
                                         <i class="fa-solid fa-pen-to-square"></i> Fix
                                     </a>
-                                </button>
+                                </button> -->
                                 
                                 <button class="btn btn-danger">
                                     <a href="?act=admin-chitietdonhang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" >
