@@ -1,22 +1,30 @@
 <?php 
-
+//--------------------SẢN PHẨM------------------
 include_once "models/all.php";
 include_once "models/AdminSanPham.php";
 include_once "controllers/SanPhamController.php";
 
+//--------------------ĐƠN HÀNG------------------
 include_once "models/AdminDonHang.php";
 include_once "controllers/DonHangController.php";
 
+//--------------------USER------------------
 include_once "models/AdminUser.php";
 include_once "controllers/UserController.php";
 
+//--------------------CHI TIẾT ĐƠN HÀNG------------------
 include_once "models/AdminChiTietDH.php";
 
+//--------------------DANH MỤC------------------
 include_once "controllers/DanhMucController.php";
 include_once "models/AdminDanhMuc.php";
 
+//--------------------BÌNH LUẬN------------------
+include_once "controllers/BinhLuanController.php";
+include_once "models/AdminBinhLuan.php";
 
-
+//--------------------THỐNG KÊ------------------
+include_once "models/AdminThongKe.php";
 
 // Route
 $act = "";
@@ -34,11 +42,21 @@ $admin = new SanPhamController();
 $adminDonHang = new DonHangController();
 $user = new UserController();
 $adminDM = new DanhMucController();
+$adminBL = new BinhLuanController();
+
+
 switch($act) {
     case "":
         // Điều hướng sang trang mặc định (trang danh sách) nếu người dùng không truyền "act"
         header("Location: ?act=login");
         break;
+  //-----------------------THỐNG KÊ ----------------------//     
+        case "admin-thongke":
+        $admin->thongke();
+        break;   
+        
+        
+
 //------------------------ TRANG QUÁN LÝ SẢN PHẨM --------------------------------//
      //DANH SÁCH
     case "admin-sanpham":
@@ -48,6 +66,8 @@ switch($act) {
     case "admin-chitietsp":
     $admin->ChiTietSP($id);
     break;
+
+
 
     // TRANG SẢN PHẨM BỊ ẨN
     case "admin-anSanPham";
@@ -91,6 +111,27 @@ case "admin-listDM";
 
 //-----------------------------END----------------------------------------------------//
 
+//-----------------------------------TRANG QUẢN LÝ BÌNH LUẬN  ------------------------------//
+    case "admin-binhluan":
+    $adminBL->BinhLuan();
+    break;
+    // NÚT XOÁ
+    case "admin-BinhLuanXoa":
+    $adminBL->XoaBinhLuan($id);
+    break;
+    // NÚT Hiện
+    case "admin-showbinhluan":
+    $adminBL->HienBinhLuan($id);
+     break;
+    // HIỆN BÌNH LUẬN BỊ ẨN
+
+    case "admin-hienbinhluan":
+    $adminBL->Show_BL();
+    break;    
+     //------------------------------------END--------------------------------------//
+
+
+
      //------------------------ TRANG QUÁN LÝ ĐƠN HÀNG-------------------------------//
     case "admin-donhang";
     $adminDonHang->donhang();
@@ -113,6 +154,15 @@ case "admin-listDM";
     case "admin-updateDonHang";
     $adminDonHang->updateDonHang($id);
     break;
+    case "admin-GiaoDonHang";
+    $adminDonHang->GiaoHang($id);
+    break;
+    case "admin-HoanTDonHang";
+    $adminDonHang->HoanTHang($id);
+    break;
+
+    
+
 
      //------------------------------END------------------------------------------//
      //----------------------------------TRANG THỐNG KÊ-----------------------------//

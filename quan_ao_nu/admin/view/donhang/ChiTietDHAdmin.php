@@ -50,7 +50,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
+                    <a href="?act=admin-listDM" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>category </span>
                     </a>
@@ -76,7 +76,7 @@
                             <a href="?act=admin-create" class="sidebar-link">Add Product</a>
                         </li> 
                         <li class="sidebar-item">
-                            <a href="?act=admin-HienSanPham" class="sidebar-link">Show Product </a>
+                            <a href="?act=admin-anSanPham" class="sidebar-link">Show Product </a>
                         </li>
                     </ul>
                 </li>
@@ -138,18 +138,37 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
                         <i class="lni lni-popup"></i>
-                        <span>Comment Management</span>
+                        <span>Comment </span>
+                    </a>
+                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
@@ -191,20 +210,11 @@
         <h1 class="text-center mb-4">Order Details</h1>
 
         <!-- Thông tin khách hàng -->
-        <div class="card mb-4 order-details-card">
+        <!-- <div class="card mb-4 order-details-card">
             <div class="card-header bg-primary text-white">
             Customer Information
-            </div>
-            <?php foreach($danhSachSanPham as $admin){ ?>
-            <div class="card-body">
-                <p><strong>Customer name:</strong> <?= $admin->ten_nguoi_nhan ?></p>
-                <p><strong>Email:</strong> <?= $admin->email_nguoi_nhan?></p>
-                <p><strong>phone number:</strong> <?= $admin->sdt_nguoi_nhan?></p>
-                <p><strong>Order date:</strong> <?= $admin->ngay_dat?></p>
-                <p><strong>Status:</strong> <span class="badge bg-success">Delivered</span></p>
-            </div>
-            <?php }?>
-        </div>
+            </div> -->
+          
 
         <!-- Thông tin đơn hàng -->
         <div class="card mb-4 order-details-card">
@@ -225,22 +235,24 @@
                     <tbody>
                         <?php 
                         $tong =0;
-                        foreach($ChiTietDonHang as $admin){  ?>
+                        foreach($danhSach_DH as $admin){ 
+                             ?>
                     <tr>
-                        <td><?= $admin->id ?></td>
+                       <td> <?= $admin["id"] ?></td>
 
-                        <td><?= $admin->san_pham_id ?></td>
+                       <td> <?= $admin["ten_san_pham"]?></td>
                         
-                        <td><?= $admin->so_luong ?></td>
-                        <td><?= $admin->don_gia ?></td>
-                        <td>
-                            <?=$admin->thanh_tien=$admin->so_luong *$admin->don_gia ?>
-                        </td>
+                       <td><?= $admin["so_luong"]?></td> 
+                       <td> <?= $admin["don_gia"]?></td>
+                        
+                          <td> <?=$admin["thanh_tien"]=$admin["so_luong"] *$admin["don_gia"] ?></td> 
+                        
                        
                     </tr>
                     
-                    <th><?php $tong += $admin->thanh_tien ?></th> 
+                    <th><?php $tong += $admin["thanh_tien"]?></th> 
                     <?php }?>
+
                     </tbody>
                     <tfoot>
                     <tr>

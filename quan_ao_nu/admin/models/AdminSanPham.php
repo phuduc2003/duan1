@@ -20,7 +20,10 @@ class AdminSanPham
         {
             try {
                 // 1. Kết nối CSDL
-               $sql = " SELECT * FROM san_phams ";
+                $sql="SELECT san_phams.*, danh_mucs.ten_danh_muc 
+                FROM san_phams 
+                JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                      ";
                $data = $this->pdo->query($sql)->fetchAll();
                $DanhSach = [];
                foreach($data as $value){
@@ -37,6 +40,8 @@ class AdminSanPham
                 $san_phams->mo_ta= $value['mo_ta'];
                 $san_phams->danh_muc_id= $value['danh_muc_id'];
                 $san_phams->trang_thai= $value['trang_thai'];
+                $san_phams->ten_danh_muc= $value['ten_danh_muc'];
+
                 
                 array_push($DanhSach, $san_phams);
                }

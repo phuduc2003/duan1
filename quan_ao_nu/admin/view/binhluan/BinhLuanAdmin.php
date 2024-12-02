@@ -1,4 +1,4 @@
-
+<?php session_start();?> 
 <!DOCTYPE html>
 <html>
 
@@ -6,59 +6,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dự ánY</title>
+    <title>Sidebar With Bootstrap</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="style/style.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
-        .product-title {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #333;
+        .table img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
         }
 
-        .price {
-            font-size: 1.5rem;
-            color: #28a745;
-            font-weight: bold;
+        .btn-actions {
+            display: flex;
+            gap: 5px;
         }
 
-        .old-price {
-            text-decoration: line-through;
-            color: #888;
-            margin-left: 10px;
+        .search-bar {
+            max-width: 400px;
         }
 
-        .product-description {
-            line-height: 1.8;
-            color: #555;
+        .table-wrapper {
+            overflow-x: auto;
         }
 
-        .quantity-input {
-            width: 80px;
-            text-align: center;
-        }
-
-        .btn-buy-now {
-            background-color: #007bff;
-            border: none;
+        .add-product-btn {
+            background-color: #28a745;
             color: white;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
 
-        .btn-buy-now:hover {
-            background-color: #0056b3;
-        }
-
-        .related-products img {
-            transition: transform 0.3s;
-        }
-
-        .related-products img:hover {
-            transform: scale(1.05);
+        .add-product-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -229,43 +211,79 @@
                     </ul>
                 </div>
             </nav>
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Product Management</h1>
+        <a href="?act=admin-create" class="btn add-product-btn">+ Add New Category</a>
+    </div>
 
-            <?php foreach ($danhSach_SP as $value) : ?>  
-            <div class="container mt-5"> 
-                <h1>Product Details</h1> <br>
-        <!-- Product Details -->
-        <div class="row">
-            <div class="col-md-6">
-                <img src="<?= $value["hinh_anh"] ?>" alt="Product Image" class="img-fluid rounded">
-            </div>
-            <div class="col-md-6">
-                <h1 class="product-title"><?= $value["ten_san_pham"]  ?></h1>
-                <p class="price">$<?= $value["gia_san_pham"] ?> <span class="old-price">$<?= $value["gia_khuyen_mai"]  ?></span></p>
-                <p class="product-description">
-                <?= $value["mo_ta"]?>
-                </p>
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <form class="d-flex align-items-center">
+            <input type="text" class="form-control search-bar me-2" placeholder="Search by name...">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
 
-                <!-- Quantity and Buttons -->
-                <!-- <div class="d-flex align-items-center mb-3">
-                    <label for="quantity" class="me-2">Quantity:</label>
-                    <input type="number" id="quantity" class="form-control quantity-input me-3" value="1" min="1">
-                    <button class="btn btn-success me-2">Add to Cart</button>
-                    <button class="btn btn-buy-now">Buy Now</button>
-                </div> -->
+    <!-- Product Table -->
+    <div class="table-wrapper">
+        <table class="table table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                <th>ID</th>
+                <th>Product Name </th>
+                <th>Account Name </th>
+                <th>Content </th>
+                <th>Post Date </th>
+                <th>Status </th>
+                <th>operation </th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($danhSachBinhLuan as $value) {
+                if(   $value->trang_thai ==1 ){
+                
+                ?>     
+                <tr>
+               
+                    <td> <?= $value->id ?> </td>
+                    <td><?= $value->ten_san_pham ?> </td>
+                   
+                    <td> <?= $value->ho_ten ?> </td>
+                    <td> <?= $value->noi_dung ?> </td>
+                    <td> <?= $value->ngay_dang ?> </td>
 
-                <!-- Additional Information -->
-                <p><strong>Category:</strong> <?= $value["danh_muc_id"]?></p>
-                <p><strong>Availability:</strong> <?php if( $value["trang_thai"] == 1){echo"Show";}else{echo"Hiden";}?></p>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        
+                    <td> <?php if($value->trang_thai ==1 ){echo"Show";}else{echo"Hiden";} ?> </td>
+                   
+                     
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <td style="width:170px;">
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updatedm&id=<?= $value->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> View
+                                    </a>
+                                </button>
+                                
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-BinhLuanXoa&id=<?= $value->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                        <i class="fa-solid fa-trash" ></i> Delete
+                                    </a>
+                                </button> 
+                                
+                                
+                    </td>
+                </tr>
+            <?php } }?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="style/style.js"></script>
