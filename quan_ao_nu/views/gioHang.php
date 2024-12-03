@@ -29,27 +29,27 @@
     <!-- Top bar Start -->
     <?php require './views/layout/header.php'; ?>
     <!-- Bottom Bar End -->
-
+    <?php if (isset($_SESSION['warning'])): ?>
+        <div class="alert alert-warning" role="alert" style="text-align: center; margin-bottom: 20px;">
+            <?= $_SESSION['warning']; ?>
+        </div>
+        <?php unset($_SESSION['warning']); // Xóa thông báo sau khi hiển thị ?>
+    <?php endif; ?>
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">
         <div class="container-fluid">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Products</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=sanpham' ?>">Products</a></li>
                 <li class="breadcrumb-item active">Cart</li>
             </ul>
         </div>
     </div>
+
     <!-- Breadcrumb End -->
     <!-- Cart Start -->
-
     <div class="cart-page">
         <div class="container-fluid">
-        <?php if (isset($_SESSION['warning'])): ?>
-                            <div class="alert alert-warning">
-                                <?= $_SESSION['warning'] ?>
-                            </div>
-                        <?php endif; ?>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="cart-page-inner">
@@ -82,20 +82,16 @@
                                                     <?= formatPrice($sanPham['gia_san_pham']) ?>
                                                 <?php } ?>
                                             </td>
-
-                                            <td>
-                                                <div class="qty">
-                                                    <button class="btn-minus"
-                                                        onclick="changeQuantity(-1, <?= $sanPham['san_pham_id'] ?>)"><i
-                                                            class="fa fa-minus"></i></button>
-                                                    <input type="text" value="<?= $sanPham['so_luong'] ?>"
-                                                        id="quantity-<?= $sanPham['san_pham_id'] ?>" readonly>
-                                                    <button class="btn-plus"
-                                                        onclick="changeQuantity(1, <?= $sanPham['san_pham_id'] ?>)"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </div>
-                                            </td>
-
+                                            <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
+                                                <input type="hidden" name="san_pham_id"
+                                                    value="<?= $sanPham['san_pham_id'] ?>">
+                                                <td style="display: flex; align-items: center;">
+                                                    <button type="submit" name="action" value="decrease">-</button>
+                                                    <input type="text" name="so_luong" value="<?= $sanPham['so_luong'] ?>"
+                                                        readonly>
+                                                    <button type="submit" name="action" value="increase">+</button>
+                                                </td>
+                                            </form>
                                             <td>$
                                                 <?php
                                                 $tongTien = 0;
@@ -108,7 +104,10 @@
                                                 echo formatPrice($tongTien)
                                                     ?>
                                             </td>
-                                            <td><button><i class="fa fa-trash"></i></button></td>
+                                            <td> <a
+                                                    href="<?= BASE_URL . '?act=xoa-san-pham-gio-hang&san_pham_id=' . $sanPham['san_pham_id'] ?>"><button
+                                                        onclick="return confirm('Bạn có muốn xóa không')"><i
+                                                            class="fa fa-trash"></i></button></td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>
@@ -134,7 +133,6 @@
                                         <h2>Grand Total<span>$<?= formatPrice($tongGioHang + 1) ?></span></h2>
                                     </div>
                                     <div class="cart-btn">
-                                        <a class="btn" href="#"  style="width:40%;height:70%">Update Cart</a>
 
                                         <a class="btn" href="<?= BASE_URL . '?act=thanh-toan' ?>"
                                             style="width:40%;height:70%">Checkout</a>
@@ -150,7 +148,7 @@
         </div>
     </div>
     <!-- Cart End -->
-   
+
     <!-- Footer Start -->
     <?php require './views/layout/footer.php'; ?>
     <!-- Footer End -->

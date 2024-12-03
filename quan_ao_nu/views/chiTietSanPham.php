@@ -26,7 +26,6 @@
 </head>
 
 <body>
-    
     <!-- Top bar Start -->
     <?php require './views/layout/header.php'; ?>
     <!-- Bottom Bar End -->
@@ -42,7 +41,6 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-
     <!-- Product Detail Start -->
     <div class="product-detail">
         <div class="container-fluid">
