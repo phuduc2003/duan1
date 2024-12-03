@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 
@@ -51,21 +52,14 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
                     <a href="?act=admin-listDM" class="sidebar-link">
-                        <i class="lni lni-user"></i>
+                        <i class="lni lni-list"></i>
                         <span>category </span>
                     </a>
                 </li>
-                
-                <!-- <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Task</span>
-                    </a>
-                </li> -->
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-protection"></i>
+                        <i class="lni lni-archive"></i>
                         <span>Product Management</span>
                     </a>
                     <ul style="background-color: #1A2035;" id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -73,35 +67,19 @@
                             <a href="?act=admin-sanpham" class="sidebar-link">Product List</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-create" class="sidebar-link">Add Product</a>
+                            <a href="?act=admin-create" class="sidebar-link">Add New Product</a>
                         </li> 
                         <li class="sidebar-item">
-                            <a href="?act=admin-anSanPham" class="sidebar-link">Show Product </a>
+                            <a href="?act=admin-anSanPham" class="sidebar-link">List of products deleted </a>
                         </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
+                        <i class="lni lni-users"></i>
                         <span>Account Management</span>
                     </a>
-                    <!-- <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                               Quản Lý
-                            </a>
-                            <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul> -->
                 </li>
                 <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
@@ -111,53 +89,53 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-listuser" class="sidebar-link">List Account</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link"> List of accounts</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-create" class="sidebar-link">Add Account</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Add New Account</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-AnUser" class="sidebar-link">Show Account </a>
+                                    <a href="?act=admin-AnUser" class="sidebar-link">List of locked accounts </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item">
+                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
-                        <i class="lni lni-protection"></i>
+                        data-bs-target="#orderDropdown" aria-expanded="false" aria-controls="orderDropdown">
+                        <i class="lni lni-package"></i>
                         <span>Order Management</span>
                     </a>
-                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <ul style="background-color: #1A2035;" id="orderDropdown" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donhang" class="sidebar-link">Order List</a>
+                            <a href="?act=admin-donhang" class="sidebar-link">Order delivered successfully</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-andonhang" class="sidebar-link">Show Order</a>
+                            <a href="?act=admin-andonhang" class="sidebar-link">pending orders</a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
+                        data-bs-target="#commentDropdown" aria-expanded="false" aria-controls="commentDropdown">
                         <i class="lni lni-popup"></i>
-                        <span>Comment </span>
+                        <span>Comment Management</span>
                     </a>
-                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <ul style="background-color: #1A2035;" id="commentDropdown" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-binhluan" class="sidebar-link">List Comment</a>
+                            <a href="?act=admin-binhluan" class="sidebar-link">List of comments</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-hienbinhluan" class="sidebar-link">Show Comment</a>
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link"> List of Deleted Comments</a>
                         </li>
-                       
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="?act=admin-thongke" class="sidebar-link">
-                        <i class="lni lni-cog"></i>
+                        <i class="lni lni-stats-up"></i>
                         <span>Statistics</span>
                     </a>
                 </li>
@@ -204,82 +182,105 @@
                     </ul>
                 </div>
             </nav>
+            
+            <?php if (!empty($orderData)) { 
+    // Lấy thông tin đơn hàng chính
+    $orderInfo = $orderData[0];
+?>
+<div class="container my-5">
+    <!-- Card hiển thị thông tin đơn hàng -->
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title">Order Information</h3>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Order ID:</strong> <?= $orderInfo['ma_don_hang']; ?></p>
+                    <p><strong>Customer Name:</strong> <?= $orderInfo['ten_nguoi_nhan']; ?></p>
+                    <p><strong>Email:</strong> <?= $orderInfo['email_nguoi_nhan']; ?></p>
+                    <p><strong>Phone Number:</strong> <?= $orderInfo['sdt_nguoi_nhan']; ?></p>
+            <p><strong>Status:</strong> 
+                <span class="badge 
+                    <?= $orderInfo['trang_thai_id'] == 4 ? 'bg-success' : 
+                         ($orderInfo['trang_thai_id'] == 3 ? 'bg-info' : 
+                         ($orderInfo['trang_thai_id'] == 2 ? 'bg-warning' : 'bg-secondary')); ?>">
+                    <?php
+                    if ($orderInfo['trang_thai_id'] == 4) echo "Completed";
+                    if ($orderInfo['trang_thai_id'] == 3) echo "In Delivery";
+                    if ($orderInfo['trang_thai_id'] == 2) echo "Pending Approval";
+                    if ($orderInfo['trang_thai_id'] == 1) echo "Approved";
+                    ?>
+                </span>
+            </p>
 
-            <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Order Details</h1>
-
-        <!-- Thông tin khách hàng -->
-        <!-- <div class="card mb-4 order-details-card">
-            <div class="card-header bg-primary text-white">
-            Customer Information
-            </div> -->
-          
-
-        <!-- Thông tin đơn hàng -->
-        <div class="card mb-4 order-details-card">
-            <div class="card-header bg-secondary text-white">
-            Order Information
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Address:</strong> <?= $orderInfo['dia_chi_nguoi_nhan']; ?></p>
+                    <p><strong>Order Date:</strong> <?= $orderInfo['ngay_dat']; ?></p>
+                    <p><strong>describe:</strong> <?= $orderInfo['ghi_chu']; ?></p>
+                    <p><strong>Payment method:</strong> 
+                    <?php if($orderInfo['phuong_thuc_thanh_toan_id']==1){echo"Cash on Delivery";}
+                          if($orderInfo['phuong_thuc_thanh_toan_id']==2){echo"online payment";} ?></p>
+                </div>
             </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
+           
+        </div>
+    </div>
+
+    <!-- Card hiển thị chi tiết đơn hàng -->
+    <div class="card mt-4 shadow">
+        <div class="card-header bg-secondary text-white">
+            <h3 class="card-title">Order Details</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <th>STT</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Unit Price($)</th>
-                        <th>Money ($)</th>
+                        <th>Unit Price</th>
+                        <th>Total Price</th>
                     </tr>
-                    </thead>    
-                    <tbody>
-                        <?php 
-                        $tong =0;
-                        foreach($danhSach_DH as $admin){ 
-                             ?>
+                </thead>
+                <tbody>
+                    <?php 
+                    $tong = 0;
+                    foreach ($orderData as $detail) { ?>
+                        <tr>
+                            <td><?= $detail['ten_san_pham']; ?></td>
+                            <td><?= $detail['so_luong']; ?></td>
+                            <td><?= number_format($detail['don_gia'], 2); ?> $</td>
+                            <td><?= number_format($detail['thanh_tien'], 2); ?> $</td>
+                        </tr>
+                    <?php 
+                        $tong += $detail['thanh_tien'];
+                    } ?>
+                </tbody>
+                <tfoot>
                     <tr>
-                       <td> <?= $admin["id"] ?></td>
-
-                       <td> <?= $admin["ten_san_pham"]?></td>
-                        
-                       <td><?= $admin["so_luong"]?></td> 
-                       <td> <?= $admin["don_gia"]?></td>
-                        
-                          <td> <?=$admin["thanh_tien"]=$admin["so_luong"] *$admin["don_gia"] ?></td> 
-                        
-                       
+                        <th colspan="3" class="text-end">Total:</th>
+                        <th><?= number_format($tong, 2); ?> $</th>
                     </tr>
-                    
-                    <th><?php $tong += $admin["thanh_tien"]?></th> 
-                    <?php }?>
-
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th colspan="4" class="text-end">Total:</th>
-                        <th><?php echo $tong  ?>$</th>
-                    </tr>
-                  
-                    </tfoot>
-                    
-                      
-                       
-
-                       
-                   
-                </table>
-            </div>
+                </tfoot>
+            </table>
         </div>
+    </div>
+</div>
+<?php } else { ?>
+    <div class="container my-5">
+        <div class="alert alert-warning">
+            <strong>No order found!</strong> Please check the order ID.
+        </div>
+    </div>
+<?php } ?>
+
 
         <!-- Nút quay lại -->
         <div class="text-center">
             <a href="?act=admin-donhang" class="btn-back">Back to order list</a>
         </div>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
@@ -287,6 +288,15 @@
 </body>
 
 </html>
-</body>
 
-</html>
+
+
+
+
+
+
+     
+
+
+
+
