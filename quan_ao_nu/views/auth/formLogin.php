@@ -48,17 +48,25 @@
 
     <!-- Login Start -->
     <div class="login">
-        
+
         <div class="container-fluid">
             <div class="row">
 
                 <div class="col-lg">
                     <div class="login-form">
-                    <?php if (isset($_SESSION['error'])): ?>
+                        <?php if (isset($_SESSION['warning'])): ?>
+                            <div class="alert alert-warning">
+                                <?= $_SESSION['warning'] ?>
+                                <?php unset($_SESSION['warning']); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['error'])): ?>
                             <div class="alert alert-danger">
                                 <?= $_SESSION['error'] ?>
                             </div>
+                            <?php unset($_SESSION['error']); ?>
                         <?php endif; ?>
+
                         <form action="<?= BASE_URL . '?act=check-login' ?>" method="post">
                             <div class="row">
                                 <div class="col-md-6">

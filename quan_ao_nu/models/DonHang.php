@@ -47,7 +47,7 @@ class DonHang
     public function getDonHangFromUser($taiKhoanId)
     {
         try {
-            $sql = 'SELECT * from don_hangs where tai_khoan_id = :tai_khoan_id';
+            $sql = 'SELECT * from don_hangs where tai_khoan_id = :tai_khoan_id ORDER BY don_hangs.id DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':tai_khoan_id' => $taiKhoanId]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

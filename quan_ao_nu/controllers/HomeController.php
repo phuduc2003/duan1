@@ -315,7 +315,60 @@ class HomeController
   }
   public function postThanhToan()
   {
+ 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $tong_tien = $_POST['tong_tien'];
+      $ma_don_hang = 'DH' . rand(1000, 9999);
+      $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
+      if($phuong_thuc_thanh_toan_id == 2){
+   
+      $ten_nguoi_nhan = $_POST['ten_nguoi_nhan'];
+      $email_nguoi_nhan = $_POST['email_nguoi_nhan'];
+      $dia_chi_nguoi_nhan = $_POST['dia_chi_nguoi_nhan'];
+      $sdt_nguoi_nhan = $_POST['sdt_nguoi_nhan'];
+      $ghi_chu = $_POST['ghi_chu'];
+     
+      $ngay_dat = date(format: 'Y-m-d');
+      $trang_thai_id = 2;
+      $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+      $tai_khoan_id = $user['id'];
+     
+      //Them thong tin vao db
+
+      $donHang = $this->modelDonHang->addDonHang($tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $dia_chi_nguoi_nhan, $sdt_nguoi_nhan, $ghi_chu, $tong_tien, $phuong_thuc_thanh_toan_id, $ngay_dat, $ma_don_hang, $trang_thai_id);
+      //Lưu thông tin người dùng
+      $gioHang = $this->modelGioHang->getGioHangFromUser($tai_khoan_id);
+      //Lưu sản phẩm vào chi tiết đơn hàngz
+      if ($donHang) {
+        $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+        //Them tung san pham tu gio hang vao bang chi tiet don hang
+
+        foreach ($chiTietGioHang as $item) {
+          $donGia = $item['gia_khuyen_mai'] ?? $item['gia_san_pham']; // Uu tien don gia se lay gia khuyen mai
+          $this->modelDonHang->addChiTietDonHang(
+            $donHang, //ID đơn hàng vừa tạo
+            $item['san_pham_id'], //Id sản phẩm
+            $donGia,//đơn giá
+            $item['so_luong'], //so luong
+            $donGia * $item['so_luong']  //thành tiền
+          );
+        }
+       
+        //Sau khi thêm xong thì phải tiến hành xóa sản phẩm trong giỏ hàng
+
+        //Xóa toàn bộ sản phẩm trong chi tiết giỏ hàng  
+        $this->modelGioHang->clearDetailGioHang($gioHang['id']);
+        //Xóa thông tin giỏ hàng người dùng
+        $this->modelGioHang->clearGioHang($tai_khoan_id);
+        //Chuyển hướng về trang lịch sử đơn hàng
+       
+        $_SESSION['success_message'] = "Đặt hàng thành công!";
+      
+      }
+      $this->checkout($ma_don_hang,$tong_tien);
+        return;
+      }
+      
       // var_dump($_POST);die;
       $ten_nguoi_nhan = $_POST['ten_nguoi_nhan'];
       $email_nguoi_nhan = $_POST['email_nguoi_nhan'];
@@ -323,12 +376,13 @@ class HomeController
       $sdt_nguoi_nhan = $_POST['sdt_nguoi_nhan'];
       $ghi_chu = $_POST['ghi_chu'];
       $tong_tien = $_POST['tong_tien'];
-      $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
-      $ngay_dat = date('Y-m-d');
+      $ma_don_hang = 'DH' . rand(1000, 9999);
+      
+      $ngay_dat = date(format: 'Y-m-d');
       $trang_thai_id = 1;
       $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
       $tai_khoan_id = $user['id'];
-      $ma_don_hang = 'DH' . rand(1000, 9999);
+    
       //Them thong tin vao db
 
       $donHang = $this->modelDonHang->addDonHang($tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $dia_chi_nguoi_nhan, $sdt_nguoi_nhan, $ghi_chu, $tong_tien, $phuong_thuc_thanh_toan_id, $ngay_dat, $ma_don_hang, $trang_thai_id);
@@ -365,9 +419,119 @@ class HomeController
         die;
       }
     }
-
-
   }
+  public function checkout($ma_don_hang,$tong_tien){
+    if(isset($_POST['phuong_thuc_thanh_toan_id']) && $_POST['phuong_thuc_thanh_toan_id'] == 2 ){
+
+      $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+      $vnp_Returnurl = "http://localhost/duan1/quan_ao_nu/?act=lich-su-mua-hang";
+      $vnp_TmnCode = "DWDM7EQF";//Mã website tại VNPAY 
+      $vnp_HashSecret = "9U52LAO4JXJCYRUFLNXYHOBDS2U8695P"; //Chuỗi bí mật
+      
+      $vnp_TxnRef = $ma_don_hang; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này 
+      // sang VNPAY
+      $vnp_OrderInfo = 'noi dung thanh toan';
+      $vnp_OrderType = 'billpayment';
+      $vnp_Amount = $tong_tien * 21000 * 100;
+      $vnp_Locale = 'VND';
+      $vnp_BankCode = 'NCB';
+      $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //127.0.0.1
+      //Add Params of 2.0.1 Version
+      // $vnp_ExpireDate = $_POST['txtexpire'];
+      //Billing
+      // $vnp_Bill_Mobile = $_POST['txt_billing_mobile'];
+      // $vnp_Bill_Email = $_POST['txt_billing_email'];
+      // $fullName = trim($_POST['txt_billing_fullname']);
+      // if (isset($fullName) && trim($fullName) != '') {
+      //     $name = explode(' ', $fullName);
+      //     $vnp_Bill_FirstName = array_shift($name);
+      //     $vnp_Bill_LastName = array_pop($name);
+      // }
+      // $vnp_Bill_Address=$_POST['txt_inv_addr1'];
+      // $vnp_Bill_City=$_POST['txt_bill_city'];
+      // $vnp_Bill_Country=$_POST['txt_bill_country'];
+      // $vnp_Bill_State=$_POST['txt_bill_state'];
+      // // Invoice
+      // $vnp_Inv_Phone=$_POST['txt_inv_mobile'];
+      // $vnp_Inv_Email=$_POST['txt_inv_email'];
+      // $vnp_Inv_Customer=$_POST['txt_inv_customer'];
+      // $vnp_Inv_Address=$_POST['txt_inv_addr1'];
+      // $vnp_Inv_Company=$_POST['txt_inv_company'];
+      // $vnp_Inv_Taxcode=$_POST['txt_inv_taxcode'];
+      // $vnp_Inv_Type=$_POST['cbo_inv_type'];
+      $inputData = array(
+          "vnp_Version" => "2.1.0",
+          "vnp_TmnCode" => $vnp_TmnCode,
+          "vnp_Amount" => $vnp_Amount,
+          "vnp_Command" => "pay",
+          "vnp_CreateDate" => date('YmdHis'),
+          "vnp_CurrCode" => "VND",
+          "vnp_IpAddr" => $vnp_IpAddr,
+          "vnp_Locale" => $vnp_Locale,
+          "vnp_OrderInfo" => $vnp_OrderInfo,
+          "vnp_OrderType" => $vnp_OrderType,
+          "vnp_ReturnUrl" => $vnp_Returnurl,
+          "vnp_TxnRef" => $vnp_TxnRef
+          // "vnp_ExpireDate"=>$vnp_ExpireDate
+          // "vnp_Bill_Mobile"=>$vnp_Bill_Mobile,
+          // "vnp_Bill_Email"=>$vnp_Bill_Email,
+          // "vnp_Bill_FirstName"=>$vnp_Bill_FirstName,
+          // "vnp_Bill_LastName"=>$vnp_Bill_LastName,
+          // "vnp_Bill_Address"=>$vnp_Bill_Address,
+          // "vnp_Bill_City"=>$vnp_Bill_City,
+          // "vnp_Bill_Country"=>$vnp_Bill_Country,
+          // "vnp_Inv_Phone"=>$vnp_Inv_Phone,
+          // "vnp_Inv_Email"=>$vnp_Inv_Email,
+          // "vnp_Inv_Customer"=>$vnp_Inv_Customer,
+          // "vnp_Inv_Address"=>$vnp_Inv_Address,
+          // "vnp_Inv_Company"=>$vnp_Inv_Company,
+          // "vnp_Inv_Taxcode"=>$vnp_Inv_Taxcode,
+          // "vnp_Inv_Type"=>$vnp_Inv_Type
+      );
+      
+      if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+          $inputData['vnp_BankCode'] = $vnp_BankCode;
+      }
+      // if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+      //     $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+      // }
+      
+      //var_dump($inputData);
+      ksort($inputData);
+      $query = "";
+      $i = 0;
+      $hashdata = "";
+      foreach ($inputData as $key => $value) {
+          if ($i == 1) {
+              $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+          } else {
+              $hashdata .= urlencode($key) . "=" . urlencode($value);
+              $i = 1;
+          }
+          $query .= urlencode($key) . "=" . urlencode($value) . '&';
+      }
+      
+      $vnp_Url = $vnp_Url . "?" . $query;
+      if (isset($vnp_HashSecret)) {
+          $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+          $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+      }
+      $returnData = array('code' => '00'
+          , 'message' => 'success'
+          , 'data' => $vnp_Url);
+          if (isset($_POST['phuong_thuc_thanh_toan_id'] ) == 2) {
+              header('Location: ' . $vnp_Url);
+              die();
+          } else {
+              echo json_encode($returnData);
+          }
+          // vui lòng tham khảo thêm tại code demo
+  
+     }
+   
+
+    }  
+  
   public function lichSuMuaHang()
   {
     if (isset($_SESSION['user_client'])) {
