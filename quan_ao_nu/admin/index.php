@@ -207,7 +207,7 @@ case "admin-listDM";
         break;
 
     // NUT THÊM SỬA XOÁ
-    case "admin-create";
+    case "admin-createUser";
     $user->CreateUser();
     break;
     case "admin-updateUser";

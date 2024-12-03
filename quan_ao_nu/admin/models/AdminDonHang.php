@@ -141,4 +141,5 @@ public function updateDonHang($id,don_hangs $don_hangs){
 public function AnDonHang(){
     include "view/donhang/ChiTietDHAdmin.php";
 }
+
 }

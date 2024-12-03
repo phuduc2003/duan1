@@ -88,7 +88,7 @@ class UserController{
           $tai_khoans->trang_thai=trim($_POST["trang_thai"]);
          
           if($tai_khoans->ho_ten===""){
-            $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
+            $thongBaoLoi = "You need to fill in all information";
   
           }
   
@@ -108,7 +108,7 @@ class UserController{
                 $thongBaoThanhCong = "Update successful. Please continue creating or return to the list.";
                
               }else {
-                $thongBaoLoi = "New creation failed. Please check errors and try again.";
+                $thongBaoLoi = "Update failed. Please check errors and try again.";
   
             }
             
@@ -146,7 +146,7 @@ case 1: // Admin
     $_SESSION['username'] = $user['email'];
     $_SESSION['role_admin'] = $user['chuc_vu_id'];
     echo "<script>";
-    echo "alert('Chào Admin');";
+    echo "alert('Hello Admin');";
     echo "window.location.href = '?act=admin-sanpham';";
     echo "</script>";
     break;
@@ -156,7 +156,7 @@ case 2: // guest
     $_SESSION['role_guest'] = $user['chuc_vu_id'];
     $_SESSION['id'] = $user['id'];
     echo "<script>";
-    echo 'alert("Chào Bạn ");';
+    echo 'alert("Hello ");';
     echo 'window.location.href = "sanpham";';
     echo "</script>";
     break;
