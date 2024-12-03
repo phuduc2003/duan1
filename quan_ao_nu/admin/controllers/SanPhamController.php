@@ -5,6 +5,7 @@ class SanPhamController
    
   public $AdminSanPham;
   public $AdminDanhMuc;
+  public $AdminThongKe;
 
 
 
@@ -14,10 +15,18 @@ class SanPhamController
       // 1. Khởi tạo giá trị cho thuộc tính hang_hoaQuery
       $this->AdminSanPham = new AdminSanPham();
       $this->AdminDanhMuc = new AdminDanhMuc();
+      $this->AdminThongKe = new AdminThongKe();
       // $this->AdminTrangThai = new AdminTrangThai();
       // Mở trình duyệt lên để kiểm tra kết quả
   }
   
+  public function thongke(){
+    $danhSachTKe= $this->AdminThongKe->all_tk();
+    $thongKe = $this->AdminThongKe->thongKeDonHang();
+      include   "view/thongke/ThongKeAdmin.php";
+  }
+ 
+
   public function sanpham(){
     $danhSachSanPham = $this->AdminSanPham->all();
 
@@ -56,9 +65,8 @@ class SanPhamController
         $san_phams->ngay_nhap=trim($_POST["ngay_nhap"]);
         $san_phams->mo_ta=trim($_POST["mo_ta"]);
         $san_phams->danh_muc_id=trim($_POST["danh_muc_id"]);
-        if($san_phams->ten_san_pham===""||$san_phams->gia_san_pham===""){
-          $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
-
+        if($san_phams->ten_san_pham===""){
+          $thongBaoLoi = "You need to fill in all information";
         }
 
           if($_FILES["file_anh_upload"]["name"]!==""){
@@ -68,16 +76,16 @@ class SanPhamController
             if($ketQuaUploadFile){
               $san_phams->hinh_anh=$thamSo2;
             }else{
-              $thongBaoUploadFile ="upload file không thành công. mời bạn thử lại.";
+              $thongBaoUploadFile ="File upload failed. Please try again.";
             }
           }
           if($thongBaoLoi===""&& $thongBaoUploadFile===""){
             $ketQua=$this->AdminSanPham->insert($san_phams);
             if($ketQua==="success"){
-              $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+              $thongBaoThanhCong = "New creation successful. Please continue creating or return to the list.";
             
             }else {
-              $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+              $thongBaoLoi = "New creation failed. Please check errors and try again.";
 
           }
           
@@ -127,17 +135,17 @@ class SanPhamController
                     $san_phams->hinh_anh = $thamSo2;
 
                 } else {
-                    $thongBaoUploadFile = "Upload file không thành công. Mời bạn thử lại.";
+                    $thongBaoUploadFile = "File upload failed. Please try again.";
                 }
             }
             if ($thongBaoLoi === "" && $thongBaoUploadFile === "") {
                 $ketQua = $this->AdminSanPham->updateSP($id,$san_phams);
                 if ($ketQua === "success") {
-                    $thongBaoThanhCong = " Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-                    echo '<a>hay</a>';
+                    $thongBaoThanhCong = " Edit successful. Please continue creating new or return to the list.";
+                    
 
                 } else {
-                    $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+                    $thongBaoLoi = "Repair failed. Please check errors and try again.";
 
                 }
             }

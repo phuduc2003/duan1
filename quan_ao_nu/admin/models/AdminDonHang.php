@@ -14,39 +14,74 @@ class AdminDonHang
     }
 
 
-   public function All(){
-    try{
-    $sql="SELECT * FROM `don_hangs`";
-    $data =$this->pdo->query($sql)->fetchAll();
-    $donHangs=[];
-    foreach($data as $value){
-        $don_hangs = new don_hangs();
-        $don_hangs->id = $value['id'];
-        $don_hangs->ma_don_hang	 = $value['ma_don_hang'];
-        $don_hangs->tai_khoan_id= $value['tai_khoan_id'];
-        $don_hangs->ten_nguoi_nhan= $value['ten_nguoi_nhan'];
-        $don_hangs->email_nguoi_nhan= $value['email_nguoi_nhan'];
-        $don_hangs->sdt_nguoi_nhan= $value['sdt_nguoi_nhan'];
-        $don_hangs->dia_chi_nguoi_nhan= $value['dia_chi_nguoi_nhan'];
-        $don_hangs->ngay_dat= $value['ngay_dat'];
-        $don_hangs->tong_tien= $value['tong_tien'];
-        $don_hangs->ghi_chu= $value['ghi_chu'];
-        $don_hangs->phuong_thuc_thanh_toan_id= $value['phuong_thuc_thanh_toan_id'];
-        $don_hangs->trang_thai_id= $value['trang_thai_id'];
-        array_push($donHangs,$don_hangs);
-
+    public function All()
+    {
+        try {
+            $sql = "
+                SELECT don_hangs.*, 
+                       tai_khoans.ho_ten 
+                FROM don_hangs
+                JOIN tai_khoans ON don_hangs.tai_khoan_id = tai_khoans.id
+            ";
+            $data = $this->pdo->query($sql)->fetchAll();
+            $donHangs = [];
+    
+            foreach ($data as $value) {
+                $don_hangs = new don_hangs();
+                $don_hangs->id = $value['id'];
+                $don_hangs->ma_don_hang = $value['ma_don_hang'];
+                $don_hangs->tai_khoan_id = $value['tai_khoan_id'];
+                $don_hangs->ten_nguoi_nhan = $value['ten_nguoi_nhan'];
+                $don_hangs->email_nguoi_nhan = $value['email_nguoi_nhan'];
+                $don_hangs->sdt_nguoi_nhan = $value['sdt_nguoi_nhan'];
+                $don_hangs->dia_chi_nguoi_nhan = $value['dia_chi_nguoi_nhan'];
+                $don_hangs->ngay_dat = $value['ngay_dat'];
+                $don_hangs->tong_tien = $value['tong_tien'];
+                $don_hangs->ghi_chu = $value['ghi_chu'];
+                $don_hangs->phuong_thuc_thanh_toan_id = $value['phuong_thuc_thanh_toan_id'];
+                $don_hangs->trang_thai_id = $value['trang_thai_id'];
+                $don_hangs->ho_ten = $value['ho_ten']; // Thêm tên tài khoản
+    
+                array_push($donHangs, $don_hangs);
+            }
+    
+            return $donHangs;
+        } catch (Exception $error) {
+            echo "<h1>";
+            echo "Lỗi kết nối CSDL: " . $error->getMessage();
+            echo "</h1>";
+        }
     }
-    return $donHangs;
-} catch (Exception $error) {
-    echo "<h1>";
-    echo "Lỗi kết nối CSDL: " . $error->getMessage();
-    echo "</h1>";
-}
-   
-}
+    
  public function deleteDonHang($id){
     try{
         $sql = "UPDATE don_hangs SET trang_thai_id = 1 WHERE id = $id";
+          $data =$this->pdo->exec($sql);
+        if($data===1){
+            return "success";
+        }
+    }catch (Exception $error) {
+        echo "<h1>";
+        echo "Lỗi hàm insert trong model: " . $error->getMessage();
+        echo "</h1>";
+ }
+}
+public function GiaoDonHang($id){
+    try{
+        $sql = "UPDATE don_hangs SET trang_thai_id = 3 WHERE id = $id";
+          $data =$this->pdo->exec($sql);
+        if($data===1){
+            return "success";
+        }
+    }catch (Exception $error) {
+        echo "<h1>";
+        echo "Lỗi hàm insert trong model: " . $error->getMessage();
+        echo "</h1>";
+ }
+}
+public function HoanTDonHang($id){
+    try{
+        $sql = "UPDATE don_hangs SET trang_thai_id = 4 WHERE id = $id";
           $data =$this->pdo->exec($sql);
         if($data===1){
             return "success";
@@ -106,4 +141,5 @@ public function updateDonHang($id,don_hangs $don_hangs){
 public function AnDonHang(){
     include "view/donhang/ChiTietDHAdmin.php";
 }
+
 }

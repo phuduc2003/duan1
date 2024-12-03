@@ -1,6 +1,4 @@
-
-
-
+<?php session_start();?> 
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dự án 1</title>
+    <title>Sidebar With Bootstrap</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -192,10 +190,10 @@
             </nav>
 <div class="container mt-5">
     <!-- Header -->
-    <!-- <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
-        <a href="?act=admin-themSP" class="btn add-product-btn">+ Add New Product</a>
-    </div> -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Comment Management</h1>
+        <!-- <a href="?act=admin-create" class="btn add-product-btn">+ Add New Category</a> -->
+    </div>
 
     <!-- Search Bar -->
     <div class="mb-3">
@@ -210,67 +208,50 @@
         <table class="table table-striped table-hover text-center">
             <thead class="table-dark">
                 <tr>
-                <th>ID</th></th>
-                <th>Order Code </th>
-                <th> Recipient Account</th>
-                <th> Name Recipient</th>
-                <th>Email Recipient</th>
-                <th>Phone Number</th>
-                <th>Placer Address</th>
-                <th> Date Put </th>
-                <th>Total Amount </th>  
-                <th>Notes</th>
-                <th>Pay</th>
-                <th>Status</th>
-                <th>Operation</th>
+                <th>ID</th>
+                <th>Product Name </th>
+                <th>Account Name </th>
+                <th>Content </th>
+                <th>Post Date </th>
+                <th>Status </th>
+                <th>operation </th>
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($danhSachSanPham as $admins) {
-                if($admins->trang_thai_id === 4 ){
+            <?php foreach ($danhSachBinhLuan as $value) {
+                if(   $value->trang_thai ==2 ){
+                
                 ?>     
                 <tr>
                
-                    <td> <?= $admins->id ?> </td>
-                    <td> <?= $admins->ma_don_hang ?></td>
+                    <td> <?= $value->id ?> </td>
+                    <td><?= $value->ten_san_pham ?> </td>
                    
-                    <td><?= $admins->ho_ten ?></td>
-                    <td> <?= $admins->ten_nguoi_nhan ?></td> 
-                    <!-- <td>
-                        <div style="height: 60px; width:60px;">
-                            <img style="max-height:100%; max-width:100%;" src="">
-                        </div>
-                    </td> -->
-                    <td> <?= $admins->email_nguoi_nhan ?></td>
-                    <td> <?= $admins->sdt_nguoi_nhan ?></td>
-                    <td> <?= $admins->dia_chi_nguoi_nhan ?></td>
-                    <td> <?= $admins->ngay_dat ?></td>
-                    <td> <?= $admins->tong_tien ?></td>
-                    <td> <?= $admins->ghi_chu ?></td>
-                    <td> <?php if( $admins->phuong_thuc_thanh_toan_id==1){
-                        echo"  cash ";
-                    }else{echo" Online ";} ?></td>
-                    <td> <?php if( $admins->trang_thai_id==4 ){
-                        echo"Completed Received";
-                    } 
+                    <td> <?= $value->ho_ten ?> </td>
+                    <td> <?= $value->noi_dung ?> </td>
+                    <td> <?= $value->ngay_dang ?> </td>
 
-                        ?></td>
+                    <td> <?php if($value->trang_thai ==1 ){echo"Show";}else{echo"Hiden";} ?> </td>
+                   
+                     
+
                     <td style="width:170px;">
-                    <!-- <button class="btn btn-success m-1">
-                                    <a href="?act=admin-updateDonHang&id=<?= $admins->id ?>" class="text-white" style="text-decoration:none;">
-                                        <i class="fa-solid fa-pen-to-square"></i> Fix
-                                    </a>
-                                </button> -->
-                                
-                                <button class="btn btn-danger">
-                                    <a href="?act=admin-chitietdonhang&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" >
-                                        <i class="fa-solid fa-trash"></i>See details
+                    <button class="btn btn-success">
+                                    <a href="?act=admin-updatedm&id=<?= $value->id ?>" class="text-white" style="text-decoration:none;">
+                                        <i class="fa-solid fa-pen-to-square"></i> View
                                     </a>
                                 </button>
                                 
+                                <button class="btn btn-danger" name="delete">
+                                    <a href="?act=admin-showbinhluan&id=<?= $value->id ?> " style="text-decoration:none;" class="text-white" >
+                                        <i class="fa-solid fa-trash" ></i> Show
+                                    </a>
+                                </button> 
+                                
+                                
                     </td>
                 </tr>
-            <?php } } ?>
+            <?php } }?>
             </tbody>
         </table>
     </div>

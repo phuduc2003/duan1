@@ -57,62 +57,37 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="product-search">
-                                            <form action="<?= BASE_URL . '?act=sanpham' ?>" method="post">
+                                        <form action="<?= BASE_URL . '?act=sanpham' ?>" method="post">
                                                 <input type="text" name="keyword" placeholder="Search"
                                                     value="<?= isset($_POST['keyword']) ? $_POST['keyword'] : ''; ?>">
                                                 <button type="submit"><i class="fa fa-search"></i></button>
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        
+                                    </div>
+                                    <div class="col-md-5">
                                         <div class="product-short">
                                             <div class="dropdown">
                                                 <div class="dropdown-toggle" data-toggle="dropdown">Product short by
                                                 </div>
-                                                <?php
-                                                // Lấy danh mục duy nhất từ danh sách sản phẩm
-                                                $categories = [];
-                                                foreach ($listSanPham as $sanPham) {
-                                                    $categories[$sanPham['danh_muc_id']] = $sanPham['ten_danh_muc'];
-                                                }
-                                                ?>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <form action="<?= BASE_URL . '?act=sanpham' ?>" method="post">
-                                                        <!-- Lặp qua danh sách danh mục duy nhất -->
-                                                        <?php foreach ($categories as $categoryId => $categoryName): ?>
-                                                            <button type="submit" name="category_id"
-                                                                value="<?= $categoryId ?>" class="dropdown-item">
-                                                                <?= $categoryName ?>
-                                                            </button>
-                                                            <input type="hidden" name="" id="danh_muc_id" value="<?=$sanPham['danh_muc_id']?>">
-                                                        <?php endforeach; ?>
-                                                   
-                                                    </form>
+                                                <form action="<?= BASE_URL . '?act=sanpham' ?>" method="post">
+                                                      
+                                                      <?php foreach ($listDanhMuc as $danhMuc): ?>
+                                                          <button type="submit" name="category_id"
+                                                              value="<?= $danhMuc['id'] ?>" class="dropdown-item">
+                                                              <?= ($danhMuc['ten_danh_muc']) ?>
+                                                          </button>
+                                                      <?php endforeach; ?>
+                                                  </form>
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="product-price-range">
-                                            <div class="dropdown">
-                                                <div class="dropdown-toggle" data-toggle="dropdown">Product price range
-                                                </div>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item">$0 to $50</a>
-                                                    <a href="#" class="dropdown-item">$51 to $100</a>
-                                                    <a href="#" class="dropdown-item">$101 to $150</a>
-                                                    <a href="#" class="dropdown-item">$151 to $200</a>
-                                                    <a href="#" class="dropdown-item">$201 to $250</a>
-                                                    <a href="#" class="dropdown-item">$251 to $300</a>
-                                                    <a href="#" class="dropdown-item">$301 to $350</a>
-                                                    <a href="#" class="dropdown-item">$351 to $400</a>
-                                                    <a href="#" class="dropdown-item">$401 to $450</a>
-                                                    <a href="#" class="dropdown-item">$451 to $500</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

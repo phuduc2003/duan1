@@ -57,22 +57,15 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="?act=admin-home" class="sidebar-link">
-                        <i class="lni lni-user"></i>
+                    <a href="?act=admin-listDM" class="sidebar-link">
+                        <i class="lni lni-list"></i>
                         <span>category </span>
                     </a>
                 </li>
-                
-                <!-- <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Task</span>
-                    </a>
-                </li> -->
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-protection"></i>
+                        <i class="lni lni-archive"></i>
                         <span>Product Management</span>
                     </a>
                     <ul style="background-color: #1A2035;" id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -80,32 +73,19 @@
                             <a href="?act=admin-sanpham" class="sidebar-link">Product List</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="?act=admin-create" class="sidebar-link">Add Product</a>
+                            <a href="?act=admin-create" class="sidebar-link">Add New Product</a>
+                        </li> 
+                        <li class="sidebar-item">
+                            <a href="?act=admin-anSanPham" class="sidebar-link">List of products deleted </a>
                         </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
+                        <i class="lni lni-users"></i>
                         <span>Account Management</span>
                     </a>
-                    <!-- <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                               Quản Lý
-                            </a>
-                            <ul style="background-color: #1A2035;" id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="?act=admin-listuser" class="sidebar-link">Danh Sách Quan Lý</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="?act=admin-create" class="sidebar-link">Thêm Quản Lý</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul> -->
                 </li>
                 <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
@@ -115,42 +95,64 @@
                             </a>
                             <ul style="background-color: #1A2035;" id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-listuser" class="sidebar-link">List Uuser</a>
+                                    <a href="?act=admin-listuser" class="sidebar-link"> List of accounts</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="?act=admin-create" class="sidebar-link">Add User</a>
+                                    <a href="?act=admin-create" class="sidebar-link">Add New Account</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="?act=admin-AnUser" class="sidebar-link">List of locked accounts </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item">
+                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth1" aria-expanded="false" aria-controls="auth1">
-                        <i class="lni lni-protection"></i>
+                        data-bs-target="#orderDropdown" aria-expanded="false" aria-controls="orderDropdown">
+                        <i class="lni lni-package"></i>
                         <span>Order Management</span>
                     </a>
-                    <ul style="background-color: #1A2035;" id="auth1" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <ul style="background-color: #1A2035;" id="orderDropdown" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="?act=admin-donhang" class="sidebar-link">Order List</a>
+                            <a href="?act=admin-donhang" class="sidebar-link">Order delivered successfully</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="" class="sidebar-link">?</a>
+                            <a href="?act=admin-andonhang" class="sidebar-link">pending orders</a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#commentDropdown" aria-expanded="false" aria-controls="commentDropdown">
                         <i class="lni lni-popup"></i>
                         <span>Comment Management</span>
                     </a>
+                    <ul style="background-color: #1A2035;" id="commentDropdown" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="?act=admin-binhluan" class="sidebar-link">List of comments</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="?act=admin-hienbinhluan" class="sidebar-link"> List of Deleted Comments</a>
+                        </li>
+                    </ul>
                 </li>
+
+                <li class="sidebar-item">
+                    <a href="?act=admin-thongke" class="sidebar-link">
+                        <i class="lni lni-stats-up"></i>
+                        <span>Statistics</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting</span>
                     </a>
                 </li>
+                
             </ul>
             <div class="sidebar-footer">
             <a href="?act=logout" class="sidebar-link">
@@ -189,7 +191,7 @@
 <div class="container mt-5">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product Management</h1>
+        <h1 class="h3">Category Management</h1>
         <a href="?act=admin-create" class="btn add-product-btn">+ Add New Category</a>
     </div>
 
@@ -235,7 +237,7 @@
                                 </button>
                                 
                                 <button class="btn btn-danger" name="delete">
-                                    <a href="?act=admin-deletedm&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                    <a href="?act=admin-deletedm&id=<?= $admins->id ?> " style="text-decoration:none;" class="text-white" onclick="return confirm('Are you sure you want to delete?')">
                                         <i class="fa-solid fa-trash" ></i> Delete
                                     </a>
                                 </button> 

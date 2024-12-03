@@ -14,33 +14,37 @@ class adminChiTietDH{
         }
     }
    
-    public function Show(){
-        {
-            try {
-                // 1. Kết nối CSDL
-               $sql = " SELECT * FROM chi_tiet_don_hangs ";
-               $data = $this->pdo->query($sql)->fetchAll();
-               $DanhSach = [];
-               foreach($data as $value){
-                $chi_tiet_don_hangs = new chi_tiet_don_hangs();
+public function showDH($donHangId) {
+    // Câu SQL kết hợp chi_tiet_don_hangs và san_phams để lấy tên sản phẩm
+    $sql = "
+    SELECT 
+        dh.*, 
+        cth.*, 
+        sp.ten_san_pham 
+    FROM 
+        don_hangs AS dh
+    JOIN 
+        chi_tiet_don_hangs AS cth ON dh.id = cth.don_hang_id
+    JOIN 
+        san_phams AS sp ON cth.san_pham_id = sp.id
+    WHERE 
+        dh.id = :don_hang_id
+";
 
-                $chi_tiet_don_hangs->id= $value['id'];
-                $chi_tiet_don_hangs->don_hang_id = $value['don_hang_id'];
-                $chi_tiet_don_hangs->san_pham_id= $value['san_pham_id'];
-                $chi_tiet_don_hangs->don_gia= $value['don_gia'];
-              
-                $chi_tiet_don_hangs->so_luong= $value['so_luong'];
-                $chi_tiet_don_hangs->thanh_tien= $value['thanh_tien'];
-                
-                array_push($DanhSach, $chi_tiet_don_hangs);
-               }
-               return $DanhSach;
-            } catch (Exception $error) {
-                echo "<h1>";
-                echo "Lỗi kết nối CSDL: " . $error->getMessage();
-                echo "</h1>";
-            }
-        }
-    }
+
+    // Chuẩn bị câu lệnh
+    $stmt = $this->pdo->prepare($sql);
+
+    // Gắn giá trị cho placeholder :don_hang_id
+    $stmt->bindParam(':don_hang_id', $donHangId);
+
+    // Thực thi câu truy vấn
+    $stmt->execute();
+
+    // Trả về kết quả
+    return $stmt->fetchAll();
+}
+
+
 }
 ?>

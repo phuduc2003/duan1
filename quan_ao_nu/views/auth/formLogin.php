@@ -48,12 +48,13 @@
 
     <!-- Login Start -->
     <div class="login">
+        
         <div class="container-fluid">
             <div class="row">
 
                 <div class="col-lg">
                     <div class="login-form">
-                        <?php if (isset($_SESSION['error'])): ?>
+                    <?php if (isset($_SESSION['error'])): ?>
                             <div class="alert alert-danger">
                                 <?= $_SESSION['error'] ?>
                             </div>

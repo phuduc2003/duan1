@@ -57,12 +57,12 @@
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Mã đơn hàng</th>
-                                        <th>Ngày đặt</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Phương thức thanh toán</th>
-                                        <th>Trạng thái đơn hàng</th>
-                                        <th>Thao tác</th>
+                                        <th>Order Code</th>
+                                        <th>Order Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Payment Method</th>
+                                        <th>Order Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="align-middle">

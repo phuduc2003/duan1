@@ -16,18 +16,48 @@ class DonHangController{
         // Mở trình duyệt lên để kiểm tra kết quả
   }
 
-
   
+  
+
   public function donhang(){
     $danhSachSanPham = $this->AdminDonHang->All();
     include "view/donhang/DonHangAdmin.php";
   }
-
+//
     public function deleteHang($id){
       if($id !==""){
       $KetQua=$this->AdminDonHang->deleteDonHang($id);
      if($KetQua="success"){
-      header("location:?act=admin-donhang");
+   
+
+      header("location:?act=admin-andonhang");
+     }else{
+      echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+    }
+      } 
+    }
+//
+    public function GiaoHang($id){
+      if($id !==""){
+      $KetQua=$this->AdminDonHang->GiaoDonHang($id);
+        
+     if($KetQua="success"){
+
+     
+      header("location:?act=admin-andonhang");
+     }else{
+      echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+    }
+      } 
+    }
+    //
+    public function HoanTHang($id){
+      if($id !==""){
+      $KetQua=$this->AdminDonHang->HoanTDonHang($id);
+     if($KetQua="success"){
+     
+
+      header("location:?act=admin-andonhang");
      }else{
       echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
     }
@@ -46,28 +76,19 @@ class DonHangController{
             $don_hangs = $this->AdminDonHang->find($id);
     
           if (isset($_POST["submitForm"])) {
-          $don_hangs->ma_don_hang=trim($_POST["ma_don_hang"]);
-          $don_hangs->tai_khoan_id=trim($_POST["tai_khoan_id"]);
-          $don_hangs->ten_nguoi_nhan=trim($_POST["ten_nguoi_nhan"]);
-          $don_hangs->email_nguoi_nhan=trim($_POST["email_nguoi_nhan"]);
-          $don_hangs->sdt_nguoi_nhan=trim($_POST["sdt_nguoi_nhan"]);
-          $don_hangs->dia_chi_nguoi_nhan=trim($_POST["dia_chi_nguoi_nhan"]);
-          $don_hangs->ngay_dat=trim($_POST["ngay_dat"]);
-          $don_hangs->ghi_chu=trim($_POST["ghi_chu"]);
-          $don_hangs->phuong_thuc_thanh_toan_id=trim($_POST["phuong_thuc_thanh_toan_id"]);
           $don_hangs->trang_thai_id=trim($_POST["trang_thai_id"]);
 
-          if($don_hangs->ma_don_hang===""){
-                    $thongBaoLoi ="mã đơn hàng phải nhập";
+          if($don_hangs->trang_thai_id===""){
+                    $thongBaoLoi ="Please select status";
                   }
                 if ($thongBaoLoi === "" && $thongBaoUploadFile === "") {
                     $ketQua = $this->AdminDonHang->updateDonHang($id,$don_hangs);
                     if ($ketQua === "success") {
-                        $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                        $thongBaoThanhCong = "Edited successfully. Please continue creating or return to the list.";
                        
     
                     } else {
-                        $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+                        $thongBaoLoi = "The repair failed. Please check the errors and try again.";
     
                     }
                 }
@@ -79,20 +100,17 @@ class DonHangController{
             echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
         }
     } 
- public function ChitietDH(){
-  $id=$_GET['id'];
-
-   $ChiTietDonHang = $this->adminChiTietDH->Show($id);
-
-  $danhSachSanPham = $this->AdminDonHang->All($id);
-
-  $name = $this->AdminSanPham->all();
+ public function ChitietDH($id){
+  $orderId=$_GET['id'];
+  $orderData = $this->adminChiTietDH->showDH($orderId);
 
 
  
   include "view/donhang/ChiTietDHAdmin.php";
  }
  public function AnDonHang(){
+  $thongBaoThanhCong = ""; 
+
   $danhSachSanPham = $this->AdminDonHang->All();
   include "view/donhang/AnDonHangAdmin.php";
  }

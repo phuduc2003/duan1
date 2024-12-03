@@ -30,18 +30,17 @@ public $AdminDanhMuc;
           $danh_mucs->mo_ta=trim($_POST["mo_ta"]);
           
           if($danh_mucs->ten_danh_muc===""||$danh_mucs->mo_ta===""){
-            $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
-  
+            $thongBaoLoi = "You need to fill in all information";
           }
   
            
             if($thongBaoLoi===""&& $thongBaoUploadFile===""){
               $ketQua=$this->AdminDanhMuc->insert_dm($danh_mucs);
               if($ketQua==="success"){
-                $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                $thongBaoThanhCong = "New creation successful. Please continue creating or return to the list.";
               
               }else {
-                $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+                $thongBaoLoi = "New creation failed. Please check errors and try again.";
   
             }
             
@@ -68,19 +67,18 @@ public $AdminDanhMuc;
           $danh_mucs->ten_danh_muc=trim($_POST["ten_danh_muc"]);
           $danh_mucs->mo_ta=trim($_POST["mo_ta"]);
           
-          if($danh_mucs->ten_danh_muc===""||$danh_mucs->mo_ta===""){
-            $thongBaoLoi = "Tên sản phẩm, số lượng , GIá bán, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
-  
+          if($danh_mucs->ten_danh_muc===""){
+            $thongBaoLoi = "You need to fill in all information";
           }
   
            
             if($thongBaoLoi===""&& $thongBaoUploadFile===""){
               $ketQua=$this->AdminDanhMuc->updateDM($id,$danh_mucs);
               if($ketQua==="success"){
-                $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
+                $thongBaoThanhCong = "Edit successful. Please continue creating new or return to the list.";
               
               }else {
-                $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
+                $thongBaoLoi = "Repair failed. Please check errors and try again.";
   
             }
             
@@ -88,6 +86,7 @@ public $AdminDanhMuc;
           }
   
         }
+        
       include "view/danhmuc/SuaDanhMucAdmin.php";
      }
 
